@@ -90,4 +90,12 @@ describe('Recipe', () =>{
   it('should be able to have a different name', () => {
     expect(recipe2.name).to.equal(name2);
   });
+
+  it('should return the cost of ingredients', () => {
+    expect(recipe1.calculateCost()).to.equal(301);
+  });
+
+  it('should be able to return a different cost', () => {
+    expect(recipe2.calculateCost()).to.equal(464);
+  })
 });
