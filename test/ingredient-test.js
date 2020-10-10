@@ -1,5 +1,6 @@
 const chai = require('chai');
 const expect = chai.expect;
+
 const Ingredient = require('../src/ingredient.js');
 
 describe('Ingredient', () => {
@@ -41,5 +42,5 @@ describe('Ingredient', () => {
 
   it('should be able to have a different cost', () => {
     expect(ingredient2.cost).to.equal(450);
-  })
+  });
 });
