@@ -17,12 +17,12 @@ describe('User', () => {
 
   beforeEach( () => {
 
-    pantry1 = [{ ingredient: 55, amount: 4 }, { ingredient: 1234, amount: 0 }, { ingredient: 4321, amount: 10 }];
+    pantry1 = [{ ingredient: 1, amount: 4 }, { ingredient: 2, amount: 0 }, { ingredient: 3, amount: 10 }];
 
-    pantry2 = [{ ingredient: 869, amount: 2 }, { ingredient: 1098, amount: 22 }];
+    pantry2 = [{ ingredient: 1, amount: 2 }, { ingredient: 2, amount: 22 }];
 
-    ingredient1 = new Recipe(1, "rosemary", 300);
-    ingredient2 = new Recipe(2, "thai mayo", 666);
+    ingredient1 = {id: 1, quantiy: {amount: 1.5, unit: "c" }}
+    ingredient2 = {id: 2, quantiy: {amount: .5, unit: "tsp" }}
 
     recipe1 = new Recipe(1, "Big image thing http", [ingredient1, ingredient2], [{ instruction: "boil em", number: 1 }, { instruction: "mash em", number: 2 }, { instruction: "stick em in a stew", number: 3 }], "pasta sauce", ["rabbit", "banana", "yup", "garlic"]);
 
@@ -132,7 +132,9 @@ describe('User', () => {
     expect(user1.searchByTag("garlic")).to.deep.equal([recipe2]);
   });
 
-  it.skip('should be able to cook a recipe if ingredients are available', () => {
+  it.skip('should be able to evaluate if the user has enough ingredients in their pantry', () => {
     user1.chooseRecipe(recipe1);
+
+    expect(user1.chooseRecipe(recipe1)).to.equal('')
   });
 });
