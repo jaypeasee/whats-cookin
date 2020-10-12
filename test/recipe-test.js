@@ -1,5 +1,6 @@
 const chai = require('chai');
 const expect = chai.expect;
+
 const Ingredient = require('../src/ingredient.js');
 const Recipe = require('../src/recipe.js');
 
@@ -23,14 +24,20 @@ describe('Recipe', () =>{
     ingredient2 = new Ingredient(2, "thai mayo", 001);
     ingredient3 = new Ingredient(3, "cheese", 230);
     ingredient4 = new Ingredient(4, "pepper", 234);
+
     instructions1 = [{instruction: 'shake it the rosemary', number: 1}, {instruction: 'put it on your food', number: 2}];
+
     instructions2 = [{instruction: 'put the lotion on the skin - jp', number: 1}, {instruction: 'that was weird..but i like it -ct', number: 2}];
+
     tags1 = ['tag', 'bag', 'jag', 'rag', 'nag'];
     tags2 = ['orange', 'uhhh', 'something', 'about', 'a door?'];
+
     name1 = 'Jalapeno Poppers';
     name2 = 'Fat Boy Lotion';
-    recipe1 = new Recipe(1, 'https://ketocookingchristian.com/wp-content/uploads/2018/05/Pepperoni-Pizza-Bagels.jpg', [ingredient1, ingredient2], instructions1, tags1, name1);
-    recipe2 = new Recipe(2, 'https://images.heb.com/is/image/HEBGrocery/002755125', [ingredient3, ingredient4], instructions2, tags2, name2);
+
+    recipe1 = new Recipe(1, 'https://ketocookingchristian.com/wp-content/uploads/2018/05/Pepperoni-Pizza-Bagels.jpg', [ingredient1, ingredient2], instructions1, name1, tags1);
+
+    recipe2 = new Recipe(2, 'https://images.heb.com/is/image/HEBGrocery/002755125', [ingredient3, ingredient4], instructions2, name2, tags2);
   });
 
   it('should be a function', () => {
