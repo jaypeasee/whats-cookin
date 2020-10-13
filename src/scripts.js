@@ -6,14 +6,13 @@ window.addEventListener('load', loadRecipes);
 
 function loadRecipes() {
   recipeData.forEach((recipe) => {
-    let newRecipe = new Recipe(recipe.id, recipe.image, recipe.ingredients, recipe.instructions, recipe.name, recipe.tags)
-    let recipeCardInfo = `<div class="recipe-card">
-      <img src=${newRecipe.image}>
+    let newRecipe = new Recipe(recipe.id, recipe.image, recipe.ingredients, recipe.instructions, recipe.name, recipe.tags);
+    let newRecipeTags = newRecipe.tags.join(', ');
+    let recipeCardInfo = `<div class="recipe-card" id="${newRecipe.id}">
+      <img src="${newRecipe.image}">
       <p>${newRecipe.name}</p>
       <div class="tag-buttons">
-        <button type="button" name="button">Tag</button>
-        <button type="button" name="button">Tag</button>
-        <button type="button" name="button">Tag</button>
+        <p>Tags: ${newRecipeTags}</p>
       </div>
     </div>`
     pageWrap.insertAdjacentHTML('afterbegin', recipeCardInfo);
