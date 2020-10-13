@@ -18,7 +18,10 @@
         <button>Search</button>
       </div>
     </nav>
-    <section class="recipes-wrapper">
+    <div class="view-title hidden">
+      <h2>All Recipes</h2>
+    </div>
+    <section class="recipes-wrapper hidden">
       <div class="recipe-card">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTSH62JNVF5AlAumCvU5cdytTBegBaab-KejQ&usqp=CAU" alt="pizza">
         <p>Recipe Name</p>
@@ -74,9 +77,41 @@
         </div>
       </div>
     </section>
+    <section class="pantry-view">
+      <ul>
+      <div class="ingredient-wrap">
+        <div class="ingredient-label">
+          <input class="ingredient-checkbox"type="checkbox">
+          <label>Thai Mayo</label>
+        </div>
+        <div class="ingredient-quantity">
+          <h3>4</h3>
+        </div>
+      </div>
+      <div class="ingredient-wrap">
+        <div class="ingredient-label">
+          <input class="ingredient-checkbox"type="checkbox">
+          <label>Thai Mayo</label>
+        </div>
+        <div class="ingredient-quantity">
+          <h3>4</h3>
+        </div>
+      </div>
+      <div class="ingredient-wrap">
+        <div class="ingredient-label">
+          <input class="ingredient-checkbox"type="checkbox">
+          <label>Thai Mayo</label>
+        </div>
+        <div class="ingredient-quantity">
+          <h3>4</h3>
+        </div>
+      </div>
+      </ul>
+    </section>
     <script type="text/javascript" src="../data/users.js"></script>
     <script type="text/javascript" src="../data/recipes.js"></script>
     <script type="text/javascript" src="../data/ingredients.js"></script>
     <script type="text/javascript" src="./scripts.js"></script>
+
   </body>
 </html>
