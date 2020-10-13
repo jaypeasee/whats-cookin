@@ -10,6 +10,15 @@ function changeView(event) {
   }
 }
 
+function hideMainRecipes() {
+  pageWrap.classList.add('hidden');
+}
+
+function displaySearch() {
+  hideMainRecipes();
+  
+}
+
 function loadNewExperience() {
   createRecipes();
 }
