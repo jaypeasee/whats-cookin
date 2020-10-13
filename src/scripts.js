@@ -1,15 +1,15 @@
 const pageWrap = document.querySelector('.recipes-wrapper');
-
-console.log(recipeData);
+const nav = document.querySelector('.header-nav');
 
 window.addEventListener('load', loadNewExperience);
-//^^^ invoke a handler function
-//handler function should invoke two functions
-//createRecipes
-//createUser
+nav.addEventListener('click', changeView);
 
-//refactor
-//creates
+function changeView(event) {
+  if(event.target.className === 'search-button' && event.target.previousElementSibling.value) {
+    displaySearch();
+  }
+}
+
 function loadNewExperience() {
   createRecipes();
 }
