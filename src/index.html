@@ -2,11 +2,158 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../src/styles.css">
     <title>Whats Cookin</title>
   </head>
   <body>
-    <h1>Whats Cookin</h1>
-
+    <nav class="header-nav">
+      <div class="nav-buttons">
+        <h1>Whats Cookin</h1>
+        <h2>Recipes To Cook</h2>
+        <h2>Shopping List</h2>
+        <h2>Favorites</h2>
+      </div>
+      <div class="search-bar">
+        <input type="search" id="search-bar" placeholder="Search For A Recipe"></input>
+        <button>Search</button>
+      </div>
+    </nav>
+    <div class="view-title">
+      <h2>All Recipes</h2>
+    </div>
+    <section class="recipes-wrapper">
+      <div class="recipe-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTSH62JNVF5AlAumCvU5cdytTBegBaab-KejQ&usqp=CAU" alt="pizza">
+        <p>Recipe Name</p>
+        <div class="tag-buttons">
+          <button type="button" name="button">Tag</button>
+          <button type="button" name="button">Tag</button>
+          <button type="button" name="button">Tag</button>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTSH62JNVF5AlAumCvU5cdytTBegBaab-KejQ&usqp=CAU" alt="pizza">
+        <p>Recipe Name</p>
+        <div class="tag-buttons">
+            <button type="button" name="button">Tag</button>
+            <button type="button" name="button">Tag</button>
+            <button type="button" name="button">Tag</button>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTSH62JNVF5AlAumCvU5cdytTBegBaab-KejQ&usqp=CAU" alt="pizza">
+        <p>Recipe Name</p>
+        <div class="tag-buttons">
+          <button type="button" name="button">Tag</button>
+          <button type="button" name="button">Tag</button>
+          <button type="button" name="button">Tag</button>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTSH62JNVF5AlAumCvU5cdytTBegBaab-KejQ&usqp=CAU" alt="pizza">
+        <p>Recipe Name</p>
+        <div class="tag-buttons">
+          <button type="button" name="button">Tag</button>
+          <button type="button" name="button">Tag</button>
+          <button type="button" name="button">Tag</button>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTSH62JNVF5AlAumCvU5cdytTBegBaab-KejQ&usqp=CAU" alt="pizza">
+        <p>Recipe Name</p>
+        <div class="tag-buttons">
+          <button type="button" name="button">Tag</button>
+          <button type="button" name="button">Tag</button>
+          <button type="button" name="button">Tag</button>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTSH62JNVF5AlAumCvU5cdytTBegBaab-KejQ&usqp=CAU" alt="pizza">
+        <p>Recipe Name</p>
+        <div class="tag-buttons">
+          <button type="button" name="button">Tag</button>
+          <button type="button" name="button">Tag</button>
+          <button type="button" name="button">Tag</button>
+        </div>
+      </div>
+    </section>
+    <section class="pantry-view hidden">
+      <ul class="ingredient-list">
+      <div class="ingredient-wrap">
+        <div class="ingredient-label">
+          <input class="ingredient-checkbox"type="checkbox">
+          <label>Thai Mayo</label>
+        </div>
+        <div class="ingredient-quantity">
+          <h3>4</h3>
+        </div>
+      </div>
+      <div class="ingredient-wrap">
+        <div class="ingredient-label">
+          <input class="ingredient-checkbox"type="checkbox">
+          <label>Thai Mayo</label>
+        </div>
+        <div class="ingredient-quantity">
+          <h3>4</h3>
+        </div>
+      </div>
+      <div class="ingredient-wrap">
+        <div class="ingredient-label">
+          <input class="ingredient-checkbox"type="checkbox">
+          <label>Thai Mayo</label>
+        </div>
+        <div class="ingredient-quantity">
+          <h3>4</h3>
+        </div>
+      </div>
+      </ul>
+    </section>
+    <div class="modal-recipe-view">
+      <div class="modal-content">
+        <img class="modal-img"src="https://spoonacular.com/recipeImages/595736-556x370.jpg" alt="pizza">
+        <div class="recipe-name">
+          <h1>Recipe Name</h1>
+        </div>
+        <div class="modal-recipe-info">
+          <div class="modal-ingredients">
+            <h2 class="modal-recipe-titles">Ingredients</h2>
+            <ul>
+              <li>Ingredient1</li>
+              <li>Ingredient2</li>
+              <li>Ingredient3</li>
+              <li>Ingredient4</li>
+              <li>Ingredient5</li>
+              <li>Ingredient6</li>
+              <li>Ingredient7</li>
+              <li>Ingredient8</li>
+              <li>Ingredient9</li>
+              <li>Ingredient10</li>
+              <li>Ingredient11</li>
+              <li>Ingredient12</li>
+            </ul>
+          </div>
+          <div class="modal-instructions">
+            <h2 class="modal-recipe-titles">Instructions</h2>
+            <ul>
+              <li>"In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy."</li>
+              <li>"In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy."</li>
+              <li>"In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy."</li>
+              <li>"In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy."</li>
+              <li>"In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy."</li>
+              <li>"In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy."</li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-tags">
+          <button type="button" name="button">tag1</button>
+          <button type="button" name="button">tag2</button>
+          <button type="button" name="button">tag3</button>
+          <button type="button" name="button">tag4</button>
+          <button type="button" name="button">tag5</button>
+          <button type="button" name="button">tag6</button>
+        </div>
+      </div>
+    </div>
     <script type="text/javascript" src="../data/users.js"></script>
     <script type="text/javascript" src="../data/recipes.js"></script>
     <script type="text/javascript" src="../data/ingredients.js"></script>
