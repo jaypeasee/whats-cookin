@@ -2,22 +2,37 @@ const pageWrap = document.querySelector('.recipes-wrapper');
 
 console.log(recipeData);
 
-window.addEventListener('load', loadRecipes);
+window.addEventListener('load', loadNewExperience);
+//^^^ invoke a handler function
+//handler function should invoke two functions
+//createRecipes
+//createUser
 
-function loadRecipes() {
-  recipeData.forEach((recipe) => {
-    let newRecipe = new Recipe(recipe.id, recipe.image, recipe.ingredients, recipe.instructions, recipe.name, recipe.tags);
-    let newRecipeTags = newRecipe.tags.join(', ');
-    let recipeCardInfo = `<div class="recipe-card" id="${newRecipe.id}">
-      <img src="${newRecipe.image}">
-      <p>${newRecipe.name}</p>
-      <div class="tag-buttons">
-        <p>Tags: ${newRecipeTags}</p>
-      </div>
-    </div>`
-    pageWrap.insertAdjacentHTML('afterbegin', recipeCardInfo);
+//refactor
+//creates
+function loadNewExperience() {
+  createRecipes();
+}
+
+function createRecipes() {
+recipeData.forEach((recipe) => {
+  let newRecipe = new Recipe(recipe.id, recipe.image, recipe.ingredients, recipe.instructions, recipe.name, recipe.tags);
+  createRecipeCards(newRecipe);
   });
 }
+
+function createRecipeCards(recipe) {
+  let recipeTags = recipe.tags.join(', ');
+  let recipeCardInfo = `<div class="recipe-card" id="${recipe.id}">
+    <img src="${recipe.image}">
+    <p>${recipe.name}</p>
+    <div class="tag-buttons">
+      <p>Tags: ${recipeTags}</p>
+    </div>
+  </div>`
+  pageWrap.insertAdjacentHTML('afterbegin', recipeCardInfo);
+}
+
 
 //instantiate the recipe class
 
