@@ -16,7 +16,7 @@ function hideMainRecipes() {
 
 function displaySearch() {
   hideMainRecipes();
-  
+
 }
 
 function loadNewExperience() {
@@ -24,11 +24,20 @@ function loadNewExperience() {
 }
 
 function createRecipes() {
-recipeData.forEach((recipe) => {
-  let newRecipe = new Recipe(recipe.id, recipe.image, recipe.ingredients, recipe.instructions, recipe.name, recipe.tags);
-  createRecipeCards(newRecipe);
-  });
+  let recipeList = [];
+  recipeData.forEach((recipe) => {
+    let newRecipe = new Recipe(recipe.id, recipe.image, recipe.ingredients, recipe.instructions, recipe.name, recipe.tags);
+    createRecipeCards(newRecipe);
+    recipeList.push(newRecipe);
+    });
+  createUser(recipeList);
 }
+
+function createUser(list) {
+  const newUser = new User("JP", 1, "pantry", list)
+  console.log(newUser);
+}
+
 
 function createRecipeCards(recipe) {
   let recipeTags = recipe.tags.join(', ');
