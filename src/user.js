@@ -30,7 +30,7 @@ class User {
 
   searchAllRecipes(nameFragment) {
     const filteredRecipes = this.recipes.filter(recipe => {
-      return recipe.name.includes(nameFragment);
+      return recipe.name.toLowerCase().includes(nameFragment.toLowerCase());
     });
     return filteredRecipes;
   }

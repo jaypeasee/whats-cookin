@@ -18,7 +18,7 @@ function hideMainRecipes() {
 
 function displaySearch(searchValue) {
   hideMainRecipes();
-  const filteredRecipes = currentUser.searchAllRecipes(searchValue);
+  const filteredRecipes = currentUser.searchAllRecipes(searchValue); pageWrap.previousElementSibling.children[0].innerText = "Search Results";
   filteredRecipes.forEach((recipe) => {
     createRecipeCards(recipe);
   });

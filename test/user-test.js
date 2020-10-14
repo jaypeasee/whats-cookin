@@ -122,6 +122,10 @@ describe('User', () => {
     expect(user1.searchAllRecipes("past")).to.deep.equal([recipe1, recipe3]);
   });
 
+  it('recipe searches should not be case sensitive', () => {
+    expect(user1.searchAllRecipes("pAsT")).to.deep.equal([recipe1, recipe3]);
+  });
+
   it('should be able to search recipes by tag', () => {
     expect(user1.searchByTag("Italian")).to.deep.equal([recipe2, recipe3]);
   });
