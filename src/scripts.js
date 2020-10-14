@@ -34,7 +34,11 @@ function createRecipes() {
 }
 
 function createUser(list) {
-  const newUser = new User("JP", 1, "pantry", list)
+  //math.random from 1 - 49
+  // const newUser = new User("JP", 1, "pantry", list)
+  // usersData
+  const randomUser = usersData[Math.floor(Math.random() * usersData.length)];
+  const newUser = new User(randomUser.name, randomUser.id, randomUser.pantry, list);
   console.log(newUser);
 }
 
