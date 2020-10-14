@@ -23,6 +23,8 @@ describe('User', () => {
 
     ingredient1 = {id: 1, quantiy: {amount: 1.5, unit: "c" }}
     ingredient2 = {id: 2, quantiy: {amount: .5, unit: "tsp" }}
+    ingredient3 = {id:1, name: "wheat flour", estimatedCostInCents: 582 };
+    ingredient4 = {id: 2, name: "bicarbonate of soda", estimatedCostInCents: 142 };
 
     recipe1 = new Recipe(1, "Big image thing http", [ingredient1, ingredient2], [{ instruction: "boil em", number: 1 }, { instruction: "mash em", number: 2 }, { instruction: "stick em in a stew", number: 3 }], "pasta sauce", ["rabbit", "banana", "yup", "garlic"]);
 
@@ -141,8 +143,12 @@ describe('User', () => {
   });
 
   it.skip('should be able to evaluate if the user has enough ingredients in their pantry', () => {
-    user1.chooseRecipe(recipe1);
 
     expect(user1.chooseRecipe(recipe1)).to.equal('')
   });
+
+  it('should be able to search recipes by ingredient', () => {
+    expect(user1.searchByIngredient(ingredient3)).to.deep.equal([recipe1, recipe2, recipe3]);
+
+  })
 });

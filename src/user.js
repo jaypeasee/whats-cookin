@@ -42,6 +42,25 @@ class User {
     return filteredTags;
   }
 
+  searchByIngredient(searchedIngredient) {
+    const allIngredients = this.recipes.reduce((acc, recipe) => {
+       const exactIngredient = recipe.ingredients.find((ingredient) => {
+         return ingredient.id === searchedIngredient.id;
+      })
+      acc.push(exactIngredient);
+      return acc;
+    },[]);
+
+    const filteredRecipes = this.recipes.reduce((acc, recipe) => {
+      const matchedIngredients = allIngredients.find((ingredient) => {
+        return recipe.ingredients.includes(ingredient.id)
+      })
+    acc.push(recipe);
+      return acc;
+    },[]);
+    return filteredRecipes;
+  }
+
   chooseRecipe(recipe) {
     //loop through pantry.
     //loop through recipe ingredients
