@@ -10,6 +10,9 @@ function changeView(event) {
   if(event.target.className === 'search-button' && event.target.previousElementSibling.value) {
     displaySearch(event.target.previousElementSibling.value);
   }
+  if(event.target.className === 'clear-search-results') {
+    reloadAllRecipes();
+  }
 }
 
 function hideMainRecipes() {
@@ -23,6 +26,7 @@ function displaySearch(searchValue) {
     createRecipeCards(recipe);
   });
 }
+
 
 function loadNewExperience() {
   let recipeList = [];
@@ -58,4 +62,16 @@ function createRecipeCards(recipe) {
     </div>
   </div>`
   pageWrap.insertAdjacentHTML('afterbegin', recipeCardInfo);
+}
+
+function reloadAllRecipes() {
+  let recipeList = currentUser.recipes;
+  recipeList.map((recipe) => {
+    createRecipeCards(recipe);
+  });
+  clearAllInputs();
+}
+
+function clearAllInputs() {
+  nav.children[1].children[0].value = '';
 }
