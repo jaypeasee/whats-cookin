@@ -6,6 +6,7 @@ let currentUser;
 
 window.addEventListener('load', loadNewExperience);
 nav.addEventListener('click', changeView);
+tagSection.addEventListener('click', filterTags);
 
 function changeView(event) {
   if(event.target.className === 'search-button' && event.target.previousElementSibling.value) {
@@ -67,7 +68,7 @@ function createUniqueTags(recipeList) {
 
 function displayTagButtons(uniqueTags) {
   uniqueTags.forEach((tag) => {
-    const tagButton = `<button>${tag}</button>`
+    const tagButton = `<button class="tag-button">${tag}</button>`
     tagSection.insertAdjacentHTML('afterbegin', tagButton);
   });
 }
@@ -94,4 +95,14 @@ function reloadAllRecipes() {
 
 function clearAllInputs() {
   nav.children[1].children[0].value = '';
+}
+
+function filterTags(event) {
+  if(event.target.className === 'tag-button') {
+    hideMainRecipes();
+    const filteredRecipes = currentUser.searchByTag(event.target.innerText);
+    filteredRecipes.forEach((recipe) => {
+      createRecipeCards(recipe);
+    });
+  };
 }
