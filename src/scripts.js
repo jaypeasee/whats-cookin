@@ -16,6 +16,7 @@ function hideMainRecipes() {
 
 function displaySearch() {
   hideMainRecipes();
+
 }
 
 function loadNewExperience() {
@@ -28,25 +29,25 @@ function loadNewExperience() {
   randomizeUserData(recipeList);
 }
 
-function randomizeUserData(list) {
+function randomizeUserData(recipeList) {
   const randomUser = usersData[Math.floor(Math.random() * usersData.length)];
-  createPantry(randomUser, list);
+  createPantry(randomUser, recipeList);
 }
 
-function createPantry(randomUser, list) {
+function createPantry(randomUser, recipeList) {
   const newPantry = new Pantry(randomUser.pantry);
-  createUser(randomUser, newPantry, list);
+  createUser(randomUser, newPantry, recipeList);
 }
 
-function createUser(randomUser, newPantry, list) {
-  const newUser = new User(randomUser.name, randomUser.id, newPantry, list);
+function createUser(randomUser, newPantry, recipeList) {
+  const newUser = new User(randomUser.name, randomUser.id, newPantry, recipeList);
 }
 
 
 function createRecipeCards(recipe) {
   let recipeTags = recipe.tags.join(', ');
   let recipeCardInfo = `<div class="recipe-card" id="${recipe.id}">
-    <img src="${recipe.image}">
+    <img class="recipe-card-image" src="${recipe.image}">
     <p>${recipe.name}</p>
     <div class="tag-buttons">
       <p>Tags: ${recipeTags}</p>
@@ -54,10 +55,3 @@ function createRecipeCards(recipe) {
   </div>`
   pageWrap.insertAdjacentHTML('afterbegin', recipeCardInfo);
 }
-
-
-//instantiate the recipe class
-
-//insert adjacent html on the recipes-wrapper
-
-//insert a specific card

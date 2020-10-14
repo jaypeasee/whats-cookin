@@ -14,11 +14,17 @@
 }
 
 .recipe-card {
-  margin: 5%;
+  margin: 2%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  flex-basis: 15%;
+  flex-basis: 20%;
+  height: 100%;
+}
+
+.recipe-card-image {
+  width: 100%;
+  height: 100%;
 }
 
 .view-title {
@@ -51,7 +57,7 @@ body {
 .ingredient-quantity {
   margin-right: 2%;
 }
-.ingredient-wrap{
+.ingredient-wrap {
   margin: 1%;
   display: flex;
   flex-direction: row;
