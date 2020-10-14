@@ -98,11 +98,13 @@ function clearAllInputs() {
 }
 
 function filterTags(event) {
-  if(event.target.className === 'tag-button') {
+  if(event.target.className === 'all-tag-button') {
+    reloadAllRecipes();
+  } else if(event.target.className === 'tag-button') {
     hideMainRecipes();
     const filteredRecipes = currentUser.searchByTag(event.target.innerText);
     filteredRecipes.forEach((recipe) => {
       createRecipeCards(recipe);
     });
-  };
+  }
 }
