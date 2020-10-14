@@ -34,7 +34,7 @@ class User {
     });
     return filteredRecipes;
   }
-  
+
   searchByTag(tagName) {
     const filteredTags = this.recipes.filter(recipe => {
       return recipe.tags.includes(tagName);

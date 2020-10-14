@@ -1,22 +1,27 @@
 const pageWrap = document.querySelector('.recipes-wrapper');
 const nav = document.querySelector('.header-nav');
 
+let currentUser;
+
 window.addEventListener('load', loadNewExperience);
 nav.addEventListener('click', changeView);
 
 function changeView(event) {
   if(event.target.className === 'search-button' && event.target.previousElementSibling.value) {
-    displaySearch();
+    displaySearch(event.target.previousElementSibling.value);
   }
 }
 
 function hideMainRecipes() {
-  pageWrap.classList.add('hidden');
+  pageWrap.innerHTML = "";
 }
 
-function displaySearch() {
+function displaySearch(searchValue) {
   hideMainRecipes();
-
+  const filteredRecipes = currentUser.searchAllRecipes(searchValue);
+  filteredRecipes.forEach((recipe) => {
+    createRecipeCards(recipe);
+  });
 }
 
 function loadNewExperience() {
@@ -40,9 +45,8 @@ function createPantry(randomUser, recipeList) {
 }
 
 function createUser(randomUser, newPantry, recipeList) {
-  const newUser = new User(randomUser.name, randomUser.id, newPantry, recipeList);
+  currentUser = new User(randomUser.name, randomUser.id, newPantry, recipeList);
 }
-
 
 function createRecipeCards(recipe) {
   let recipeTags = recipe.tags.join(', ');
