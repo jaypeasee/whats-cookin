@@ -16,30 +16,30 @@ function hideMainRecipes() {
 
 function displaySearch() {
   hideMainRecipes();
-
 }
 
 function loadNewExperience() {
-  createRecipes();
-}
-
-function createRecipes() {
   let recipeList = [];
   recipeData.forEach((recipe) => {
     let newRecipe = new Recipe(recipe.id, recipe.image, recipe.ingredients, recipe.instructions, recipe.name, recipe.tags);
     createRecipeCards(newRecipe);
     recipeList.push(newRecipe);
     });
-  createUser(recipeList);
+  randomizeUserData(recipeList);
 }
 
-function createUser(list) {
-  //math.random from 1 - 49
-  // const newUser = new User("JP", 1, "pantry", list)
-  // usersData
+function randomizeUserData(list) {
   const randomUser = usersData[Math.floor(Math.random() * usersData.length)];
-  const newUser = new User(randomUser.name, randomUser.id, randomUser.pantry, list);
-  console.log(newUser);
+  createPantry(randomUser, list);
+}
+
+function createPantry(randomUser, list) {
+  const newPantry = new Pantry(randomUser.pantry);
+  createUser(randomUser, newPantry, list);
+}
+
+function createUser(randomUser, newPantry, list) {
+  const newUser = new User(randomUser.name, randomUser.id, newPantry, list);
 }
 
 
