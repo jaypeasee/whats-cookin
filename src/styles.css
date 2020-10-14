@@ -36,6 +36,13 @@
   padding-left: 5%;
 }
 
+.tag-section {
+  margin-top: 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 .recipes-wrapper {
   display: flex;
   flex-direction: row;
@@ -62,6 +69,7 @@ body {
 .ingredient-quantity {
   margin-right: 2%;
 }
+
 .ingredient-wrap {
   margin: 1%;
   display: flex;

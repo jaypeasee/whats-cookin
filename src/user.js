@@ -28,16 +28,16 @@ class User {
     return filteredFavorites;
   }
 
-  searchAllRecipes(nameFragment) {
-    const filteredRecipes = this.recipes.filter(recipe => {
-      return recipe.name.toLowerCase().includes(nameFragment.toLowerCase());
-    });
-    return filteredRecipes;
-  }
+  // searchAllRecipes(nameFragment) {
+  //   const filteredRecipes = this.recipes.filter(recipe => {
+  //     return recipe.name.toLowerCase().includes(nameFragment.toLowerCase())
+  //   });
+  //   return filteredRecipes;
+  // }
 
   searchByTag(tagName) {
     const filteredTags = this.recipes.filter(recipe => {
-      return recipe.tags.includes(tagName);
+      return recipe.tags.includes(tagName.toLowerCase());
     });
     return filteredTags;
   }

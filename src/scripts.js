@@ -1,5 +1,6 @@
 const pageWrap = document.querySelector('.recipes-wrapper');
 const nav = document.querySelector('.header-nav');
+const tagSection = document.querySelector('.tag-section');
 
 let currentUser;
 
@@ -27,7 +28,6 @@ function displaySearch(searchValue) {
   });
 }
 
-
 function loadNewExperience() {
   let recipeList = [];
   recipeData.forEach((recipe) => {
@@ -36,6 +36,7 @@ function loadNewExperience() {
     recipeList.push(newRecipe);
     });
   randomizeUserData(recipeList);
+  createUniqueTags(recipeList);
 }
 
 function randomizeUserData(recipeList) {
@@ -50,6 +51,25 @@ function createPantry(randomUser, recipeList) {
 
 function createUser(randomUser, newPantry, recipeList) {
   currentUser = new User(randomUser.name, randomUser.id, newPantry, recipeList);
+}
+
+function createUniqueTags(recipeList) {
+  let uniqueTags = [];
+  recipeList.forEach((recipe) => {
+    recipe.tags.forEach((tag) => {
+      if(!uniqueTags.includes(tag)) {
+        uniqueTags.push(tag);
+      };
+    })
+  })
+  displayTagButtons(uniqueTags);
+}
+
+function displayTagButtons(uniqueTags) {
+  uniqueTags.forEach((tag) => {
+    const tagButton = `<button>${tag}</button>`
+    tagSection.insertAdjacentHTML('afterbegin', tagButton);
+  });
 }
 
 function createRecipeCards(recipe) {
