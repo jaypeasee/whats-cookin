@@ -1,12 +1,31 @@
 const pageWrap = document.querySelector('.recipes-wrapper');
 const nav = document.querySelector('.header-nav');
 const tagSection = document.querySelector('.tag-section');
+const modalContent = document.querySelector('.modal-content');
 
 let currentUser;
 
 window.addEventListener('load', matchRecipeIngredients);
 nav.addEventListener('click', changeView);
 tagSection.addEventListener('click', filterTags);
+pageWrap.addEventListener('click', handleRecipeClick);
+
+function handleRecipeClick(event) {
+  if(event.target.className.includes('view-recipe-button')) {
+    matchRecipe(event);
+  }
+}
+
+function matchRecipe(event) {
+  let cardID = parseInt(event.target.closest('.recipe-card').id);
+  const matchedRecipe = currentUser.recipes.find((recipe) => {
+    return recipe.id === cardID;
+  })
+  displayRecipeModal(matchedRecipe);
+}
+
+function displayRecipeModal(recipe) {
+}
 
 function changeView(event) {
   if(event.target.className === 'search-button' && event.target.previousElementSibling.value) {
@@ -97,8 +116,8 @@ function createRecipeCards(recipe) {
       <p>${recipeTags}</p>
     </div>
     <div class="recipe-ctas">
-      <button class="card-content">View Recipe</button>
-      <button class="card-content">Add Recipe</button>
+      <button class="card-content view-recipe-button">View Recipe</button>
+      <button class="card-content add-recipe-button">Add Recipe</button>
   </div>`
   pageWrap.insertAdjacentHTML('afterbegin', recipeCardInfo);
 }
