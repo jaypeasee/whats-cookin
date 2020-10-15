@@ -28,18 +28,24 @@ class User {
     return filteredFavorites;
   }
 
-  searchAllRecipes(nameFragment) {
-    const filteredRecipes = this.recipes.filter(recipe => {
-      return recipe.name.includes(nameFragment);
-    });
-    return filteredRecipes;
-  }
-  
-  searchByTag(tagName) {
+  filterByTag(tagName) {
     const filteredTags = this.recipes.filter(recipe => {
-      return recipe.tags.includes(tagName);
+      return recipe.tags.includes(tagName.toLowerCase());
     });
     return filteredTags;
+  }
+
+  searchByIngredient(ingredientID) {
+      const filteredRecipes = this.recipes.reduce((acc, recipe) => {
+      const matchedIngredients = recipe.ingredients.find((ingredient) => {
+        return ingredient.id === ingredientID;
+      })
+    if (matchedIngredients) {
+      acc.push(recipe);
+    }
+      return acc;
+    },[]);
+    return filteredRecipes;
   }
 
   chooseRecipe(recipe) {

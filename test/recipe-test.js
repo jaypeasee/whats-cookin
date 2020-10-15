@@ -57,11 +57,11 @@ describe('Recipe', () =>{
   });
 
   it('should have an image', () => {
-    expect(recipe1.img).to.equal('https://ketocookingchristian.com/wp-content/uploads/2018/05/Pepperoni-Pizza-Bagels.jpg');
+    expect(recipe1.image).to.equal('https://ketocookingchristian.com/wp-content/uploads/2018/05/Pepperoni-Pizza-Bagels.jpg');
   });
 
   it('should be able to have a different img', () => {
-    expect(recipe2.img).to.equal('https://images.heb.com/is/image/HEBGrocery/002755125');
+    expect(recipe2.image).to.equal('https://images.heb.com/is/image/HEBGrocery/002755125');
   });
 
   it('should have a list of ingredients', () => {

@@ -23,14 +23,18 @@ describe('User', () => {
 
     ingredient1 = {id: 1, quantiy: {amount: 1.5, unit: "c" }}
     ingredient2 = {id: 2, quantiy: {amount: .5, unit: "tsp" }}
+    ingredient3 = {id:1, name: "wheat flour", estimatedCostInCents: 582 };
+    ingredient4 = {id: 2, name: "bicarbonate of soda", estimatedCostInCents: 142 };
 
     recipe1 = new Recipe(1, "Big image thing http", [ingredient1, ingredient2], [{ instruction: "boil em", number: 1 }, { instruction: "mash em", number: 2 }, { instruction: "stick em in a stew", number: 3 }], "pasta sauce", ["rabbit", "banana", "yup", "garlic"]);
 
-    recipe2 = new Recipe(2, "another image", [ingredient1, ingredient2], [{ instruction: "chop it up", number: 2 }, { instruction: "put some butter on it", number: 2 }], "Garlic bread", ["bread", "garlic", "Italian"])
+    recipe2 = new Recipe(2, "another image", [ingredient1, ingredient2], [{ instruction: "chop it up", number: 2 }, { instruction: "put some butter on it", number: 2 }], "Garlic bread", ["bread", "garlic", "italian"])
 
-    recipe3 = new Recipe(3, "jpg", [ingredient2, ingredient1], [{ instruction: "boil water", number: 1 }, { instruction: "add salt", number: 2 }, { instruction: "soften noodles", number: 3 }], "pasta", ["pasta", "carbs", "Italian"])
+    recipe3 = new Recipe(3, "jpg", [ingredient2, ingredient1], [{ instruction: "boil water", number: 1 }, { instruction: "add salt", number: 2 }, { instruction: "soften noodles", number: 3 }], "pasta", ["pasta", "carbs", "italian"])
 
-    user1 = new User('Coop', 1, pantry1, [recipe1, recipe2, recipe3]);
+    recipe4 = new Recipe(4, "jpg", [ingredient2], [{ instruction: "boil water", number: 1 }, { instruction: "add salt", number: 2 }, { instruction: "soften noodles", number: 3 }], "pasta", ["pasta", "carbs", "italian"])
+
+    user1 = new User('Coop', 1, pantry1, [recipe1, recipe2, recipe3, recipe4]);
     user2 = new User('JP', 2, pantry2, [recipe2, recipe3, recipe1]);
   });
 
@@ -67,7 +71,7 @@ describe('User', () => {
   });
 
   it('should be able to have a list of recipes', () => {
-    expect(user1.recipes).to.deep.equal([recipe1, recipe2, recipe3]);
+    expect(user1.recipes).to.deep.equal([recipe1, recipe2, recipe3, recipe4]);
   });
 
   it('should be able to have a different list of recipes', () => {
@@ -118,23 +122,26 @@ describe('User', () => {
     expect(user1.searchFavorites("past")).to.deep.equal([recipe1, recipe3]);
   });
 
-  it('should be able to search through all recipes by name', () => {
-    expect(user1.searchAllRecipes("past")).to.deep.equal([recipe1, recipe3]);
+  it('should be able to search recipes by tag', () => {
+    expect(user1.filterByTag("Italian")).to.deep.equal([recipe2, recipe3, recipe4]);
   });
 
-  it('should be able to search recipes by tag', () => {
-    expect(user1.searchByTag("Italian")).to.deep.equal([recipe2, recipe3]);
+  it('search by tag should not be case sensitive', () => {
+    expect(user1.filterByTag("ITaLiAn")).to.deep.equal([recipe2, recipe3, recipe4]);
   });
 
   it.skip('should be able to search by multiple tags', () => {
-    user1.searchByTag("Italian");
+    user1.filterByTag("Italian");
 
-    expect(user1.searchByTag("garlic")).to.deep.equal([recipe2]);
+    expect(user1.filterByTag("garlic")).to.deep.equal([recipe2]);
   });
 
   it.skip('should be able to evaluate if the user has enough ingredients in their pantry', () => {
-    user1.chooseRecipe(recipe1);
 
     expect(user1.chooseRecipe(recipe1)).to.equal('')
+  });
+
+  it('should be able to search recipes by ingredient', () => {
+    expect(user1.searchByIngredient(ingredient3.id)).to.deep.equal([recipe1, recipe2, recipe3]);
   });
 });

@@ -13,16 +13,34 @@
   justify-content: center;
 }
 
+.clear-search-results {
+  margin-left: 5px;
+  height: 25px;
+  width: 25px;
+}
 .recipe-card {
-  margin: 5%;
+  margin: 2%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  flex-basis: 15%;
+  flex-basis: 20%;
+  height: 100%;
+}
+
+.recipe-card-image {
+  width: 100%;
+  height: 100%;
 }
 
 .view-title {
   padding-left: 5%;
+}
+
+.tag-section {
+  margin-top: 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .recipes-wrapper {
@@ -51,7 +69,8 @@ body {
 .ingredient-quantity {
   margin-right: 2%;
 }
-.ingredient-wrap{
+
+.ingredient-wrap {
   margin: 1%;
   display: flex;
   flex-direction: row;
