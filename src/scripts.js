@@ -13,6 +13,7 @@ function changeView(event) {
     displaySearch(event.target.previousElementSibling.value);
   }
   if(event.target.className === 'clear-search-results') {
+    hideMainRecipes()
     reloadAllRecipes();
   }
 }
@@ -26,9 +27,7 @@ function displaySearch(searchValue) {
     if (ingredient.name === searchValue.toLowerCase()) {
       const matchedRecipes = currentUser.searchByIngredient(ingredient.id);
       hideMainRecipes();
-      matchedRecipes.forEach(recipe => {
-        createRecipeCards(recipe);
-      })
+      getAvailableRecipes(matchedRecipes);
     }
   })
 }
@@ -91,10 +90,8 @@ function createRecipeCards(recipe) {
 
 function reloadAllRecipes() {
   let recipeList = currentUser.recipes;
-  recipeList.map((recipe) => {
-    createRecipeCards(recipe);
-  });
-  clearAllInputs();
+  hideMainRecipes();
+  getAvailableRecipes(recipeList);
 }
 
 function clearAllInputs() {
@@ -107,8 +104,12 @@ function filterTags(event) {
   } else if(event.target.className === 'tag-button') {
     hideMainRecipes();
     const filteredRecipes = currentUser.filterByTag(event.target.innerText);
-    filteredRecipes.forEach((recipe) => {
-      createRecipeCards(recipe);
-    });
+    getAvailableRecipes(filteredRecipes)
   }
+}
+
+function getAvailableRecipes(recipes) {
+  recipes.forEach(recipe => {
+    createRecipeCards(recipe);
+  })
 }
