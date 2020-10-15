@@ -1,7 +1,7 @@
 const pageWrap = document.querySelector('.recipes-wrapper');
 const nav = document.querySelector('.header-nav');
 const tagSection = document.querySelector('.tag-section');
-const modalContent = document.querySelector('.modal-content');
+const modalRecipeView = document.querySelector('.modal-recipe-view');
 
 let currentUser;
 
@@ -21,10 +21,36 @@ function matchRecipe(event) {
   const matchedRecipe = currentUser.recipes.find((recipe) => {
     return recipe.id === cardID;
   })
-  displayRecipeModal(matchedRecipe);
+  findCardElements(matchedRecipe);
 }
 
-function displayRecipeModal(recipe) {
+function findCardElements(recipe) {
+  modalRecipeView.classList.remove('hidden');
+  const image = modalRecipeView.children[0].children[0].children[0];
+  const title = image.nextElementSibling.children[0];
+  const ingredients = image.nextElementSibling.nextElementSibling.children[0].children[1];
+  const tags = ingredients.nextElementSibling.children[1];
+  const instructions = image.nextElementSibling.nextElementSibling.children[1].children[1]; 
+  console.log(instructions);
+  displayModal(recipe, image, title, ingredients, tags, instructions);
+}
+
+function displayModal(recipe, image, title, ingredients, tags, instructions) {
+  image.src = recipe.image;
+  title.innerText = recipe.name;
+  console.log(recipe)
+  recipe.ingredients.forEach((ingredient) => {
+    const ingredientInfo = `<li>${ingredient.quantity.amount} ${ingredient.quantity.unit} of ${ingredient.name}.</li>`
+    ingredients.insertAdjacentHTML('beforeend', ingredientInfo);
+  })
+  recipe.tags.forEach((tag) => {
+    const tagInfo = `<li>${tag}</li>`
+    tags.insertAdjacentHTML('beforeend', tagInfo);
+  })
+  recipe.instructions.forEach((instruction) => {
+    const instructionsInfo = `<li>${instruction.instruction}</li>`
+    instructions.insertAdjacentHTML('beforeend', instructionsInfo);
+  })
 }
 
 function changeView(event) {
