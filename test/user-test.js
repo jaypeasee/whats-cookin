@@ -150,7 +150,7 @@ describe('User', () => {
   });
 
   it.only('should be able to search recipes by ingredient', () => {
-    expect(user1.searchByIngredient(ingredient3)).to.deep.equal([recipe1, recipe2, recipe3]);
+    expect(user1.searchByIngredient(ingredient3.id)).to.deep.equal([recipe1, recipe2, recipe3]);
 
   })
 });

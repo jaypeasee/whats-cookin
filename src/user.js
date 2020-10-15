@@ -42,10 +42,10 @@ class User {
     return filteredTags;
   }
 
-  searchByIngredient(searchedIngredient) {
+  searchByIngredient(ingredientID) {
       const filteredRecipes = this.recipes.reduce((acc, recipe) => {
       const matchedIngredients = recipe.ingredients.find((ingredient) => {
-        return ingredient.id === searchedIngredient.id;
+        return ingredient.id === ingredientID;
       })
     if (matchedIngredients) {
       acc.push(recipe);
