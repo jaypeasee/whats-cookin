@@ -37,10 +37,29 @@
 }
 
 .tag-section {
-  margin-top: 2%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tag-area {
+  display: flex;
+  flex-direction: column;
+}
+
+.tag-button {
+  margin: 1%;
+}
+
+.all-tag-button {
+  margin: 1%;
+}
+
+.tag-title {
+  margin-top: 2%;
+  display: flex;
+  justify-content: center;
 }
 
 .recipes-wrapper {

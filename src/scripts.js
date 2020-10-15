@@ -72,7 +72,7 @@ function createUniqueTags(recipeList) {
 function displayTagButtons(uniqueTags) {
   uniqueTags.forEach((tag) => {
     const tagButton = `<button class="tag-button">${tag}</button>`
-    tagSection.insertAdjacentHTML('afterbegin', tagButton);
+    tagSection.insertAdjacentHTML('beforeend', tagButton);
   });
 }
 
