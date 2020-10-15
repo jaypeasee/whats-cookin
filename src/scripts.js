@@ -23,13 +23,9 @@ function hideMainRecipes() {
 }
 
 function displaySearch(searchValue) {
-  ingredientsData.forEach(ingredient => {
-    if (ingredient.name === searchValue.toLowerCase()) {
-      const matchedRecipes = currentUser.searchByIngredient(ingredient.id);
-      hideMainRecipes();
-      getAvailableRecipes(matchedRecipes);
-    }
-  })
+  const matchedRecipes = currentUser.searchByIngredient(searchValue.toLowerCase());
+  hideMainRecipes();
+  getAvailableRecipes(matchedRecipes);
 }
 
 function matchRecipeIngredients() {
