@@ -4,7 +4,7 @@ const tagSection = document.querySelector('.tag-section');
 
 let currentUser;
 
-window.addEventListener('load', loadNewExperience);
+window.addEventListener('load', matchRecipeIngredients);
 nav.addEventListener('click', changeView);
 tagSection.addEventListener('click', filterTags);
 
@@ -30,6 +30,22 @@ function displaySearch(searchValue) {
       getAvailableRecipes(matchedRecipes);
     }
   })
+}
+
+function matchRecipeIngredients() {
+  recipeData.forEach(recipe => {
+      recipe.ingredients.forEach(recipeIngredient => {
+        let matchedIngredient = ingredientsData.find(ingredientData => {
+          return ingredientData.id === recipeIngredient.id
+        })
+        if (matchedIngredient) {
+          recipeIngredient.name = matchedIngredient.name
+          recipeIngredient.estimatedCostInCents = matchedIngredient.
+          estimatedCostInCents;
+        }
+      })
+    })
+  loadNewExperience()
 }
 
 function loadNewExperience() {
