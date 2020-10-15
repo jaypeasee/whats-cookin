@@ -30,23 +30,33 @@ function findCardElements(recipe) {
   const title = image.nextElementSibling.children[0];
   const ingredients = image.nextElementSibling.nextElementSibling.children[0].children[1];
   const tags = ingredients.nextElementSibling.children[1];
-  const instructions = image.nextElementSibling.nextElementSibling.children[1].children[1]; 
-  console.log(instructions);
-  displayModal(recipe, image, title, ingredients, tags, instructions);
+  const instructions = image.nextElementSibling.nextElementSibling.children[1].children[1];
+  displayModalHeader(recipe, image, title);
+  displayModalIngredients(recipe, ingredients);
+  displayModalTags(recipe, tags);
+  displayModalInstructions(recipe, instructions);
 }
 
-function displayModal(recipe, image, title, ingredients, tags, instructions) {
+function displayModalHeader(recipe, image, title) {
   image.src = recipe.image;
   title.innerText = recipe.name;
-  console.log(recipe)
+}
+
+function displayModalIngredients(recipe, ingredients) {
   recipe.ingredients.forEach((ingredient) => {
     const ingredientInfo = `<li>${ingredient.quantity.amount} ${ingredient.quantity.unit} of ${ingredient.name}.</li>`
     ingredients.insertAdjacentHTML('beforeend', ingredientInfo);
-  })
+  });
+}
+
+function displayModalTags(recipe, tags) {
   recipe.tags.forEach((tag) => {
     const tagInfo = `<li>${tag}</li>`
     tags.insertAdjacentHTML('beforeend', tagInfo);
   })
+}
+
+function displayModalInstructions(recipe, instructions) {
   recipe.instructions.forEach((instruction) => {
     const instructionsInfo = `<li>${instruction.instruction}</li>`
     instructions.insertAdjacentHTML('beforeend', instructionsInfo);
