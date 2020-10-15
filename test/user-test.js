@@ -122,26 +122,18 @@ describe('User', () => {
     expect(user1.searchFavorites("past")).to.deep.equal([recipe1, recipe3]);
   });
 
-  it('should be able to search through all recipes by name', () => {
-    expect(user1.searchAllRecipes("past")).to.deep.equal([recipe1, recipe3]);
-  });
-
-  it('recipe searches should not be case sensitive', () => {
-    expect(user1.searchAllRecipes("pAsT")).to.deep.equal([recipe1, recipe3]);
-  });
-
   it('should be able to search recipes by tag', () => {
-    expect(user1.searchByTag("Italian")).to.deep.equal([recipe2, recipe3]);
+    expect(user1.filterByTag("Italian")).to.deep.equal([recipe2, recipe3]);
   });
 
   it('search by tag should not be case sensitive', () => {
-    expect(user1.searchByTag("ITaLiAn")).to.deep.equal([recipe2, recipe3]);
+    expect(user1.filterByTag("ITaLiAn")).to.deep.equal([recipe2, recipe3]);
   });
 
   it.skip('should be able to search by multiple tags', () => {
-    user1.searchByTag("Italian");
+    user1.filterByTag("Italian");
 
-    expect(user1.searchByTag("garlic")).to.deep.equal([recipe2]);
+    expect(user1.filterByTag("garlic")).to.deep.equal([recipe2]);
   });
 
   it.skip('should be able to evaluate if the user has enough ingredients in their pantry', () => {
@@ -149,8 +141,7 @@ describe('User', () => {
     expect(user1.chooseRecipe(recipe1)).to.equal('')
   });
 
-  it.only('should be able to search recipes by ingredient', () => {
+  it('should be able to search recipes by ingredient', () => {
     expect(user1.searchByIngredient(ingredient3.id)).to.deep.equal([recipe1, recipe2, recipe3]);
-
-  })
+  });
 });
