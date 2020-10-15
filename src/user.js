@@ -28,7 +28,7 @@ class User {
     return filteredFavorites;
   }
 
-  searchByTag(tagName) {
+  filterByTag(tagName) {
     const filteredTags = this.recipes.filter(recipe => {
       return recipe.tags.includes(tagName.toLowerCase());
     });

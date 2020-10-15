@@ -71,7 +71,7 @@ describe('User', () => {
   });
 
   it('should be able to have a list of recipes', () => {
-    expect(user1.recipes).to.deep.equal([recipe1, recipe2, recipe3]);
+    expect(user1.recipes).to.deep.equal([recipe1, recipe2, recipe3, recipe4]);
   });
 
   it('should be able to have a different list of recipes', () => {
@@ -123,11 +123,11 @@ describe('User', () => {
   });
 
   it('should be able to search recipes by tag', () => {
-    expect(user1.filterByTag("Italian")).to.deep.equal([recipe2, recipe3]);
+    expect(user1.filterByTag("Italian")).to.deep.equal([recipe2, recipe3, recipe4]);
   });
 
   it('search by tag should not be case sensitive', () => {
-    expect(user1.filterByTag("ITaLiAn")).to.deep.equal([recipe2, recipe3]);
+    expect(user1.filterByTag("ITaLiAn")).to.deep.equal([recipe2, recipe3, recipe4]);
   });
 
   it.skip('should be able to search by multiple tags', () => {
