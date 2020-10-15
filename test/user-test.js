@@ -32,7 +32,9 @@ describe('User', () => {
 
     recipe3 = new Recipe(3, "jpg", [ingredient2, ingredient1], [{ instruction: "boil water", number: 1 }, { instruction: "add salt", number: 2 }, { instruction: "soften noodles", number: 3 }], "pasta", ["pasta", "carbs", "italian"])
 
-    user1 = new User('Coop', 1, pantry1, [recipe1, recipe2, recipe3]);
+    recipe4 = new Recipe(4, "jpg", [ingredient2], [{ instruction: "boil water", number: 1 }, { instruction: "add salt", number: 2 }, { instruction: "soften noodles", number: 3 }], "pasta", ["pasta", "carbs", "italian"])
+
+    user1 = new User('Coop', 1, pantry1, [recipe1, recipe2, recipe3, recipe4]);
     user2 = new User('JP', 2, pantry2, [recipe2, recipe3, recipe1]);
   });
 
@@ -134,7 +136,7 @@ describe('User', () => {
 
   it('search by tag should not be case sensitive', () => {
     expect(user1.searchByTag("ITaLiAn")).to.deep.equal([recipe2, recipe3]);
-  })
+  });
 
   it.skip('should be able to search by multiple tags', () => {
     user1.searchByTag("Italian");
@@ -147,7 +149,7 @@ describe('User', () => {
     expect(user1.chooseRecipe(recipe1)).to.equal('')
   });
 
-  it('should be able to search recipes by ingredient', () => {
+  it.only('should be able to search recipes by ingredient', () => {
     expect(user1.searchByIngredient(ingredient3)).to.deep.equal([recipe1, recipe2, recipe3]);
 
   })
