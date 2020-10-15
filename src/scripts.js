@@ -80,10 +80,13 @@ function createRecipeCards(recipe) {
   let recipeTags = recipe.tags.join(', ');
   let recipeCardInfo = `<div class="recipe-card" id="${recipe.id}">
     <img class="recipe-card-image" src="${recipe.image}">
-    <p>${recipe.name}</p>
-    <div class="tag-buttons">
-      <p>Tags: ${recipeTags}</p>
+    <h3 class="card-content card-title">${recipe.name}</h3>
+    <div class="tag-buttons card-content">
+      <p>${recipeTags}</p>
     </div>
+    <div class="recipe-ctas">
+      <button class="card-content">View Recipe</button>
+      <button class="card-content">Add Recipe</button>
   </div>`
   pageWrap.insertAdjacentHTML('afterbegin', recipeCardInfo);
 }
