@@ -9,6 +9,17 @@ window.addEventListener('load', matchRecipeIngredients);
 nav.addEventListener('click', changeView);
 tagSection.addEventListener('click', filterTags);
 pageWrap.addEventListener('click', handleRecipeClick);
+modalRecipeView.addEventListener('click', handleModalClick);
+
+function handleModalClick(event) {
+  if (event.target.className === 'clear-modal') {
+    clearModalView();
+  }
+}
+
+function clearModalView() {
+  modalRecipeView.classList.add('hidden');
+}
 
 function handleRecipeClick(event) {
   if(event.target.className.includes('view-recipe-button')) {
@@ -26,7 +37,7 @@ function matchRecipe(event) {
 
 function findCardElements(recipe) {
   modalRecipeView.classList.remove('hidden');
-  const image = modalRecipeView.children[0].children[0].children[0];
+  const image = modalRecipeView.children[0].children[0].children[1];
   const title = image.nextElementSibling.children[0];
   const ingredients = image.nextElementSibling.nextElementSibling.children[0].children[1];
   const tags = ingredients.nextElementSibling.children[1];
@@ -43,6 +54,7 @@ function displayModalHeader(recipe, image, title) {
 }
 
 function displayModalIngredients(recipe, ingredients) {
+  ingredients.innerHTML = '';
   recipe.ingredients.forEach((ingredient) => {
     const ingredientInfo = `<li>${ingredient.quantity.amount} ${ingredient.quantity.unit} of ${ingredient.name}.</li>`
     ingredients.insertAdjacentHTML('beforeend', ingredientInfo);
@@ -50,6 +62,7 @@ function displayModalIngredients(recipe, ingredients) {
 }
 
 function displayModalTags(recipe, tags) {
+  tags.innerHTML = '';
   recipe.tags.forEach((tag) => {
     const tagInfo = `<li>${tag}</li>`
     tags.insertAdjacentHTML('beforeend', tagInfo);
@@ -57,6 +70,7 @@ function displayModalTags(recipe, tags) {
 }
 
 function displayModalInstructions(recipe, instructions) {
+  instructions.innerHTML = '';
   recipe.instructions.forEach((instruction) => {
     const instructionsInfo = `<li>${instruction.instruction}</li>`
     instructions.insertAdjacentHTML('beforeend', instructionsInfo);
