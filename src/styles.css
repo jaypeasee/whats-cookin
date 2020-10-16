@@ -16,17 +16,20 @@ html {
 
 }
 
+.recipe-title {
+  margin: 5%;
+}
+
 .favorite-button {
-  top: 3%;
-  right: 3%;
-  position: absolute;
-  height: 60px;
-  width: 60px;
+  height: 50%;
+  margin: 5%;
   filter: invert(67%) sepia(59%) saturate(0%) hue-rotate(45deg) brightness(99%) contrast(97%);
 }
 
 .favorite-button-clicked {
   filter: invert(12%) sepia(100%) saturate(7398%) hue-rotate(341deg) brightness(94%) contrast(102%);
+  height: 50%;
+  margin: 5%;
 }
 
 .search-bar {
@@ -187,7 +190,9 @@ body {
 }
 
 .recipe-name {
-  align-self: center;
+  display: flex;
+  justify-content: space-between;
+  max-height: 15%
 }
 
 .modal-content {

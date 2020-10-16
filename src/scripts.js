@@ -2,6 +2,7 @@ const pageWrap = document.querySelector('.recipes-wrapper');
 const nav = document.querySelector('.header-nav');
 const tagSection = document.querySelector('.tag-section');
 const modalRecipeView = document.querySelector('.modal-recipe-view');
+const favoriteButton = document.querySelector('.favorite-button');
 
 let currentUser;
 
@@ -14,32 +15,34 @@ modalRecipeView.addEventListener('click', handleModalClick);
 function handleModalClick(event) {
   if(event.target.className === 'clear-modal') {
     clearModalView();
-  }
-  if(event.target.className.includes('favorite-button-target')) {
+  } else if(event.target.className === 'favorite-button') {
     addToFavoritesList(event, parseInt(modalRecipeView.id));
+  } else if(event.target.className.includes('favorite-button-clicked')) {
+    removeFromFavorites(event, parseInt(modalRecipeView.id));
   }
 }
 
 function clearModalView() {
   modalRecipeView.classList.add('hidden');
+  favoriteButton.classList.remove('favorite-button-clicked');
+
 }
 
 function handleRecipeClick(event) {
   if(event.target.className.includes('view-recipe-button')) {
     matchRecipe(event);
-  }
-  if(event.target.className.includes('favorite-button-target')) {
-    let cardID = parseInt(event.target.closest('.recipe-card').id);
-    addToFavoritesList(event, cardID);
+
   }
 }
 
+function removeFromFavorites(event, cardID) {
+  currentUser.removeFavorite(cardID);
+  event.target.classList.remove('favorite-button-clicked')
+}
+
 function addToFavoritesList(event, cardID) {
-  const matchedRecipe = currentUser.recipes.find((recipe) => {
-    return recipe.id === cardID;
-  })
-  currentUser.addFavorite(matchedRecipe);
-    event.target.classList.add('favorite-button-clicked');
+  currentUser.addFavorite(cardID);
+  event.target.classList.add('favorite-button-clicked');
 }
 
 function matchRecipe(event) {
@@ -61,7 +64,19 @@ function findCardElements(recipe) {
   displayModalIngredients(recipe, ingredients);
   displayModalTags(recipe, tags);
   displayModalInstructions(recipe, instructions);
-  modalRecipeView.setAttribute("id", recipe.id)
+  modalRecipeView.setAttribute("id", recipe.id);
+  displayFavoriteButton(recipe.id);
+}
+
+function displayFavoriteButton(id) {
+  const matchedID = currentUser.favoriteRecipes.find(recipe => {
+    return recipe.id === id
+  });
+  if (matchedID) {
+    favoriteButton.classList.add('favorite-button-clicked');
+  } else if (!matchedID) {
+    return
+  }
 }
 
 function displayModalHeader(recipe, image, title) {
@@ -177,7 +192,6 @@ function createRecipeCards(recipe) {
   let recipeTags = recipe.tags.join(', ');
   let recipeCardInfo = `<div class="recipe-card" id="${recipe.id}">
     <img class="recipe-card-image" src="${recipe.image}">
-    <img class="favorite-button-target favorite-button" src="../assets/heart-shape-silhouette.svg">
     <h3 class="card-content card-title">${recipe.name}</h3>
     <div class="tag-buttons card-content">
       <p>${recipeTags}</p>
