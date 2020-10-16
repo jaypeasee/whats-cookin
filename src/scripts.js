@@ -25,6 +25,13 @@ function handleRecipeClick(event) {
   if(event.target.className.includes('view-recipe-button')) {
     matchRecipe(event);
   }
+  if(event.target.className === 'favorite-button') {
+    addToFavoritesList(event);
+  }
+}
+
+function addToFavoritesList(event) {
+  event.target.classList.add('favorite-button-clicked');
 }
 
 function matchRecipe(event) {
@@ -161,6 +168,7 @@ function createRecipeCards(recipe) {
   let recipeTags = recipe.tags.join(', ');
   let recipeCardInfo = `<div class="recipe-card" id="${recipe.id}">
     <img class="recipe-card-image" src="${recipe.image}">
+    <img class="favorite-button" src="../assets/heart-shape-silhouette.svg">
     <h3 class="card-content card-title">${recipe.name}</h3>
     <div class="tag-buttons card-content">
       <p>${recipeTags}</p>
