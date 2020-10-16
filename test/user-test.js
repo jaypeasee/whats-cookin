@@ -14,6 +14,7 @@ describe('User', () => {
   let recipe2;
   let recipe3;
   let ingredient1;
+  let ingredient2;
 
   beforeEach( () => {
 
@@ -21,10 +22,8 @@ describe('User', () => {
 
     pantry2 = [{ ingredient: 1, amount: 2 }, { ingredient: 2, amount: 22 }];
 
-    ingredient1 = {id: 1, quantiy: {amount: 1.5, unit: "c" }}
-    ingredient2 = {id: 2, quantiy: {amount: .5, unit: "tsp" }}
-    ingredient3 = {id:1, name: "wheat flour", estimatedCostInCents: 582 };
-    ingredient4 = {id: 2, name: "bicarbonate of soda", estimatedCostInCents: 142 };
+    ingredient1 = {name: "wheat flower", estimatedCostInCents: 582, id: 1, quantiy: {amount: 1.5, unit: "c" }}
+    ingredient2 = {name: "bicarbonate of soda", estimatedCostInCents: 142 , id: 2, quantiy: {amount: .5, unit: "tsp" }}
 
     recipe1 = new Recipe(1, "Big image thing http", [ingredient1, ingredient2], [{ instruction: "boil em", number: 1 }, { instruction: "mash em", number: 2 }, { instruction: "stick em in a stew", number: 3 }], "pasta sauce", ["rabbit", "banana", "yup", "garlic"]);
 
@@ -142,6 +141,6 @@ describe('User', () => {
   });
 
   it('should be able to search recipes by ingredient', () => {
-    expect(user1.searchByIngredient(ingredient3.id)).to.deep.equal([recipe1, recipe2, recipe3]);
+    expect(user1.searchByIngredient(ingredient1.name)).to.deep.equal([recipe1, recipe2, recipe3]);
   });
 });

@@ -35,15 +35,15 @@ class User {
     return filteredTags;
   }
 
-  searchByIngredient(ingredientID) {
-      const filteredRecipes = this.recipes.reduce((acc, recipe) => {
-      const matchedIngredients = recipe.ingredients.find((ingredient) => {
-        return ingredient.id === ingredientID;
-      })
+  searchByIngredient(ingredientName) {
+    const filteredRecipes = this.recipes.reduce((acc, recipe) => {
+    const matchedIngredients = recipe.ingredients.find((ingredient) => {
+      return ingredient.name === ingredientName;
+    })
     if (matchedIngredients) {
       acc.push(recipe);
     }
-      return acc;
+    return acc;
     },[]);
     return filteredRecipes;
   }

@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../src/styles.css">
     <title>Whats Cookin</title>
   </head>
@@ -19,15 +20,20 @@
         <img class="clear-search-results" src="../assets/x-mark.png" alt="clear-button">
       </div>
     </nav>
-    <section class="tag-section">
-      <button class="all-tag-button"type="button" name="button">All Tags</button>
+    <section class="tag-area">
+      <div class="tag-title">
+        <h2>Filter By Recipe Tags</h2>
+      </div>
+      <div class="tag-section">
+        <button class="all-tag-button"type="button" name="button">ALL TAGS</button>
+      </div>
     </section>
     <div class="view-title">
       <h2 class="recipe-view">All Recipes</h2>
     </div>
     <section class="recipes-wrapper">
     </section>
-    <!-- <section class="pantry-view hidden">
+    <section class="pantry-view hidden">
       <ul class="ingredient-list">
       <div class="ingredient-wrap">
         <div class="ingredient-label">
@@ -60,50 +66,36 @@
     </section>
     <div class="modal-recipe-view hidden">
       <div class="modal-content">
-        <img class="modal-img"src="https://spoonacular.com/recipeImages/595736-556x370.jpg" alt="pizza">
-        <div class="recipe-name">
-          <h1>Recipe Name</h1>
-        </div>
-        <div class="modal-recipe-info">
-          <div class="modal-ingredients">
-            <h2 class="modal-recipe-titles">Ingredients</h2>
-            <ul>
-              <li>Ingredient1</li>
-              <li>Ingredient2</li>
-              <li>Ingredient3</li>
-              <li>Ingredient4</li>
-              <li>Ingredient5</li>
-              <li>Ingredient6</li>
-              <li>Ingredient7</li>
-              <li>Ingredient8</li>
-              <li>Ingredient9</li>
-              <li>Ingredient10</li>
-              <li>Ingredient11</li>
-              <li>Ingredient12</li>
-            </ul>
+        <div class="modal-scroll">
+          <img class="clear-modal" src="../assets/x-mark.png" alt="clear-button">
+          <img class="modal-img" src="" alt="recipe-image">
+          <div class="recipe-name">
+            <h1></h1>
           </div>
-          <div class="modal-instructions">
-            <h2 class="modal-recipe-titles">Instructions</h2>
-            <ul>
-              <li>"In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy."</li>
-              <li>"In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy."</li>
-              <li>"In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy."</li>
-              <li>"In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy."</li>
-              <li>"In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy."</li>
-              <li>"In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy."</li>
-            </ul>
+          <div class="modal-recipe-info">
+            <div class="modal-ingredients">
+              <h2 class="modal-recipe-titles">Ingredients</h2>
+              <ul>
+              </ul>
+              <div class="modal-tags">
+                <h2 class="modal-tags-header">Tags</h2>
+                <ul>
+                </ul>
+              </div>
+            </div>
+            <div class="modal-instructions">
+              <h2 class="modal-recipe-titles">Instructions</h2>
+              <ul>
+              </ul>
+            </div>
           </div>
         </div>
-        <div class="modal-tags">
-          <button type="button" name="button">tag1</button>
-          <button type="button" name="button">tag2</button>
-          <button type="button" name="button">tag3</button>
-          <button type="button" name="button">tag4</button>
-          <button type="button" name="button">tag5</button>
-          <button type="button" name="button">tag6</button>
+        <div class="modal-add-buttons">
+          <button class="add-recipe-to-cook">Add To Cook</button>
+          <button class="add-to-favorites">Add To Favorites
         </div>
       </div>
-    </div> -->
+    </div>
     <script type="text/javascript" src="../data/users.js"></script>
     <script type="text/javascript" src="../data/recipes.js"></script>
     <script type="text/javascript" src="../data/ingredients.js"></script>
