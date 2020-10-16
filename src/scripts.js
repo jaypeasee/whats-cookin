@@ -16,7 +16,7 @@ function handleModalClick(event) {
     clearModalView();
   }
   if(event.target.className.includes('favorite-button-target')) {
-    addToFavoritesList(event);
+    addToFavoritesList(event, parseInt(modalRecipeView.id));
   }
 }
 
@@ -29,17 +29,17 @@ function handleRecipeClick(event) {
     matchRecipe(event);
   }
   if(event.target.className.includes('favorite-button-target')) {
-    addToFavoritesList(event);
+    let cardID = parseInt(event.target.closest('.recipe-card').id);
+    addToFavoritesList(event, cardID);
   }
 }
 
-function addToFavoritesList(event) {
-  let cardID = parseInt(modalRecipeView.id);
+function addToFavoritesList(event, cardID) {
   const matchedRecipe = currentUser.recipes.find((recipe) => {
     return recipe.id === cardID;
   })
   currentUser.addFavorite(matchedRecipe);
-  event.target.classList.add('favorite-button-clicked');
+    event.target.classList.add('favorite-button-clicked');
 }
 
 function matchRecipe(event) {
@@ -51,7 +51,6 @@ function matchRecipe(event) {
 }
 
 function findCardElements(recipe) {
-  modalRecipeView.setAttribute('id', recipe.id);
   modalRecipeView.classList.remove('hidden');
   const image = modalRecipeView.children[0].children[0].children[1];
   const title = image.nextElementSibling.children[0];
@@ -62,6 +61,7 @@ function findCardElements(recipe) {
   displayModalIngredients(recipe, ingredients);
   displayModalTags(recipe, tags);
   displayModalInstructions(recipe, instructions);
+  modalRecipeView.setAttribute("id", recipe.id)
 }
 
 function displayModalHeader(recipe, image, title) {
