@@ -12,8 +12,11 @@ pageWrap.addEventListener('click', handleRecipeClick);
 modalRecipeView.addEventListener('click', handleModalClick);
 
 function handleModalClick(event) {
-  if (event.target.className === 'clear-modal') {
+  if(event.target.className === 'clear-modal') {
     clearModalView();
+  }
+  if(event.target.className.includes('favorite-button-target')) {
+    addToFavoritesList(event);
   }
 }
 
@@ -25,18 +28,17 @@ function handleRecipeClick(event) {
   if(event.target.className.includes('view-recipe-button')) {
     matchRecipe(event);
   }
-  if(event.target.className === 'favorite-button') {
+  if(event.target.className.includes('favorite-button-target')) {
     addToFavoritesList(event);
   }
 }
 
 function addToFavoritesList(event) {
-  let cardID = parseInt(event.target.closest('.recipe-card').id);
+  let cardID = parseInt(modalRecipeView.id);
   const matchedRecipe = currentUser.recipes.find((recipe) => {
     return recipe.id === cardID;
   })
   currentUser.addFavorite(matchedRecipe);
-  console.log(currentUser.favoriteRecipes);
   event.target.classList.add('favorite-button-clicked');
 }
 
@@ -49,6 +51,7 @@ function matchRecipe(event) {
 }
 
 function findCardElements(recipe) {
+  modalRecipeView.setAttribute('id', recipe.id);
   modalRecipeView.classList.remove('hidden');
   const image = modalRecipeView.children[0].children[0].children[1];
   const title = image.nextElementSibling.children[0];
@@ -174,7 +177,7 @@ function createRecipeCards(recipe) {
   let recipeTags = recipe.tags.join(', ');
   let recipeCardInfo = `<div class="recipe-card" id="${recipe.id}">
     <img class="recipe-card-image" src="${recipe.image}">
-    <img class="favorite-button" src="../assets/heart-shape-silhouette.svg">
+    <img class="favorite-button-target favorite-button" src="../assets/heart-shape-silhouette.svg">
     <h3 class="card-content card-title">${recipe.name}</h3>
     <div class="tag-buttons card-content">
       <p>${recipeTags}</p>
