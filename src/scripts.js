@@ -31,6 +31,12 @@ function handleRecipeClick(event) {
 }
 
 function addToFavoritesList(event) {
+  let cardID = parseInt(event.target.closest('.recipe-card').id);
+  const matchedRecipe = currentUser.recipes.find((recipe) => {
+    return recipe.id === cardID;
+  })
+  currentUser.addFavorite(matchedRecipe);
+  console.log(currentUser.favoriteRecipes);
   event.target.classList.add('favorite-button-clicked');
 }
 
