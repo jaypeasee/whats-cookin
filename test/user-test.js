@@ -95,6 +95,15 @@ describe('User', () => {
     expect(user1.favoriteRecipes[0]).to.equal(recipe1);
   });
 
+  it('should only be able to add unique recipes to favorites', () => {
+    user1.addFavorite(recipe1);
+    user1.addFavorite(recipe1);
+    user1.addFavorite(recipe1);
+    user1.addFavorite(recipe2);
+
+    expect(user1.favoriteRecipes.length).to.equal(2);
+  })
+
   it('should be able to remove from their favorite recipes', () => {
     user1.addFavorite(recipe1);
     user1.addFavorite(recipe2);
