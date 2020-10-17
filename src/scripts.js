@@ -23,6 +23,8 @@ function handleModalClick(event) {
 
 function clearModalView() {
   modalRecipeView.classList.add('hidden');
+  const favoriteButton = modalRecipeView.children[0].children[0].children[2].children[1]
+  favoriteButton.classList.remove('favorite-button-clicked');
 }
 
 function handleRecipeClick(event) {
