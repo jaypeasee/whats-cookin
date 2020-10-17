@@ -2,6 +2,7 @@ const pageWrap = document.querySelector('.recipes-wrapper');
 const nav = document.querySelector('.header-nav');
 const tagSection = document.querySelector('.tag-section');
 const modalRecipeView = document.querySelector('.modal-recipe-view');
+const pantryView = document.querySelector('.pantry-view');
 
 let currentUser;
 
@@ -93,6 +94,8 @@ function changeRecipeView(event) {
     reloadAllRecipes();
   } else if (event.target.className === "favorites-view") {
     displayFavorites(currentUser.favoriteRecipes);
+  } else if (event.target.className === "pantry-button") {
+    displayPantry()
   }
 }
 
@@ -100,6 +103,27 @@ function displaySearch(searchValue) {
   const matchedRecipes = currentUser.searchByIngredient(searchValue.toLowerCase());
   hideMainRecipes();
   getAvailableRecipes(matchedRecipes);
+}
+
+function reloadAllRecipes() {
+  let recipeList = currentUser.recipes;
+  hideMainRecipes();
+  let sectionTitle = pageWrap.previousElementSibling.children[0];
+  sectionTitle.innerText = "All Recipes";
+  getAvailableRecipes(recipeList);
+}
+
+function displayFavorites(recipe) {
+  hideMainRecipes()
+  const sectionTitle = pageWrap.previousElementSibling.children[0];
+  sectionTitle.innerText = "Your Favorites";
+  getAvailableRecipes(currentUser.favoriteRecipes)
+}
+
+function displayPantry() {
+  pantryView.classList.remove('hidden');
+  tagSection.classList.add('hidden');
+  pageWrap.classList.add('hidden');
 }
 
 function getAvailableRecipes(recipes) {
@@ -187,14 +211,6 @@ function filterTags(event) {
   }
 }
 
-function reloadAllRecipes() {
-  let recipeList = currentUser.recipes;
-  hideMainRecipes();
-  let sectionTitle = pageWrap.previousElementSibling.children[0];
-  sectionTitle.innerText = "All Recipes";
-  getAvailableRecipes(recipeList);
-}
-
 function displayFilteredTag(event) {
   hideMainRecipes();
   const filteredRecipes = currentUser.filterByTag(event.target.innerText);
@@ -233,13 +249,6 @@ function addToFavoritesList(event, cardID) {
 function removeFromFavorites(event, cardID) {
   currentUser.removeFavorite(cardID);
   event.target.classList.remove('favorite-button-clicked')
-}
-
-function displayFavorites(recipe) {
-  hideMainRecipes()
-  const sectionTitle = pageWrap.previousElementSibling.children[0];
-  sectionTitle.innerText = "Your Favorites";
-  getAvailableRecipes(currentUser.favoriteRecipes)
 }
 
 function hideMainRecipes() {
