@@ -22,15 +22,3 @@ class Pantry {
 if (typeof module !== 'undefined') {
   module.exports = Pantry;
 }
-
-
-// this.pantry.forEach(item => {
-//   if (item.ingredient === ingredient.id && ingredient.quantity.amount > item.amount) {
-//     ingredientDetails.id = ingredient.id
-//     ingredientDetails.amountNeeded = ingredient.quantity.amount - item.amount;
-//   }
-//   else if(item.ingredient !== ingredient.id) {
-//     ingredientDetails.id = ingredient.id
-//     ingredientDetails.amountNeeded = ingredient.quantity.amount;
-//   }
-// })
