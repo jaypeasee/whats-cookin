@@ -63,6 +63,10 @@ function findCardElements(recipe) {
   const ingredients = image.nextElementSibling.nextElementSibling.children[0].children[1];
   const tags = ingredients.nextElementSibling.children[1];
   const instructions = image.nextElementSibling.nextElementSibling.children[1].children[1];
+  handleModalDisplay(recipe, image, title, ingredients, tags, instructions)
+}
+
+function handleModalDisplay(recipe, image, title, ingredients, tags, instructions) {
   displayModalHeader(recipe, image, title);
   displayModalIngredients(recipe, ingredients);
   displayModalTags(recipe, tags);
@@ -106,9 +110,15 @@ function changeView(event) {
     hideMainRecipes()
     reloadAllRecipes();
   } else if (event.target.className === "favorites-view") {
-    hideMainRecipes()
-    getAvailableRecipes(currentUser.favoriteRecipes)
+    displayFavorites(currentUser.favoriteRecipes);
   }
+}
+
+function displayFavorites(recipe) {
+  hideMainRecipes()
+  const sectionTitle = pageWrap.previousElementSibling.children[0];
+  sectionTitle.innerText = "Your Favorites";
+  getAvailableRecipes(currentUser.favoriteRecipes)
 }
 
 function hideMainRecipes() {
