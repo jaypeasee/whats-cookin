@@ -95,7 +95,9 @@ function changeRecipeView(event) {
   } else if (event.target.className === "favorites-view") {
     displayFavorites(currentUser.favoriteRecipes);
   } else if (event.target.className === "pantry-button") {
-    displayPantry()
+    openPantry()
+  } else if (event.target.className === "home-view") {
+    displayHome();
   }
 }
 
@@ -109,8 +111,8 @@ function reloadAllRecipes() {
   let recipeList = currentUser.recipes;
   hideMainRecipes();
   let sectionTitle = pageWrap.previousElementSibling.children[0];
-  sectionTitle.innerText = "All Recipes";
   getAvailableRecipes(recipeList);
+  reloadAllRecipes();
 }
 
 function displayFavorites(recipe) {
@@ -120,7 +122,7 @@ function displayFavorites(recipe) {
   getAvailableRecipes(currentUser.favoriteRecipes)
 }
 
-function displayPantry() {
+function openPantry() {
   pantryView.classList.remove('hidden');
   tagSection.classList.add('hidden');
   pageWrap.classList.add('hidden');
@@ -128,6 +130,23 @@ function displayPantry() {
   removedTitle.innerText = "";
   let sectionTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
   sectionTitle.innerText = "You Pantry";
+  displayPantryContent();
+}
+
+function displayPantryContent() {
+//loop through pantry array
+//display name, amount measurement
+}
+
+function displayHome() {
+  pantryView.classList.add('hidden');
+  tagSection.classList.remove('hidden');
+  pageWrap.classList.remove('hidden');
+  let removedTitle = pageWrap.previousElementSibling.children[0];
+  removedTitle.innerText = "All Recipes";
+  let sectionTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
+  sectionTitle.innerText = "Search By Tag";
+  //invoke existing function to load items
 }
 
 function getAvailableRecipes(recipes) {
