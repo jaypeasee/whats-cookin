@@ -220,10 +220,17 @@ function filterTags(event) {
   if(event.target.className === 'all-tag-button') {
     reloadAllRecipes();
   } else if(event.target.className === 'tag-button') {
-    hideMainRecipes();
-    const filteredRecipes = currentUser.filterByTag(event.target.innerText);
-    getAvailableRecipes(filteredRecipes)
+    displayFilteredTag(event);
   }
+}
+
+function displayFilteredTag(event) {
+  hideMainRecipes();
+  const filteredRecipes = currentUser.filterByTag(event.target.innerText);
+  getAvailableRecipes(filteredRecipes)
+  const title = event.target.innerText;
+  const sectionTitle = pageWrap.previousElementSibling.children[0];
+  sectionTitle.innerText = title;
 }
 
 function getAvailableRecipes(recipes) {
