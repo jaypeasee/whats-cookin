@@ -2,7 +2,6 @@ const pageWrap = document.querySelector('.recipes-wrapper');
 const nav = document.querySelector('.header-nav');
 const tagSection = document.querySelector('.tag-section');
 const modalRecipeView = document.querySelector('.modal-recipe-view');
-const favoriteButton = document.querySelector('.favorite-button');
 
 let currentUser;
 
@@ -24,14 +23,11 @@ function handleModalClick(event) {
 
 function clearModalView() {
   modalRecipeView.classList.add('hidden');
-  favoriteButton.classList.remove('favorite-button-clicked');
-
 }
 
 function handleRecipeClick(event) {
   if(event.target.className.includes('view-recipe-button')) {
     matchRecipe(event);
-
   }
 }
 
@@ -41,7 +37,12 @@ function removeFromFavorites(event, cardID) {
 }
 
 function addToFavoritesList(event, cardID) {
-  currentUser.addFavorite(cardID);
+  if (modalRecipeView.id === cardID) {
+  }
+  const matchedRecipe = currentUser.recipes.find((recipe) => {
+    return recipe.id === cardID;
+  });
+  currentUser.addFavorite(matchedRecipe);
   event.target.classList.add('favorite-button-clicked');
 }
 
@@ -64,19 +65,7 @@ function findCardElements(recipe) {
   displayModalIngredients(recipe, ingredients);
   displayModalTags(recipe, tags);
   displayModalInstructions(recipe, instructions);
-  modalRecipeView.setAttribute("id", recipe.id);
-  displayFavoriteButton(recipe.id);
-}
-
-function displayFavoriteButton(id) {
-  const matchedID = currentUser.favoriteRecipes.find(recipe => {
-    return recipe.id === id
-  });
-  if (matchedID) {
-    favoriteButton.classList.add('favorite-button-clicked');
-  } else if (!matchedID) {
-    return
-  }
+  modalRecipeView.setAttribute("id", recipe.id)
 }
 
 function displayModalHeader(recipe, image, title) {
