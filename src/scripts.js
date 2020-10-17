@@ -117,15 +117,26 @@ function reloadAllRecipes() {
 
 function displayFavorites(recipe) {
   hideMainRecipes()
+  unhideHome()
   const sectionTitle = pageWrap.previousElementSibling.children[0];
   sectionTitle.innerText = "Your Favorites";
   getAvailableRecipes(currentUser.favoriteRecipes)
 }
 
-function openPantry() {
-  pantryView.classList.remove('hidden');
+function unhideHome() {
+  pantryView.classList.add('hidden');
+  tagSection.classList.remove('hidden');
+  pageWrap.classList.remove('hidden');
+}
+
+function hideHome() {
   tagSection.classList.add('hidden');
   pageWrap.classList.add('hidden');
+}
+
+function openPantry() {
+  hideHome();
+  pantryView.classList.remove('hidden');
   let removedTitle = pageWrap.previousElementSibling.children[0];
   removedTitle.innerText = "";
   let sectionTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
@@ -139,11 +150,9 @@ function displayPantryContent() {
 }
 
 function displayHome() {
-  pantryView.classList.add('hidden');
-  tagSection.classList.remove('hidden');
-  pageWrap.classList.remove('hidden');
   let tagTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
   tagTitle.innerText = "Filter By Recipe Tags";
+  unhideHome()
   reloadAllRecipes()
 }
 
