@@ -100,10 +100,12 @@ function displayModalInstructions(recipe, instructions) {
 function changeView(event) {
   if(event.target.className === 'search-button' && event.target.previousElementSibling.value) {
     displaySearch(event.target.previousElementSibling.value);
-  }
-  if(event.target.className === 'clear-search-results') {
+  } else if(event.target.className === 'clear-search-results') {
     hideMainRecipes()
     reloadAllRecipes();
+  } else if (event.target.className === "favorites-view") {
+    hideMainRecipes()
+    getAvailableRecipes(currentUser.favoriteRecipes)
   }
 }
 
