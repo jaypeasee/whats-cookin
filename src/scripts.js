@@ -137,7 +137,8 @@ function handleModalDisplay(recipe, image, title, ingredients, tags, instruction
   displayModalIngredients(recipe, ingredients);
   displayModalTags(recipe, tags);
   displayModalInstructions(recipe, instructions);
-  modalRecipeView.setAttribute("id", recipe.id)
+  displayFavoriteButton(recipe);
+  modalRecipeView.setAttribute("id", recipe.id);
 }
 
 function displayModalHeader(recipe, image, title) {
@@ -166,6 +167,15 @@ function displayModalInstructions(recipe, instructions) {
   recipe.instructions.forEach((instruction) => {
     const instructionsInfo = `<li>${instruction.instruction}</li>`
     instructions.insertAdjacentHTML('beforeend', instructionsInfo);
+  })
+}
+
+function displayFavoriteButton(recipe) {
+  currentUser.favoriteRecipes.forEach(favoriteRecipe => {
+    if (favoriteRecipe.id === recipe.id) {
+      let favoriteButton = modalRecipeView.children[0].children[0].children[2].children[1];
+      favoriteButton.classList.add('favorite-button-clicked');
+    }
   })
 }
 
