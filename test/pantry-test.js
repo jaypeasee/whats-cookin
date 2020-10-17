@@ -6,16 +6,175 @@ const Pantry = require('../src/pantry.js');
 describe('Pantry', () => {
   let pantry1;
   let pantry2;
-  let contents1
-  let contents2
+  let pantry3;
+  let contents1;
+  let contents2;
+  let contents3;
+  let recipe1;
+  let recipe2;
+  let recipe3;
 
   beforeEach(() => {
-    contents1 = [{ ingredient: 1, amount: 2 }, { ingredient: 2, amount: 70 }, { ingredient: 3, amount: 5.4 }];
+  recipe1 = {
+    //[{id:1, amountNeeded:0}, id:2, amountNeeded: 3, id: 3 amountNeeded: 10 ]
+    //[]
+   "id": 1,
+   "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
+   "ingredients": [
+     {
+       "id": 1,
+       "quantity": {
+         "amount": 0.5,
+         "unit": "c"
+       }
+     },
+     {
+       "id": 2,
+       "quantity": {
+         "amount": 6,
+         "unit": "tsp"
+       }
+     },
+     {
+       "id": 3,
+       "quantity": {
+         "amount": 10,
+         "unit": "tsp"
+       }
+     }
+   ],
+   "instructions": [
+     {
+       "instruction": "In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.",
+       "number": 1
+     }
+   ],
+   "name": "Loaded Chocolate Chip Pudding Cookie Cups",
+   "tags": [
+     "antipasti"
+   ]
+  }
 
-    contents2 = [{ ingredient: 4, amount: .5 }, { ingredient: 5, amount: 666 }, { ingredient: 6, amount: 40 }];
+  recipe2 =  {
+    "id": 2,
+    "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
+    "ingredients": [
+      ,
+      {
+        "id": 3,
+        "quantity": {
+          "amount": 0.5,
+          "unit": "tsp"
+        }
+      },
+      {
+        "id": 4,
+        "quantity": {
+          "amount": 24,
+          "unit": "servings"
+        }
+      }
+    ],
+    "instructions": [
+      {
+        "instruction": "In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.",
+        "number": 1
+      }
+    ],
+    "name": "Loaded Chocolate Chip Pudding Cookie Cups",
+    "tags": [
+      "antipasti"
+    ]
+  }
+
+  recipe3 =  {
+    "id": 2,
+    "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
+    "ingredients": [
+      ,
+      {
+        "id": 5,
+        "quantity": {
+          "amount": 5,
+          "unit": "tsp"
+        }
+      },
+      {
+        "id": 6,
+        "quantity": {
+          "amount": 24,
+          "unit": "servings"
+        }
+      }
+    ],
+    "instructions": [
+      {
+        "instruction": "In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.",
+        "number": 1
+      }
+    ],
+    "name": "Loaded Chocolate Chip Pudding Cookie Cups",
+    "tags": [
+      "antipasti"
+    ]
+  }
+
+    contents1 = [{
+        "ingredient":1,
+        "amount": 4
+      },
+      {
+        "ingredient": 2,
+        "amount": 3
+      },
+      {
+        "ingredient": 5,
+        "amount": 10
+      },
+      {
+        "ingredient": 6,
+        "amount": 5
+      }]
+
+    contents2 = [
+      {
+        "ingredient": 7,
+        "amount": 2
+      },
+      {
+        "ingredient": 8,
+        "amount": 2
+      },
+      {
+        "ingredient": 9,
+        "amount": 4
+      },
+      {
+        "ingredient": 10,
+        "amount": 3
+      }]
+
+      contents3 = [
+        {
+          "ingredient": 1,
+          "amount": 2
+        },
+        {
+          "ingredient": 2,
+          "amount": 2
+        },
+        {
+          "ingredient": 5,
+          "amount": 4
+        },
+        {
+          "ingredient": 6,
+          "amount": 3
+        }]
 
     pantry1 = new Pantry(contents1);
     pantry2 = new Pantry(contents2);
+    pantry3 = new Pantry(contents3);
   });
 
   it('should be a function', () => {
@@ -41,4 +200,9 @@ describe('Pantry', () => {
   it('each item in the contents should have an amount', () => {
     expect(pantry2.pantry[2].amount).to.equal(40);
   });
+
+  it('should be able to evaluate ingredients', () => {
+    expect(pantry1.evaluateIngredients(recipe1).to.deep.equal([{id:1, amountNeeded:0}, {id:2, amountNeeded: 3}, {id: 3, amountNeeded: 10 }]));
+  });
+
 });
