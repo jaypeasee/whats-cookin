@@ -111,8 +111,8 @@ function reloadAllRecipes() {
   let recipeList = currentUser.recipes;
   hideMainRecipes();
   let sectionTitle = pageWrap.previousElementSibling.children[0];
+  sectionTitle.innerText = "All Recipes";
   getAvailableRecipes(recipeList);
-  reloadAllRecipes();
 }
 
 function displayFavorites(recipe) {
@@ -142,11 +142,9 @@ function displayHome() {
   pantryView.classList.add('hidden');
   tagSection.classList.remove('hidden');
   pageWrap.classList.remove('hidden');
-  let removedTitle = pageWrap.previousElementSibling.children[0];
-  removedTitle.innerText = "All Recipes";
-  let sectionTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
-  sectionTitle.innerText = "Search By Tag";
-  //invoke existing function to load items
+  let tagTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
+  tagTitle.innerText = "Filter By Recipe Tags";
+  reloadAllRecipes()
 }
 
 function getAvailableRecipes(recipes) {
