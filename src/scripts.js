@@ -107,7 +107,6 @@ function changeView(event) {
   if(event.target.className === 'search-button' && event.target.previousElementSibling.value) {
     displaySearch(event.target.previousElementSibling.value);
   } else if(event.target.className === 'clear-search-results') {
-    hideMainRecipes()
     reloadAllRecipes();
   } else if (event.target.className === "favorites-view") {
     displayFavorites(currentUser.favoriteRecipes);
@@ -209,6 +208,8 @@ function createRecipeCards(recipe) {
 function reloadAllRecipes() {
   let recipeList = currentUser.recipes;
   hideMainRecipes();
+  let sectionTitle = pageWrap.previousElementSibling.children[0];
+  sectionTitle.innerText = "All Recipes";
   getAvailableRecipes(recipeList);
 }
 
@@ -229,7 +230,7 @@ function displayFilteredTag(event) {
   const filteredRecipes = currentUser.filterByTag(event.target.innerText);
   getAvailableRecipes(filteredRecipes)
   const title = event.target.innerText;
-  const sectionTitle = pageWrap.previousElementSibling.children[0];
+  let sectionTitle = pageWrap.previousElementSibling.children[0];
   sectionTitle.innerText = title;
 }
 
