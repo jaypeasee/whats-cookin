@@ -49,7 +49,6 @@ function createRecipeCards(recipe) {
     </div>
     <div class="recipe-ctas">
       <button class="card-content view-recipe-button">View Recipe</button>
-      <button class="card-content add-recipe-button">Add Recipe</button>
   </div>`
   pageWrap.insertAdjacentHTML('afterbegin', recipeCardInfo);
 }
@@ -257,7 +256,9 @@ function handleModalClick(event) {
     addToFavoritesList(event, parseInt(modalRecipeView.id));
   } else if (event.target.className.includes('favorite-button-clicked')) {
     removeFromFavorites(event, parseInt(modalRecipeView.id));
-  }
+  } else if (event.target.className === 'add-recipe-to-cook'){
+    matchRecipeToCook();
+  };
 }
 
 function clearModalView() {
@@ -279,6 +280,18 @@ function addToFavoritesList(event, cardID) {
 function removeFromFavorites(event, cardID) {
   currentUser.removeFavorite(cardID);
   event.target.classList.remove('favorite-button-clicked')
+}
+
+function matchRecipeToCook() {
+  const matchedRecipe = currentUser.recipes.find((recipe) => {
+    return recipe.id === parseInt(modalRecipeView.id);
+  })
+  const ingredientsList = currentUser.pantry.evaluateIngredients(matchedRecipe);
+  displayNeededIngredients(ingredientsList);
+}
+
+function displayNeededIngredients(list) {
+  
 }
 
 function hideMainRecipes() {
