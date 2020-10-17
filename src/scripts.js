@@ -124,6 +124,10 @@ function displayPantry() {
   pantryView.classList.remove('hidden');
   tagSection.classList.add('hidden');
   pageWrap.classList.add('hidden');
+  let removedTitle = pageWrap.previousElementSibling.children[0];
+  removedTitle.innerText = "";
+  let sectionTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
+  sectionTitle.innerText = "You Pantry";
 }
 
 function getAvailableRecipes(recipes) {
