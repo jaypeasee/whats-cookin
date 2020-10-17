@@ -6,7 +6,7 @@ html {
   display: flex;
   flex-direction: column;
   background-color: #e5383b;
-  width: 125%;
+  width: 100%;
 }
 
 .nav-buttons {
@@ -14,6 +14,22 @@ html {
   flex-direction: row;
   justify-content: space-around;
 
+}
+
+.recipe-title {
+  margin: 5%;
+}
+
+.favorite-button {
+  height: 50%;
+  margin: 5%;
+  filter: invert(67%) sepia(59%) saturate(0%) hue-rotate(45deg) brightness(99%) contrast(97%);
+}
+
+.favorite-button-clicked {
+  filter: invert(12%) sepia(100%) saturate(7398%) hue-rotate(341deg) brightness(94%) contrast(102%);
+  height: 50%;
+  margin: 5%;
 }
 
 .search-bar {
@@ -34,6 +50,7 @@ html {
 }
 
 .recipe-card {
+  position: relative;
   margin: 2%;
   display: flex;
   flex-direction: column;
@@ -58,6 +75,7 @@ html {
 
 
 .recipe-card-image {
+  opacity: 85%;
   width: 100%;
   height: 100%;
 }
@@ -172,7 +190,9 @@ body {
 }
 
 .recipe-name {
-  align-self: center;
+  display: flex;
+  justify-content: space-between;
+  max-height: 15%
 }
 
 .modal-content {
