@@ -89,7 +89,7 @@ describe('Pantry', () => {
   }
 
   recipe3 =  {
-    "id": 2,
+    "id": 3,
     "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
     "ingredients": [
       ,
@@ -203,8 +203,16 @@ describe('Pantry', () => {
   //   expect(pantry2.pantry[2].amount).to.equal(40);
   // });
 
-  it.only('should be able to evaluate ingredients', () => {
+  it('should be able to evaluate what ingredients are needed to cook a recipe', () => {
     expect(pantry1.evaluateIngredients(recipe1)).to.deep.equal([{id:2, amountNeeded: 3}, {id: 3, amountNeeded: 10 }]);
   });
+
+  it('should be able to evaluate ingredients for another recipe', () => {
+    expect(pantry1.evaluateIngredients(recipe2)).to.deep.equal([{id:3, amountNeeded: .5}, {id: 4, amountNeeded: 24 }]);
+  })
+
+  it('should be able to evaluate a different user pantry', () => {
+    expect(pantry2.evaluateIngredients(recipe2)).to.deep.equal([{id:3, amountNeeded: .5}, {id: 4, amountNeeded: 24 }])
+  })
 
 });
