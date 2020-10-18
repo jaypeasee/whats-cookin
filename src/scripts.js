@@ -262,9 +262,17 @@ function handleModalClick(event) {
 }
 
 function clearModalView() {
+  let addRecipeButton = modalRecipeView.children[0].children[1].children[0];
+  let favoriteButton = modalRecipeView.children[0].children[0].children[2].children[1];
+  let neededTitle = modalRecipeView.children[0].children[2]
+  let neededIngredients = modalRecipeView.children[0].children[3];
   modalRecipeView.classList.add('hidden');
-  let favoriteButton = modalRecipeView.children[0].children[0].children[2].children[1]
   favoriteButton.classList.remove('favorite-button-clicked');
+  addRecipeButton.disabled = false;
+  neededIngredients.innerHTML = "";
+  if (neededTitle) {
+    neededTitle.innerHTML = "";
+  }
 }
 
 function addToFavoritesList(event, cardID) {
