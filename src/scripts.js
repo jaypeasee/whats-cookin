@@ -295,9 +295,21 @@ function matchRecipeToCook(event) {
   })
   const ingredientsList = currentUser.pantry.evaluateIngredients(matchedRecipe);
   if(ingredientsList === []){
+    displayAddedRecipe();
   } else {
     updateIngredientsNeeded(ingredientsList, event);
   }
+}
+
+function displayAddedRecipe() {
+  const addRecipeButton = modalRecipeView.children[0].children[1];
+  const addedRecipeBlock =
+  `<div>
+    <h2>This recipe has  added to your cooking list!</h2>
+    <p>The ingredients needed have been taken out of your pantry</p>
+  </div>`
+  addRecipeButton.insertAdjacentHTML("afterend", addedRecipeBlock);
+  //need to manually test if this actually works
 }
 
 function updateIngredientsNeeded(ingredientsList, event) {
