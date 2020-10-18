@@ -314,10 +314,10 @@ function updateIngredientsNeeded(ingredientsList, event) {
     })
     return ingredientsList;
   })
-  displayIngredientsNeeded(ingredientsList, event);
+  DisplayIngredientsNeededBlock(ingredientsList, event);
 }
 
-function displayIngredientsNeeded(ingredientsList, event) {
+function DisplayIngredientsNeededBlock(ingredientsList, event) {
   event.target.disabled = true;
   let neededIngredientsBlock =
   `<div class="needed-ingredients">
@@ -327,7 +327,10 @@ function displayIngredientsNeeded(ingredientsList, event) {
   </div>`
   const addRecipeButton = modalRecipeView.children[0].children[1];
   addRecipeButton.insertAdjacentHTML("afterend", neededIngredientsBlock);
+  displayNeededIngredientItems(ingredientsList);
+}
 
+function displayNeededIngredientItems(ingredientsList) {
   const list = modalRecipeView.children[0].children[2].children[1];
   ingredientsList.forEach(ingredient => {
     const ingredientDetails =
@@ -335,7 +338,6 @@ function displayIngredientsNeeded(ingredientsList, event) {
     list.insertAdjacentHTML('afterbegin', ingredientDetails);
   })
 }
-
 
 function hideMainRecipes() {
   pageWrap.innerHTML = "";
