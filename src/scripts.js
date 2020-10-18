@@ -171,6 +171,7 @@ function displayHome() {
 
 function displayShoppingList() {
   shoppingListView.classList.remove('hidden');
+  pantryView.classList.add('hidden')
   hideHome();
   let removedTitle = pageWrap.previousElementSibling.children[0];
   removedTitle.innerText = "";
@@ -369,8 +370,10 @@ function DisplayIngredientsNeededBlock(ingredientsList, event) {
 function displayNeededIngredientItems(ingredientsList) {
   const list = modalRecipeView.children[0].children[2].children[1];
   ingredientsList.forEach(ingredient => {
+    const price = (ingredient.cost / 100).toFixed(2);
+    const amount = Math.round(ingredient.amountNeeded * 100) / 100;
     const ingredientDetails =
-    `<li>${ingredient.name} - ${ingredient.amountNeeded} ${ingredient.unit} - $${ingredient.cost / 100}</li>`
+    `<li>${amount} ${ingredient.unit} ${ingredient.name}: $${price}</li>`
     list.insertAdjacentHTML('afterbegin', ingredientDetails);
   })
   populateShoppingList(ingredientsList)
@@ -379,14 +382,16 @@ function displayNeededIngredientItems(ingredientsList) {
 function populateShoppingList(ingredientsList) {
   const ingredientsBlock = shoppingListView.children[0];
   ingredientsList.forEach(ingredient => {
+    const price = (ingredient.cost / 100).toFixed(2);
+    const amount = Math.round(ingredient.amountNeeded * 100) / 100;
     const ingredientItem =
     `<div class="ingredient-wrap">
       <div class="ingredient-label">
         <input class="ingredient-checkbox"type="checkbox">
-        <label>${ingredient.amountNeeded} ${ingredient.unit} of ${ingredient.name}</label>
+        <label>${amount} ${ingredient.unit} of ${ingredient.name}</label>
       </div>
       <div class="ingredient-quantity">
-        <h3>$${ingredient.cost / 100}</h3>
+        <h3>$${price}</h3>
       </div>
     </div>`
     ingredientsBlock.insertAdjacentHTML('afterbegin', ingredientItem);
