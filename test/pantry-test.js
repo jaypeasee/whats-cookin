@@ -158,15 +158,15 @@ describe('Pantry', () => {
       contents3 = [
         {
           "ingredient": 1,
-          "amount": 2
+          "amount": .5
         },
         {
           "ingredient": 2,
-          "amount": 2
+          "amount": 9
         },
         {
-          "ingredient": 5,
-          "amount": 4
+          "ingredient": 3,
+          "amount": 10
         },
         {
           "ingredient": 6,
@@ -199,7 +199,7 @@ describe('Pantry', () => {
     expect(pantry1.pantry[1].ingredient).to.equal(2);
   });
 
-  it.only('each item in the contents should have an amount', () => {
+  it('each item in the contents should have an amount', () => {
     expect(pantry2.pantry[2].amount).to.equal(4);
   });
 
@@ -213,6 +213,10 @@ describe('Pantry', () => {
 
   it('should be able to evaluate a different user pantry', () => {
     expect(pantry2.evaluateIngredients(recipe2)).to.deep.equal([{id:3, amountNeeded: .5}, {id: 4, amountNeeded: 24 }])
+  });
+
+  it('should return an empty array if there is enough ingredients', () => {
+    expect(pantry3.evaluateIngredients(recipe1)).to.deep.equal([]);
   });
 
 });
