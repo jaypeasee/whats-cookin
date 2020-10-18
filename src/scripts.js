@@ -293,16 +293,17 @@ function matchRecipeToCook() {
 function displayNeededIngredients(list) {
   const detailsList = list.map((item) => {
     return currentUser.recipes.forEach((recipe) => {
-      recipe.ingredients.find((ingredient) => {
-        ingredient.id === item.id;
+      const matchedRecipe = recipe.ingredients.find((ingredient) => {
+        return ingredient.id === item.id;
       })
       if (matchedRecipe) {
-        recipe.amountNeeded = item.amountNeeded;
+        item.name = matchedRecipe.name;
+        item.unit = matchedRecipe.quantity.unit;
+        item.cost = matchedRecipe.estimatedCostInCents * item.amountNeeded;
       }
     })
-    return detailsList;
+    return list;
   })
-  console.log(detailsList);
 }
 
 function hideMainRecipes() {
