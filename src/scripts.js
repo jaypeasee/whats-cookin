@@ -265,13 +265,12 @@ function clearModalView() {
   let addRecipeButton = modalRecipeView.children[0].children[1].children[0];
   let favoriteButton = modalRecipeView.children[0].children[0].children[2].children[1];
   let neededTitle = modalRecipeView.children[0].children[2]
-  let neededIngredients = modalRecipeView.children[0].children[3];
+  let neededIngredients = modalRecipeView.children[0].children[2];
   modalRecipeView.classList.add('hidden');
   favoriteButton.classList.remove('favorite-button-clicked');
   addRecipeButton.disabled = false;
-  neededIngredients.innerHTML = "";
-  if (neededTitle) {
-    neededTitle.innerHTML = "";
+  if (neededIngredients) {
+    neededIngredients.innerHTML = "";
   }
 }
 
@@ -320,13 +319,21 @@ function updateIngredientsNeeded(ingredientsList, event) {
 
 function displayIngredientsNeeded(ingredientsList, event) {
   event.target.disabled = true;
-  const ingredientsNeededList = modalRecipeView.children[0].children[2];
-  const ingredientsNeededTitle = `<h2>The following items have been added to your shopping list:</h2>`;
-  ingredientsNeededList.insertAdjacentHTML('beforebegin', ingredientsNeededTitle);
-  ingredientsList.forEach((ingredient) => {
-    const ingredientListItems = `<li>${ingredient.name} - ${ingredient.amountNeeded} ${ingredient.unit} - $${ingredient.cost / 100}</li>`
-    ingredientsNeededList.insertAdjacentHTML('beforeend', ingredientListItems);
-  });
+  let neededIngredientsBlock =
+  `<div class="needed-ingredients">
+    <h2>The following items have been added to your shopping list:</h2>
+    <ul>
+    </ul>
+  </div>`
+  const addRecipeButton = modalRecipeView.children[0].children[1];
+  addRecipeButton.insertAdjacentHTML("afterend", neededIngredientsBlock);
+
+  const list = modalRecipeView.children[0].children[2].children[1];
+  ingredientsList.forEach(ingredient => {
+    const ingredientDetails =
+    `<li>${ingredient.name} - ${ingredient.amountNeeded} ${ingredient.unit} - $${ingredient.cost / 100}</li>`
+    list.insertAdjacentHTML('afterbegin', ingredientDetails);
+  })
 }
 
 
