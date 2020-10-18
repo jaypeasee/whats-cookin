@@ -3,6 +3,7 @@ const nav = document.querySelector('.header-nav');
 const tagSection = document.querySelector('.tag-section');
 const modalRecipeView = document.querySelector('.modal-recipe-view');
 const pantryView = document.querySelector('.pantry-view');
+const shoppingListView = document.querySelector('.shopping-list-view');
 
 let currentUser;
 
@@ -97,6 +98,8 @@ function changeRecipeView(event) {
     openPantry()
   } else if (event.target.className === "home-view") {
     displayHome();
+  } else if (event.target.className === "view-shopping-list") {
+    displayShoppingList();
   }
 }
 
@@ -140,19 +143,35 @@ function openPantry() {
   removedTitle.innerText = "";
   let sectionTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
   sectionTitle.innerText = "You Pantry";
-  displayPantryContent();
+  // displayPantryContent();
 }
 
-function displayPantryContent() {
-//loop through pantry array
-//display name, amount measurement
-}
+// function displayPantryContent() {
+// const pantryDetails = currentUser.pantry.pantry.map(item => {
+//   return currentUser.recipes.forEach(recipe => {
+//     const matchedIngredient = recipe.ingredients.find(ingredient => {
+//       return item.ingredient === ingredient.id;
+//     })
+//     if (matchedIngredient) {
+//       item.name = matchedIngredient.name;
+//       item.unit = matchedIngredient.quantity.unit;
+//     }
+//   })
+//   return pantryDetails;
+// })
+// //display name, amount measurement
+// }
 
 function displayHome() {
   let tagTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
   tagTitle.innerText = "Filter By Recipe Tags";
   unhideHome()
   reloadAllRecipes()
+}
+
+function displayShoppingList() {
+  shoppingListView.classList.remove('hidden');
+  hideHome();
 }
 
 function getAvailableRecipes(recipes) {
@@ -327,6 +346,7 @@ function updateIngredientsNeeded(ingredientsList, event) {
     return ingredientsList;
   })
   DisplayIngredientsNeededBlock(ingredientsList, event);
+  //invoke injecting content into shopping list
 }
 
 function DisplayIngredientsNeededBlock(ingredientsList, event) {
@@ -349,6 +369,27 @@ function displayNeededIngredientItems(ingredientsList) {
     `<li>${ingredient.name} - ${ingredient.amountNeeded} ${ingredient.unit} - $${ingredient.cost / 100}</li>`
     list.insertAdjacentHTML('afterbegin', ingredientDetails);
   })
+  populateShoppingList(ingredientsList)
+}
+
+function populateShoppingList(ingredientsList) {
+  const ingredientsBlock = shoppingListView.children[0];
+  ingredientsList.forEach(ingredient => {
+    const ingredientItem =
+    `<div class="ingredient-wrap">
+      <div class="ingredient-label">
+        <input class="ingredient-checkbox"type="checkbox">
+        <label>${ingredient.amountNeeded} ${ingredient.unit} ${ingredient.name}</label>
+      </div>
+      <div class="ingredient-quantity">
+        <h3>$${ingredient.cost / 100}</h3>
+      </div>
+    </div>`
+    ingredientsBlock.insertAdjacentHTML('afterbegin', ingredientItem);
+  });
+//forEach through ingredientsList
+//create block of code
+//insertAdjacentHTML
 }
 
 function hideMainRecipes() {
