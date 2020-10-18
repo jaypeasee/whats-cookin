@@ -142,7 +142,7 @@ function openPantry() {
   let removedTitle = pageWrap.previousElementSibling.children[0];
   removedTitle.innerText = "";
   let sectionTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
-  sectionTitle.innerText = "You Pantry";
+  sectionTitle.innerText = "Your Pantry";
   // displayPantryContent();
 }
 
@@ -172,6 +172,10 @@ function displayHome() {
 function displayShoppingList() {
   shoppingListView.classList.remove('hidden');
   hideHome();
+  let removedTitle = pageWrap.previousElementSibling.children[0];
+  removedTitle.innerText = "";
+  let sectionTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
+  sectionTitle.innerText = "Your Shopping List";
 }
 
 function getAvailableRecipes(recipes) {
@@ -379,7 +383,7 @@ function populateShoppingList(ingredientsList) {
     `<div class="ingredient-wrap">
       <div class="ingredient-label">
         <input class="ingredient-checkbox"type="checkbox">
-        <label>${ingredient.amountNeeded} ${ingredient.unit} ${ingredient.name}</label>
+        <label>${ingredient.amountNeeded} ${ingredient.unit} of ${ingredient.name}</label>
       </div>
       <div class="ingredient-quantity">
         <h3>$${ingredient.cost / 100}</h3>
@@ -387,9 +391,6 @@ function populateShoppingList(ingredientsList) {
     </div>`
     ingredientsBlock.insertAdjacentHTML('afterbegin', ingredientItem);
   });
-//forEach through ingredientsList
-//create block of code
-//insertAdjacentHTML
 }
 
 function hideMainRecipes() {
