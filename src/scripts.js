@@ -257,7 +257,7 @@ function handleModalClick(event) {
   } else if (event.target.className.includes('favorite-button-clicked')) {
     removeFromFavorites(event, parseInt(modalRecipeView.id));
   } else if (event.target.className === 'add-recipe-to-cook'){
-    matchRecipeToCook();
+    matchRecipeToCook(event);
   };
 }
 
@@ -282,16 +282,19 @@ function removeFromFavorites(event, cardID) {
   event.target.classList.remove('favorite-button-clicked')
 }
 
-function matchRecipeToCook() {
+function matchRecipeToCook(event) {
   const matchedRecipe = currentUser.recipes.find((recipe) => {
     return recipe.id === parseInt(modalRecipeView.id);
   })
   const ingredientsList = currentUser.pantry.evaluateIngredients(matchedRecipe);
-  displayNeededIngredients(ingredientsList);
+  if(ingredientsList === []){
+  } else {
+    updateIngredientsNeeded(ingredientsList, event);
+  }
 }
 
-function displayNeededIngredients(list) {
-  const detailsList = list.map((item) => {
+function updateIngredientsNeeded(ingredientsList, event) {
+  const detailsList = ingredientsList.map((item) => {
     return currentUser.recipes.forEach((recipe) => {
       const matchedRecipe = recipe.ingredients.find((ingredient) => {
         return ingredient.id === item.id;
@@ -302,9 +305,22 @@ function displayNeededIngredients(list) {
         item.cost = matchedRecipe.estimatedCostInCents * item.amountNeeded;
       }
     })
-    return list;
+    return ingredientsList;
   })
+  displayIngredientsNeeded(ingredientsList, event);
 }
+
+function displayIngredientsNeeded(ingredientsList, event) {
+  event.target.disabled = true;
+  const ingredientsNeededList = modalRecipeView.children[0].children[2];
+  const ingredientsNeededTitle = `<h2>The following items have been added to your shopping list:</h2>`;
+  ingredientsNeededList.insertAdjacentHTML('beforebegin', ingredientsNeededTitle);
+  ingredientsList.forEach((ingredient) => {
+    const ingredientListItems = `<li>${ingredient.name} - ${ingredient.amountNeeded} ${ingredient.unit} - $${ingredient.cost / 100}</li>`
+    ingredientsNeededList.insertAdjacentHTML('beforeend', ingredientListItems);
+  });
+}
+
 
 function hideMainRecipes() {
   pageWrap.innerHTML = "";
