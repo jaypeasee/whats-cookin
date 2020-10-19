@@ -2,6 +2,8 @@ const pageWrap = document.querySelector('.recipes-wrapper');
 const nav = document.querySelector('.header-nav');
 const tagSection = document.querySelector('.tag-section');
 const modalRecipeView = document.querySelector('.modal-recipe-view');
+const pantryView = document.querySelector('.pantry-view');
+const shoppingListView = document.querySelector('.shopping-list-view');
 
 let currentUser;
 
@@ -48,7 +50,6 @@ function createRecipeCards(recipe) {
     </div>
     <div class="recipe-ctas">
       <button class="card-content view-recipe-button">View Recipe</button>
-      <button class="card-content add-recipe-button">Add Recipe</button>
   </div>`
   pageWrap.insertAdjacentHTML('afterbegin', recipeCardInfo);
 }
@@ -93,6 +94,12 @@ function changeRecipeView(event) {
     reloadAllRecipes();
   } else if (event.target.className === "favorites-view") {
     displayFavorites(currentUser.favoriteRecipes);
+  } else if (event.target.className === "pantry-button") {
+    openPantry()
+  } else if (event.target.className === "home-view") {
+    displayHome();
+  } else if (event.target.className === "view-shopping-list") {
+    displayShoppingList();
   }
 }
 
@@ -100,6 +107,97 @@ function displaySearch(searchValue) {
   const matchedRecipes = currentUser.searchByIngredient(searchValue.toLowerCase());
   hideMainRecipes();
   getAvailableRecipes(matchedRecipes);
+}
+
+function reloadAllRecipes() {
+  let recipeList = currentUser.recipes;
+  hideMainRecipes();
+  let sectionTitle = pageWrap.previousElementSibling.children[0];
+  sectionTitle.innerText = "All Recipes";
+  getAvailableRecipes(recipeList);
+}
+
+function displayFavorites(recipe) {
+  hideMainRecipes()
+  unhideHome()
+  const sectionTitle = pageWrap.previousElementSibling.children[0];
+  sectionTitle.innerText = "Your Favorites";
+  getAvailableRecipes(currentUser.favoriteRecipes)
+}
+
+function unhideHome() {
+  pantryView.classList.add('hidden');
+  tagSection.classList.remove('hidden');
+  pageWrap.classList.remove('hidden');
+}
+
+function hideHome() {
+  tagSection.classList.add('hidden');
+  pageWrap.classList.add('hidden');
+}
+
+function openPantry() {
+  hideHome();
+  pantryView.classList.remove('hidden');
+  let removedTitle = pageWrap.previousElementSibling.children[0];
+  removedTitle.innerText = "";
+  let sectionTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
+  sectionTitle.innerText = "Your Pantry";
+  consolidatePantry();
+}
+
+function consolidatePantry() {
+  const allPantryDetails = currentUser.pantry.pantry.reduce((acc, item) => {
+    const updatedIngredient = {};
+    currentUser.recipes.forEach(recipe => {
+      recipe.ingredients.forEach(ingredient => {
+        if (item.ingredient === ingredient.id) {
+          updatedIngredient.id = ingredient.id;
+          updatedIngredient.name = ingredient.name;
+          updatedIngredient.amount = item.amount;
+          updatedIngredient.unit = ingredient.quantity.unit;
+        }
+      })
+        if (!acc.includes(updatedIngredient)) {
+          acc.push(updatedIngredient);
+        }
+    })
+    return acc
+  }, [])
+  displayPantry(allPantryDetails);
+  console.log(allPantryDetails)
+}
+
+function displayPantry(pantryItems) {
+  pantryItems.forEach(item => {
+    const pantryItemBlock =
+    `<div class="ingredient-wrap">
+      <div class="ingredient-label">
+        <input class="ingredient-checkbox"type="checkbox">
+        <label>${item.name}</label>
+      </div>
+      <div class="ingredient-quantity">
+        <h3>${item.amount} ${item.unit}</h3>
+      </div>`
+    pantryView.children[0].insertAdjacentHTML('afterbegin', pantryItemBlock);
+  })
+}
+
+function displayHome() {
+  let tagTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
+  tagTitle.innerText = "Filter By Recipe Tags";
+  unhideHome()
+  reloadAllRecipes()
+}
+
+function displayShoppingList() {
+  shoppingListView.classList.remove('hidden');
+  pantryView.classList.add('hidden')
+  hideHome();
+  let removedTitle = pageWrap.previousElementSibling.children[0];
+  removedTitle.innerText = "";
+  let sectionTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
+  sectionTitle.innerText = "Your Shopping List";
 }
 
 function getAvailableRecipes(recipes) {
@@ -149,7 +247,8 @@ function displayModalHeader(recipe, image, title) {
 function displayModalIngredients(recipe, ingredients) {
   ingredients.innerHTML = '';
   recipe.ingredients.forEach((ingredient) => {
-    const ingredientInfo = `<li>${ingredient.quantity.amount} ${ingredient.quantity.unit} of ${ingredient.name}.</li>`
+    const amount = Math.round(ingredient.quantity.amount * 100) / 100;
+    const ingredientInfo = `<li>${amount} ${ingredient.quantity.unit} of ${ingredient.name}.</li>`
     ingredients.insertAdjacentHTML('beforeend', ingredientInfo);
   });
 }
@@ -187,14 +286,6 @@ function filterTags(event) {
   }
 }
 
-function reloadAllRecipes() {
-  let recipeList = currentUser.recipes;
-  hideMainRecipes();
-  let sectionTitle = pageWrap.previousElementSibling.children[0];
-  sectionTitle.innerText = "All Recipes";
-  getAvailableRecipes(recipeList);
-}
-
 function displayFilteredTag(event) {
   hideMainRecipes();
   const filteredRecipes = currentUser.filterByTag(event.target.innerText);
@@ -211,13 +302,22 @@ function handleModalClick(event) {
     addToFavoritesList(event, parseInt(modalRecipeView.id));
   } else if (event.target.className.includes('favorite-button-clicked')) {
     removeFromFavorites(event, parseInt(modalRecipeView.id));
-  }
+  } else if (event.target.className === 'add-recipe-to-cook'){
+    matchRecipeToCook(event);
+  };
 }
 
 function clearModalView() {
+  let addRecipeButton = modalRecipeView.children[0].children[1].children[0];
+  let favoriteButton = modalRecipeView.children[0].children[0].children[2].children[1];
+  let neededTitle = modalRecipeView.children[0].children[2]
+  let neededIngredients = modalRecipeView.children[0].children[2];
   modalRecipeView.classList.add('hidden');
-  let favoriteButton = modalRecipeView.children[0].children[0].children[2].children[1]
   favoriteButton.classList.remove('favorite-button-clicked');
+  addRecipeButton.disabled = false;
+  if (neededIngredients) {
+    neededIngredients.innerHTML = "";
+  }
 }
 
 function addToFavoritesList(event, cardID) {
@@ -235,11 +335,84 @@ function removeFromFavorites(event, cardID) {
   event.target.classList.remove('favorite-button-clicked')
 }
 
-function displayFavorites(recipe) {
-  hideMainRecipes()
-  const sectionTitle = pageWrap.previousElementSibling.children[0];
-  sectionTitle.innerText = "Your Favorites";
-  getAvailableRecipes(currentUser.favoriteRecipes)
+function matchRecipeToCook(event) {
+  const matchedRecipe = currentUser.recipes.find((recipe) => {
+    return recipe.id === parseInt(modalRecipeView.id);
+  })
+  const ingredientsList = currentUser.pantry.evaluateIngredients(matchedRecipe);
+  if(ingredientsList === []){
+    displayAddedRecipe();
+  } else {
+    updateIngredientsNeeded(ingredientsList, event);
+  }
+}
+
+function displayAddedRecipe() {
+  const addRecipeButton = modalRecipeView.children[0].children[1];
+  const addedRecipeBlock =
+  `<div>
+    <h2>This recipe has  added to your cooking list!</h2>
+    <p>The ingredients needed have been taken out of your pantry</p>
+  </div>`
+  addRecipeButton.insertAdjacentHTML("afterend", addedRecipeBlock);
+  //need to manually test if this actually works
+}
+
+function updateIngredientsNeeded(ingredientsList, event) {
+  const detailsList = ingredientsList.map((item) => {
+    return currentUser.recipes.forEach((recipe) => {
+      const matchedRecipe = recipe.ingredients.find((ingredient) => {
+        return ingredient.id === item.id;
+      })
+      if (matchedRecipe) {
+        item.name = matchedRecipe.name;
+        item.unit = matchedRecipe.quantity.unit;
+        item.cost = matchedRecipe.estimatedCostInCents * item.amountNeeded;
+      }
+    })
+    return ingredientsList;
+  })
+  DisplayIngredientsNeededBlock(ingredientsList, event);
+}
+
+function DisplayIngredientsNeededBlock(ingredientsList, event) {
+  event.target.disabled = true;
+  let neededIngredientsBlock =
+  `<div class="needed-ingredients">
+    <h2>The following items have been added to your shopping list:</h2>
+    <ul>
+    </ul>
+  </div>`
+  const addRecipeButton = modalRecipeView.children[0].children[1];
+  addRecipeButton.insertAdjacentHTML("afterend", neededIngredientsBlock);
+  displayNeededIngredientItems(ingredientsList);
+}
+
+function displayNeededIngredientItems(ingredientsList) {
+  const list = modalRecipeView.children[0].children[2].children[1];
+  ingredientsList.forEach(ingredient => {
+    ingredient.cost = (ingredient.cost / 100).toFixed(2);
+    ingredient.amountNeeded = Math.round(ingredient.amountNeeded * 100) / 100;
+    const ingredientDetails =
+    `<li>${ingredient.amountNeeded} ${ingredient.unit} ${ingredient.name}: $${ingredient.cost}</li>`
+    list.insertAdjacentHTML('afterbegin', ingredientDetails);
+    populateShoppingList(ingredient);
+  })
+}
+
+function populateShoppingList(ingredient) {
+  const ingredientsBlock = shoppingListView.children[0];
+    const ingredientItem =
+    `<div class="ingredient-wrap">
+      <div class="ingredient-label">
+        <input class="ingredient-checkbox"type="checkbox">
+        <label>${ingredient.amount} ${ingredient.unit} of ${ingredient.name}</label>
+      </div>
+      <div class="ingredient-quantity">
+        <h3>$${ingredient.cost}</h3>
+      </div>
+    </div>`
+    ingredientsBlock.insertAdjacentHTML('afterbegin', ingredientItem);
 }
 
 function hideMainRecipes() {
