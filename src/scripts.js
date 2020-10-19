@@ -124,6 +124,9 @@ function reloadAllRecipes() {
 function displayFavorites(recipe) {
   hideMainRecipes()
   unhideHome()
+  let pageHeading = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
+  pageHeading.innerText = "";
+  tagSection.classList.add('hidden')
   const sectionTitle = pageWrap.previousElementSibling.children[0];
   sectionTitle.innerText = "Your Favorites";
   getAvailableRecipes(currentUser.favoriteRecipes)
@@ -187,6 +190,9 @@ function displayShoppingList() {
 function displayRecipesToCook() {
   hideMainRecipes()
   unhideHome()
+  let pageHeading = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
+  pageHeading.innerText = "";
+  tagSection.classList.add('hidden')
   const sectionTitle = pageWrap.previousElementSibling.children[0];
   sectionTitle.innerText = "Your Recipes To Cook";
   getAvailableRecipes(currentUser.recipesToCook)
