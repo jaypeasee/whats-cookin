@@ -183,7 +183,11 @@ function displayShoppingList() {
 }
 
 function displayRecipesToCook() {
-  
+  hideMainRecipes()
+  unhideHome()
+  const sectionTitle = pageWrap.previousElementSibling.children[0];
+  sectionTitle.innerText = "Your Recipes To Cook";
+  getAvailableRecipes(currentUser.recipesToCook)
 }
 
 function getAvailableRecipes(recipes) {

@@ -222,7 +222,7 @@ button:focus {
 .recipes-wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
