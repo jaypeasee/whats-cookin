@@ -24,8 +24,9 @@ class User {
   }
 
   searchFavorites(nameFragment) {
+    const lowerCaseWord = nameFragment.toLowerCase();
     const filteredFavorites = this.favoriteRecipes.filter(recipe => {
-      return recipe.name.includes(nameFragment);
+      return recipe.name.toLowerCase().includes(lowerCaseWord);
     });
     return filteredFavorites;
   }

@@ -142,6 +142,11 @@ function unhideHome() {
   pantryView.classList.add('hidden');
   tagSection.classList.remove('hidden');
   pageWrap.classList.remove('hidden');
+  let searchBar = nav.children[1].children[0];
+  searchBar.placeholder = "Search By An Ingredient";
+  searchBar.value = "";
+  let searchButton = searchBar.nextElementSibling
+  searchButton.classList.remove('search-favorites');
 }
 
 function hideHome() {
