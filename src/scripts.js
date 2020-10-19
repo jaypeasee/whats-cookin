@@ -143,19 +143,33 @@ function openPantry() {
   removedTitle.innerText = "";
   let sectionTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
   sectionTitle.innerText = "Your Pantry";
-  displayPantryContent();
+  consolidatePantry();
 }
 
-function displayPantryContent() {
-  const pantryDetails = currentUser.pantry.pantry.reduce((acc, item) => {
-    const matchedIngredient = currentUser.recipes.find(recipe => {
-      return recipe.ingredients.find(ingredient => {
-        return item.ingredient === ingredient.id;
-      });
-    });
-    acc.push(matchedIngredient);
-    return acc;
-  }, []);
+function consolidatePantry() {
+  const allPantryDetails = currentUser.pantry.pantry.reduce((acc, item) => {
+    const updatedIngredient = {};
+    currentUser.recipes.forEach(recipe => {
+      recipe.ingredients.forEach(ingredient => {
+        if (item.ingredient === ingredient.id) {
+          updatedIngredient.id = ingredient.id;
+          updatedIngredient.name = ingredient.name;
+          updatedIngredient.amount = ingredient.quantity.amount;
+          updatedIngredient.unit = ingredient.quantity.unit;
+        }
+      })
+        if (!acc.includes(updatedIngredient)) {
+          acc.push(updatedIngredient);
+        }
+    })
+    return acc
+  }, [])
+  displayPantry(allPantryDetails);
+  console.log(allPantryDetails);
+}
+
+function displayPantry() {
+  //i
 }
 
 function displayHome() {
@@ -348,7 +362,6 @@ function updateIngredientsNeeded(ingredientsList, event) {
     return ingredientsList;
   })
   DisplayIngredientsNeededBlock(ingredientsList, event);
-  //invoke injecting content into shopping list
 }
 
 function DisplayIngredientsNeededBlock(ingredientsList, event) {
