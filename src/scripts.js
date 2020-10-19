@@ -91,9 +91,9 @@ function displayTagButtons(uniqueTags) {
 
 function changeRecipeView(event) {
   if(event.target.className === 'search-button' && event.target.previousElementSibling.value) {
-    displaySearch(event.target.previousElementSibling.value);
+    displaySearch(event.target.previousElementSibling);
   } else if(event.target.className === 'clear-search-results') {
-    reloadAllRecipes();
+    reloadAllRecipes(event);
   } else if (event.target.className === "favorites-view") {
     displayFavorites(currentUser.favoriteRecipes);
   } else if (event.target.className === "pantry-button") {
@@ -101,7 +101,7 @@ function changeRecipeView(event) {
   } else if (event.target.className === "home-view") {
     displayHome();
   } else if (event.target.className === "view-shopping-list") {
-    displayShoppingList();
+    displayShoppingList(event);
   } else if (event.target.className === "recipes-to-cook") {
     displayRecipesToCook();
   } else if (event.target.className.includes("search-favorites")) {
@@ -109,10 +109,11 @@ function changeRecipeView(event) {
   }
 }
 
-function displaySearch(searchValue) {
-  const matchedRecipes = currentUser.searchByIngredient(searchValue.toLowerCase());
+function displaySearch(searchTerm) {
+  const matchedRecipes = currentUser.searchByIngredient(searchTerm.value.toLowerCase());
   hideMainRecipes();
   getAvailableRecipes(matchedRecipes);
+  searchTerm.value = "";
 }
 
 function reloadAllRecipes() {
@@ -221,6 +222,7 @@ function showSearchedFavorites(event) {
   const searchResults = currentUser.searchFavorites(inputName.value);
   hideMainRecipes()
   getAvailableRecipes(searchResults);
+  inputName.value = "";
 }
 
 function handleRecipeClick(event) {
