@@ -213,6 +213,8 @@ function getAvailableRecipes(recipes) {
 function showSearchedFavorites(event) {
   const inputName = event.target.previousElementSibling
   const searchResults = currentUser.searchFavorites(inputName.value);
+  hideMainRecipes()
+  getAvailableRecipes(searchResults);
 }
 
 function handleRecipeClick(event) {
