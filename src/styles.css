@@ -2,14 +2,23 @@ html {
   font-family: 'Roboto', sans-serif;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
+button:focus {
+  outline: 0;
+}
 .header-nav{
   display: flex;
   flex-direction: column;
   background-color: #e5383b;
   width: 100%;
+  padding-bottom: .5%;
 }
 
 .nav-buttons {
+  font-size: 12px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -17,6 +26,9 @@ html {
   font-weight: 100;
 }
 
+.nav-buttons:hover {
+  cursor: pointer;
+}
 .recipe-title {
   margin: 5%;
 }
@@ -34,23 +46,43 @@ html {
 }
 
 .search-bar {
+  margin-right: 6.5%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+}
+
+.search-input {
+  width: 25%;
+  color: #e5383b;
+  border: none;
+  border-radius: 5px;
+}
+
+.search-input {
+  outline: 0;
 }
 
 .clear-search-results {
+  filter: brightness(0) invert(1);
   margin: 5px;
   height: 25px;
   width: 25px;
 }
 
+.clear-search-results:hover {
+  cursor: pointer;
+}
+
+
 .clear-modal {
   align-self: flex-end;
   height: 5%;
   width: 5%;
+  filter: invert(67%) sepia(59%) saturate(0%) hue-rotate(45deg) brightness(99%) contrast(97%);
 }
 
 .recipe-card {
+  background-color: #e5383b;
   position: relative;
   margin: 2%;
   display: flex;
@@ -59,7 +91,14 @@ html {
   flex-basis: 20%;
   height: 100%;
   border: 1px solid black;
-  border-radius: 5px;
+  border-radius: 10px;
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+  /* box-shadow: 1px 1px 20px 0px #000000; */
+}
+
+.recipe-card:hover {
+  transform: scale(1.10);
 }
 
 .card-content {
@@ -76,13 +115,58 @@ html {
 
 
 .recipe-card-image {
-  opacity: 85%;
+  opacity: 100%;
   width: 100%;
   height: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .view-title {
-  padding-left: 5%;
+  padding-left: 3%;
+  margin-bottom: 0;
+}
+
+.recipe-view {
+  margin: 0;
+}
+
+.view-recipe-button {
+  background: none;
+  border-radius: 5px;
+  color: #FFFFFF;
+  border-style: solid;
+  border-color: #FFFFFF;
+  padding: 5px;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+.view-recipe-button:hover {
+  color: #e5383b;
+  background: #FFFFFF
+}
+
+.add-recipe-to-cook {
+  background: none;
+  border-radius: 5px;
+  color: #e5383b;
+  border-style: solid;
+  border-color: #e5383b;
+}
+
+.add-recipe-to-cook:disabled {
+  display: none;
+}
+
+.add-recipe-to-cook:hover {
+  color: #FFFFFF;
+  background: #e5383b
+}
+
+::placeholder {
+  color: #000000;
+  padding-left: 2%;
 }
 
 .tag-section {
@@ -98,17 +182,39 @@ html {
 }
 
 .tag-button {
+  background: #e5383b;
+  border-radius: 5px;
+  color: #FFFFFF;
+  border-style: solid;
+  border-color: #e5383b;
   margin: 1%;
-  width: 100px;
+  width: 8%;
+}
+
+.tag-button:hover {
+  color: #FFFFFF;
+  background: #e5383b;
+  transform: scale(1.15);
 }
 
 .all-tag-button {
   margin: 1%;
-  width: 100px;
+  width: 8%;
+  background: #e5383b;
+  border-color: #e5383b;
+  background-color: none;
+  border-style: solid;
+  border-width: medium;
+  border-radius: 5px;
+  color: #FFFFFF;
+}
+
+.all-tag-button:hover {
+  color: #FFFFFF;
+  background: #e5383b
 }
 
 .tag-title {
-  margin-top: 2%;
   display: flex;
   justify-content: center;
 }
@@ -116,16 +222,34 @@ html {
 .recipes-wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 
 .search-input {
   margin: 5px;
+  color: #000000;
 }
 
 .search-button {
+  background: white;
+  border-radius: 5px;
+  color: #000000;
+  border-style: solid;
+  border-color: #e5383b;
+  margin: 1%;
+  width: 100px;
   margin: 5px;
+  border-color: #e5383b;
+  color: #FFFFFF;
+  background: #e5383b;
+  border-color: white;
+}
+
+.search-button:hover {
+  background: white;
+  color: #000000;
+  border-style: solid;
 }
 
 .recipe-ctas {
@@ -137,6 +261,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  margin: 0;
 }
 
 .ingredient-checkbox {
@@ -181,7 +306,6 @@ body {
   bottom: 0;
   top: 0;
   padding-top: 5vh;
-
 }
 
 .modal-img {
@@ -206,7 +330,7 @@ body {
   background-color: white;
   height: 75%;
   max-height: 80%;
-  box-shadow: 3px 6px 5px 2px #000000de
+  /* box-shadow: 3px 6px 5px 2px #000000de */
 }
 
 .modal-scroll {
