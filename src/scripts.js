@@ -32,19 +32,21 @@ function matchRecipeIngredients() {
 function loadNewExperience() {
   let recipeList = [];
   recipeData.forEach((recipe) => {
-    let newRecipe = new Recipe(recipe.id, recipe.image, recipe.ingredients, recipe.instructions, recipe.name, recipe.tags);
-    createRecipeCards(newRecipe);
+    const newRecipe = new Recipe(recipe.id, recipe.image, recipe.ingredients, recipe.instructions, recipe.name, recipe.tags);
+    const recipeCost = newRecipe.calculateCost();
+    createRecipeCards(newRecipe, recipeCost);
     recipeList.push(newRecipe);
     });
   randomizeUserData(recipeList);
   createUniqueTags(recipeList);
 }
 
-function createRecipeCards(recipe) {
+function createRecipeCards(recipe, recipeCost) {
   let recipeTags = recipe.tags.join(', ');
   let recipeCardInfo = `<div class="recipe-card" id="${recipe.id}">
     <img class="recipe-card-image" src="${recipe.image}">
     <h3 class="card-content card-title">${recipe.name}</h3>
+    <h4 class="recipe-cost">$${recipeCost}</h4>
     <div class="tag-buttons card-content">
       <p>${recipeTags}</p>
     </div>
