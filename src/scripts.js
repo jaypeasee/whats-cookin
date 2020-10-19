@@ -206,7 +206,8 @@ function displayRecipesToCook() {
 
 function getAvailableRecipes(recipes) {
   recipes.forEach(recipe => {
-    createRecipeCards(recipe);
+    const recipeCost = recipe.calculateCost()
+    createRecipeCards(recipe, recipeCost);
   });
 }
 
