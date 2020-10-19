@@ -10,13 +10,10 @@ class Recipe {
 
   calculateCost() {
     const totalCost = this.ingredients.reduce((sum, ingredient) => {
-      return sum += ingredient.cost;
-    },0)
-    return totalCost
-  }
-
-  giveInstructions() {
-    return this.instructions;
+      sum += ingredient.estimatedCostInCents;
+      return sum;
+    }, 0);
+    return totalCost;
   }
 }
 

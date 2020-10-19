@@ -50,20 +50,13 @@ class User {
     return filteredRecipes;
   }
 
-  chooseRecipe(recipe) {
-    //loop through pantry.
-    //loop through recipe ingredients
-    //if item.id === recipe.ingredients.id
-    //and if item.quantity >= recipe.ingredients.quantity
-    //push into this.recipesToCook
-
-    //else
-    //create variable of amount
-    //recipe.ingredients.quantiy - item.quantity
-    //new object assigned to
-    // name: recipe.ingredients.name
-    //amount: amount
-    //cost: amount * recipe.ingredients.estimatedCostInCents
+  addToCook(recipeID) {
+    const matchedRecipe = this.recipes.find(recipe => {
+      return recipe.id === recipeID
+    })
+    if (!this.recipesToCook.includes(matchedRecipe)) {
+      this.recipesToCook.push(matchedRecipe);
+    }
   }
 }
 

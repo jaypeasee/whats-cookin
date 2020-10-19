@@ -143,33 +143,13 @@ function openPantry() {
   removedTitle.innerText = "";
   let sectionTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
   sectionTitle.innerText = "Your Pantry";
-  consolidatePantry();
-}
-
-function consolidatePantry() {
-  const allPantryDetails = currentUser.pantry.pantry.reduce((acc, item) => {
-    const updatedIngredient = {};
-    currentUser.recipes.forEach(recipe => {
-      recipe.ingredients.forEach(ingredient => {
-        if (item.ingredient === ingredient.id) {
-          updatedIngredient.id = ingredient.id;
-          updatedIngredient.name = ingredient.name;
-          updatedIngredient.amount = item.amount;
-          updatedIngredient.unit = ingredient.quantity.unit;
-        }
-      })
-        if (!acc.includes(updatedIngredient)) {
-          acc.push(updatedIngredient);
-        }
-    })
-    return acc
-  }, [])
-  displayPantry(allPantryDetails);
-  console.log(allPantryDetails)
+  const pantryItems = currentUser.pantry.consolidatePantry(currentUser.recipes);
+  displayPantry(pantryItems)
 }
 
 function displayPantry(pantryItems) {
   pantryItems.forEach(item => {
+    const roundedAmount = Math.round(item.amount);
     const pantryItemBlock =
     `<div class="ingredient-wrap">
       <div class="ingredient-label">
@@ -177,7 +157,7 @@ function displayPantry(pantryItems) {
         <label>${item.name}</label>
       </div>
       <div class="ingredient-quantity">
-        <h3>${item.amount} ${item.unit}</h3>
+        <h3>${roundedAmount} ${item.unit}</h3>
       </div>`
     pantryView.children[0].insertAdjacentHTML('afterbegin', pantryItemBlock);
   })
@@ -303,7 +283,7 @@ function handleModalClick(event) {
   } else if (event.target.className.includes('favorite-button-clicked')) {
     removeFromFavorites(event, parseInt(modalRecipeView.id));
   } else if (event.target.className === 'add-recipe-to-cook'){
-    matchRecipeToCook(event);
+    addRecipeToCook(event, parseInt(modalRecipeView.id));
   };
 }
 
@@ -333,6 +313,11 @@ function addToFavoritesList(event, cardID) {
 function removeFromFavorites(event, cardID) {
   currentUser.removeFavorite(cardID);
   event.target.classList.remove('favorite-button-clicked')
+}
+
+function addRecipeToCook(event, cardID) {
+  matchRecipeToCook(event)
+  currentUser.addToCook(cardID)
 }
 
 function matchRecipeToCook(event) {

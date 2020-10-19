@@ -23,6 +23,7 @@ describe('Pantry', () => {
    "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
    "ingredients": [
      {
+       "name": "eggs",
        "id": 1,
        "quantity": {
          "amount": 0.5,
@@ -30,6 +31,7 @@ describe('Pantry', () => {
        }
      },
      {
+       "name": "bacon",
        "id": 2,
        "quantity": {
          "amount": 6,
@@ -37,6 +39,7 @@ describe('Pantry', () => {
        }
      },
      {
+       "name": "cheese",
        "id": 3,
        "quantity": {
          "amount": 10,
@@ -62,6 +65,7 @@ describe('Pantry', () => {
     "ingredients": [
       ,
       {
+        "name": "grapes",
         "id": 3,
         "quantity": {
           "amount": 0.5,
@@ -69,6 +73,7 @@ describe('Pantry', () => {
         }
       },
       {
+        "name": "oranges",
         "id": 4,
         "quantity": {
           "amount": 24,
@@ -94,6 +99,7 @@ describe('Pantry', () => {
     "ingredients": [
       ,
       {
+        "name": "bread",
         "id": 5,
         "quantity": {
           "amount": 5,
@@ -101,6 +107,7 @@ describe('Pantry', () => {
         }
       },
       {
+        "name": "chips",
         "id": 6,
         "quantity": {
           "amount": 24,
@@ -218,5 +225,10 @@ describe('Pantry', () => {
   it('should return an empty array if there is enough ingredients', () => {
     expect(pantry3.evaluateIngredients(recipe1)).to.deep.equal([]);
   });
+
+  it('should be able to return a more detailed list of each pantry item', () => {
+    expect(pantry1.consolidatePantry(user1.recipes)).to.deep.equal([{id: 1, name: "eggs", amount: 4, unit: "c"},
+  {id: 2, name: "bacon", amount: 3, unit: "tsp"}, {id: 5, name: "bread", amount: 10, unit: "tsp"}, {id: 6, name: "chips", amount: 5, unit: "servings"}]);
+});
 
 });
