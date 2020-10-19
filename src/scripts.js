@@ -126,6 +126,10 @@ function displayFavorites(recipe) {
   unhideHome()
   let pageHeading = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
   pageHeading.innerText = "";
+  let searchButton = nav.children[1].children[1];
+  let searchInput = searchButton.previousElementSibling;
+  searchInput.placeholder = "Search Favorite By Name";
+  searchButton.classList.add('search-favorites');
   tagSection.classList.add('hidden')
   const sectionTitle = pageWrap.previousElementSibling.children[0];
   sectionTitle.innerText = "Your Favorites";
