@@ -367,33 +367,28 @@ function DisplayIngredientsNeededBlock(ingredientsList, event) {
 function displayNeededIngredientItems(ingredientsList) {
   const list = modalRecipeView.children[0].children[2].children[1];
   ingredientsList.forEach(ingredient => {
-    const price = (ingredient.cost / 100).toFixed(2);
-    const amount = Math.round(ingredient.amountNeeded * 100) / 100;
+    ingredient.cost = (ingredient.cost / 100).toFixed(2);
+    ingredient.amountNeeded = Math.round(ingredient.amountNeeded * 100) / 100;
     const ingredientDetails =
-    `<li>${amount} ${ingredient.unit} ${ingredient.name}: $${price}</li>`
+    `<li>${ingredient.amountNeeded} ${ingredient.unit} ${ingredient.name}: $${ingredient.cost}</li>`
     list.insertAdjacentHTML('afterbegin', ingredientDetails);
+    populateShoppingList(ingredient);
   })
-  populateShoppingList(ingredientsList)
-  //refactor this to invoke from the forEach so next function doesnt need a loop and constants dont need to be declared twice
 }
 
-function populateShoppingList(ingredientsList) {
+function populateShoppingList(ingredient) {
   const ingredientsBlock = shoppingListView.children[0];
-  ingredientsList.forEach(ingredient => {
-    const price = (ingredient.cost / 100).toFixed(2);
-    const amount = Math.round(ingredient.amountNeeded * 100) / 100;
     const ingredientItem =
     `<div class="ingredient-wrap">
       <div class="ingredient-label">
         <input class="ingredient-checkbox"type="checkbox">
-        <label>${amount} ${ingredient.unit} of ${ingredient.name}</label>
+        <label>${ingredient.amount} ${ingredient.unit} of ${ingredient.name}</label>
       </div>
       <div class="ingredient-quantity">
-        <h3>$${price}</h3>
+        <h3>$${ingredient.cost}</h3>
       </div>
     </div>`
     ingredientsBlock.insertAdjacentHTML('afterbegin', ingredientItem);
-  });
 }
 
 function hideMainRecipes() {
