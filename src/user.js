@@ -49,6 +49,12 @@ class User {
     },[]);
     return filteredRecipes;
   }
+
+  addToCook(recipe) {
+    if (!this.recipesToCook.includes(recipe)) {
+      this.recipesToCook.push(recipe);
+    }
+  }
 }
 
 if (typeof module !== 'undefined') {

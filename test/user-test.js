@@ -137,12 +137,6 @@ describe('User', () => {
     expect(user1.filterByTag("ITaLiAn")).to.deep.equal([recipe2, recipe3, recipe4]);
   });
 
-  it.skip('should be able to search by multiple tags', () => {
-    user1.filterByTag("Italian");
-
-    expect(user1.filterByTag("garlic")).to.deep.equal([recipe2]);
-  });
-
   it('should be able to search recipes by ingredient', () => {
     expect(user1.searchByIngredient(ingredient1.name)).to.deep.equal([recipe1, recipe2, recipe3]);
   });
@@ -152,5 +146,11 @@ describe('User', () => {
     user1.addToCook(recipe2);
     user1.addToCook(recipe3);
     expect(user1.recipesToCook).to.deep.equal([recipe1, recipe2, recipe3]);
+  })
+
+  it('should not have duplicate recipes to cook in the cook list', () => {
+    user1.addToCook(recipe1);
+    user1.addToCook(recipe1);
+    expect(user1.recipesToCook).to.deep.equal([recipe1])
   })
 });
