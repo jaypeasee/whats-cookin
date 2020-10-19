@@ -146,52 +146,17 @@ function openPantry() {
   displayPantryContent();
 }
 
-// function displayPantryContent() {
-//   const pantryDetails = currentUser.pantry.pantry.reduce((acc, item) => {
-//     currentUser.recipes.forEach(recipe => {
-//       const matchedIngredient = recipe.ingredients.find(ingredient => {
-//         return item.ingredient === ingredient.id;
-//       })
-//       if (!acc.includes(matchedIngredient) && matchedIngredient) {
-//         const itemDetails = { name: matchedIngredient.name, id: matchedIngredient.id, amount: matchedIngredient.quantity.amount, unit: matchedIngredient.quantity.unit };
-//         acc.push(matchedIngredient);
-//       }
-//     })
-//     return acc;
-//   }, [])
-
 function displayPantryContent() {
   const pantryDetails = currentUser.pantry.pantry.reduce((acc, item) => {
-    currentUser.recipes.forEach(recipe => {
-      recipe.ingredients.forEach(ingredient => {
-        if (item.ingredient === ingredient.id && !acc.includes(ingredient)) {
-          const ingredientDetails = { name: ingredient.name, id: ingredient.id, amount: ingredient.quantity.amount, unit: ingredient.quantity.unit }
-          acc.push(ingredientDetails);
-        }
-      })
-    })
-    console.log(acc);
+    const matchedIngredient = currentUser.recipes.find(recipe => {
+      return recipe.ingredients.find(ingredient => {
+        return item.ingredient === ingredient.id;
+      });
+    });
+    acc.push(matchedIngredient);
     return acc;
-  }, [])
+  }, []);
 }
-
-
-  // const pantryDetails = currentUser.pantry.pantry.reduce((acc, item) => {
-  //   return currentUser.recipes.forEach(recipe => {
-  //     const matchedIngredient = recipe.ingredients.find(ingredient => {
-  //       return item.ingredient === ingredient.id;
-  //     })
-  //     if (matchedIngredient) {
-  //       const itemDetails = { name: matchedIngredient.name, id: matchedIngredient.id, amount: matchedIngredient.quantity.amount, unit: matchedIngredient.quantity.unit }
-  //       acc.push(itemDetails);
-  //     }
-  //     return acc;
-  //   })
-  // }, [])
-  // console.log(pantryDetails)
-  // console.log(currentUser.pantry.pantry);
-//display name, amount measurement
-// }
 
 function displayHome() {
   let tagTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
