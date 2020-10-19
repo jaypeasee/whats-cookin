@@ -14,10 +14,6 @@ class Recipe {
     },0)
     return totalCost
   }
-
-  giveInstructions() {
-    return this.instructions;
-  }
 }
 
 if (typeof module !== 'undefined') {

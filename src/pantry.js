@@ -36,7 +36,7 @@ class Pantry {
           }
       })
       return acc;
-    }, [])
+    }, []);
     return allPantryDetails
   }
 

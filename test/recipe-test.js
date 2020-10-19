@@ -105,8 +105,4 @@ describe('Recipe', () =>{
   it('should be able to return a different cost', () => {
     expect(recipe2.calculateCost()).to.equal(464);
   });
-
-  it('it should be able to return instructions', () => {
-    expect(recipe1.giveInstructions()).to.equal(instructions1)
-  })
 });
