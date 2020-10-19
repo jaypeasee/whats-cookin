@@ -1,7 +1,6 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const Ingredient = require('../src/ingredient.js');
 const Recipe = require('../src/recipe.js');
 
 
@@ -20,10 +19,10 @@ describe('Recipe', () =>{
   let recipe2;
 
   beforeEach(() => {
-    ingredient1 = new Ingredient(1, "rosemary", 300);
-    ingredient2 = new Ingredient(2, "thai mayo", 001);
-    ingredient3 = new Ingredient(3, "cheese", 230);
-    ingredient4 = new Ingredient(4, "pepper", 234);
+    ingredient1 = {id: 1, name: "rosemary", estimatedCostInCents: 300};
+    ingredient2 = {id: 2, name: "thai mayo", estimatedCostInCents: 001};
+    ingredient3 = {id: 3, name: "cheese", estimatedCostInCents: 230};
+    ingredient4 = {id: 4, name: "pepper", estimatedCostInCents: 234};
 
     instructions1 = [{instruction: 'shake it the rosemary', number: 1}, {instruction: 'put it on your food', number: 2}];
 
