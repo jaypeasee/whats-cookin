@@ -143,23 +143,54 @@ function openPantry() {
   removedTitle.innerText = "";
   let sectionTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
   sectionTitle.innerText = "Your Pantry";
-  // displayPantryContent();
+  displayPantryContent();
 }
 
 // function displayPantryContent() {
-// const pantryDetails = currentUser.pantry.pantry.map(item => {
-//   return currentUser.recipes.forEach(recipe => {
-//     const matchedIngredient = recipe.ingredients.find(ingredient => {
-//       return item.ingredient === ingredient.id;
+//   const pantryDetails = currentUser.pantry.pantry.reduce((acc, item) => {
+//     currentUser.recipes.forEach(recipe => {
+//       const matchedIngredient = recipe.ingredients.find(ingredient => {
+//         return item.ingredient === ingredient.id;
+//       })
+//       if (!acc.includes(matchedIngredient) && matchedIngredient) {
+//         const itemDetails = { name: matchedIngredient.name, id: matchedIngredient.id, amount: matchedIngredient.quantity.amount, unit: matchedIngredient.quantity.unit };
+//         acc.push(matchedIngredient);
+//       }
 //     })
-//     if (matchedIngredient) {
-//       item.name = matchedIngredient.name;
-//       item.unit = matchedIngredient.quantity.unit;
-//     }
-//   })
-//   return pantryDetails;
-// })
-// //display name, amount measurement
+//     return acc;
+//   }, [])
+
+function displayPantryContent() {
+  const pantryDetails = currentUser.pantry.pantry.reduce((acc, item) => {
+    currentUser.recipes.forEach(recipe => {
+      recipe.ingredients.forEach(ingredient => {
+        if (item.ingredient === ingredient.id && !acc.includes(ingredient)) {
+          const ingredientDetails = { name: ingredient.name, id: ingredient.id, amount: ingredient.quantity.amount, unit: ingredient.quantity.unit }
+          acc.push(ingredientDetails);
+        }
+      })
+    })
+    console.log(acc);
+    return acc;
+  }, [])
+}
+
+
+  // const pantryDetails = currentUser.pantry.pantry.reduce((acc, item) => {
+  //   return currentUser.recipes.forEach(recipe => {
+  //     const matchedIngredient = recipe.ingredients.find(ingredient => {
+  //       return item.ingredient === ingredient.id;
+  //     })
+  //     if (matchedIngredient) {
+  //       const itemDetails = { name: matchedIngredient.name, id: matchedIngredient.id, amount: matchedIngredient.quantity.amount, unit: matchedIngredient.quantity.unit }
+  //       acc.push(itemDetails);
+  //     }
+  //     return acc;
+  //   })
+  // }, [])
+  // console.log(pantryDetails)
+  // console.log(currentUser.pantry.pantry);
+//display name, amount measurement
 // }
 
 function displayHome() {
@@ -226,7 +257,8 @@ function displayModalHeader(recipe, image, title) {
 function displayModalIngredients(recipe, ingredients) {
   ingredients.innerHTML = '';
   recipe.ingredients.forEach((ingredient) => {
-    const ingredientInfo = `<li>${ingredient.quantity.amount} ${ingredient.quantity.unit} of ${ingredient.name}.</li>`
+    const amount = Math.round(ingredient.quantity.amount * 100) / 100;
+    const ingredientInfo = `<li>${amount} ${ingredient.quantity.unit} of ${ingredient.name}.</li>`
     ingredients.insertAdjacentHTML('beforeend', ingredientInfo);
   });
 }
@@ -377,6 +409,7 @@ function displayNeededIngredientItems(ingredientsList) {
     list.insertAdjacentHTML('afterbegin', ingredientDetails);
   })
   populateShoppingList(ingredientsList)
+  //refactor this to invoke from the forEach so next function doesnt need a loop and constants dont need to be declared twice
 }
 
 function populateShoppingList(ingredientsList) {
