@@ -142,15 +142,15 @@ describe('User', () => {
   });
 
   it('should be able to add to their recipes to cook list', () => {
-    user1.addToCook(recipe1);
-    user1.addToCook(recipe2);
-    user1.addToCook(recipe3);
+    user1.addToCook(recipe1.id);
+    user1.addToCook(recipe2.id);
+    user1.addToCook(recipe3.id);
     expect(user1.recipesToCook).to.deep.equal([recipe1, recipe2, recipe3]);
   })
 
   it('should not have duplicate recipes to cook in the cook list', () => {
-    user1.addToCook(recipe1);
-    user1.addToCook(recipe1);
+    user1.addToCook(recipe1.id);
+    user1.addToCook(recipe1.id);
     expect(user1.recipesToCook).to.deep.equal([recipe1])
   })
 });

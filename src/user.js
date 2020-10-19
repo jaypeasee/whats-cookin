@@ -50,9 +50,12 @@ class User {
     return filteredRecipes;
   }
 
-  addToCook(recipe) {
-    if (!this.recipesToCook.includes(recipe)) {
-      this.recipesToCook.push(recipe);
+  addToCook(recipeID) {
+    const matchedRecipe = this.recipes.find(recipe => {
+      return recipe.id === recipeID
+    })
+    if (!this.recipesToCook.includes(matchedRecipe)) {
+      this.recipesToCook.push(matchedRecipe);
     }
   }
 }

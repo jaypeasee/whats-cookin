@@ -283,7 +283,7 @@ function handleModalClick(event) {
   } else if (event.target.className.includes('favorite-button-clicked')) {
     removeFromFavorites(event, parseInt(modalRecipeView.id));
   } else if (event.target.className === 'add-recipe-to-cook'){
-    matchRecipeToCook(event);
+    addRecipeToCook(event, parseInt(modalRecipeView.id));
   };
 }
 
@@ -313,6 +313,11 @@ function addToFavoritesList(event, cardID) {
 function removeFromFavorites(event, cardID) {
   currentUser.removeFavorite(cardID);
   event.target.classList.remove('favorite-button-clicked')
+}
+
+function addRecipeToCook(event, cardID) {
+  matchRecipeToCook(event)
+  currentUser.addToCook(cardID)
 }
 
 function matchRecipeToCook(event) {
