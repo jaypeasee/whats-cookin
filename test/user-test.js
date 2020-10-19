@@ -143,11 +143,6 @@ describe('User', () => {
     expect(user1.filterByTag("garlic")).to.deep.equal([recipe2]);
   });
 
-  it.skip('should be able to evaluate if the user has enough ingredients in their pantry', () => {
-
-    expect(user1.chooseRecipe(recipe1)).to.equal('')
-  });
-
   it('should be able to search recipes by ingredient', () => {
     expect(user1.searchByIngredient(ingredient1.name)).to.deep.equal([recipe1, recipe2, recipe3]);
   });
