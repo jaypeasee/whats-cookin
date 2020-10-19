@@ -100,6 +100,8 @@ function changeRecipeView(event) {
     displayHome();
   } else if (event.target.className === "view-shopping-list") {
     displayShoppingList();
+  } else if (event.target.className === "recipes-to-cook") {
+    displayRecipesToCook();
   }
 }
 
@@ -178,6 +180,10 @@ function displayShoppingList() {
   removedTitle.innerText = "";
   let sectionTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
   sectionTitle.innerText = "Your Shopping List";
+}
+
+function displayRecipesToCook() {
+  
 }
 
 function getAvailableRecipes(recipes) {
