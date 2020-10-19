@@ -18,6 +18,28 @@ class Pantry {
     }, []);
     return neededIngredients;
   }
+
+  consolidatePantry(allRecipes) {
+    const allPantryDetails = this.pantry.reduce((acc, item) => {
+      const updatedIngredient = {};
+      allRecipes.forEach(recipe => {
+        recipe.ingredients.forEach(ingredient => {
+          if (item.ingredient === ingredient.id) {
+            updatedIngredient.id = ingredient.id;
+            updatedIngredient.name = ingredient.name;
+            updatedIngredient.amount = item.amount;
+            updatedIngredient.unit = ingredient.quantity.unit;
+          }
+        })
+          if (!acc.includes(updatedIngredient)) {
+            acc.push(updatedIngredient);
+          }
+      })
+      return acc;
+    }, [])
+    return allPantryDetails
+  }
+
 }
 if (typeof module !== 'undefined') {
   module.exports = Pantry;

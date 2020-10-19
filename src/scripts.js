@@ -143,29 +143,8 @@ function openPantry() {
   removedTitle.innerText = "";
   let sectionTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
   sectionTitle.innerText = "Your Pantry";
-  consolidatePantry();
-}
-
-function consolidatePantry() {
-  const allPantryDetails = currentUser.pantry.pantry.reduce((acc, item) => {
-    const updatedIngredient = {};
-    currentUser.recipes.forEach(recipe => {
-      recipe.ingredients.forEach(ingredient => {
-        if (item.ingredient === ingredient.id) {
-          updatedIngredient.id = ingredient.id;
-          updatedIngredient.name = ingredient.name;
-          updatedIngredient.amount = item.amount;
-          updatedIngredient.unit = ingredient.quantity.unit;
-        }
-      })
-        if (!acc.includes(updatedIngredient)) {
-          acc.push(updatedIngredient);
-        }
-    })
-    return acc
-  }, [])
-  displayPantry(allPantryDetails);
-  console.log(allPantryDetails)
+  const pantryItems = currentUser.pantry.consolidatePantry(currentUser.recipes);
+  displayPantry(pantryItems)
 }
 
 function displayPantry(pantryItems) {
