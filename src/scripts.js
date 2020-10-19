@@ -154,7 +154,7 @@ function consolidatePantry() {
         if (item.ingredient === ingredient.id) {
           updatedIngredient.id = ingredient.id;
           updatedIngredient.name = ingredient.name;
-          updatedIngredient.amount = ingredient.quantity.amount;
+          updatedIngredient.amount = item.amount;
           updatedIngredient.unit = ingredient.quantity.unit;
         }
       })
@@ -165,11 +165,22 @@ function consolidatePantry() {
     return acc
   }, [])
   displayPantry(allPantryDetails);
-  console.log(allPantryDetails);
+  console.log(allPantryDetails)
 }
 
-function displayPantry() {
-  //i
+function displayPantry(pantryItems) {
+  pantryItems.forEach(item => {
+    const pantryItemBlock =
+    `<div class="ingredient-wrap">
+      <div class="ingredient-label">
+        <input class="ingredient-checkbox"type="checkbox">
+        <label>${item.name}</label>
+      </div>
+      <div class="ingredient-quantity">
+        <h3>${item.amount} ${item.unit}</h3>
+      </div>`
+    pantryView.children[0].insertAdjacentHTML('afterbegin', pantryItemBlock);
+  })
 }
 
 function displayHome() {
