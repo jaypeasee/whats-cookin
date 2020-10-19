@@ -104,6 +104,8 @@ function changeRecipeView(event) {
     displayShoppingList();
   } else if (event.target.className === "recipes-to-cook") {
     displayRecipesToCook();
+  } else if (event.target.className.includes("search-favorites")) {
+    showSearchedFavorites(event);
   }
 }
 
@@ -206,6 +208,11 @@ function getAvailableRecipes(recipes) {
   recipes.forEach(recipe => {
     createRecipeCards(recipe);
   });
+}
+
+function showSearchedFavorites(event) {
+  const inputName = event.target.previousElementSibling
+  const searchResults = currentUser.searchFavorites(inputName.value);
 }
 
 function handleRecipeClick(event) {
