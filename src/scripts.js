@@ -389,6 +389,7 @@ function matchRecipeToCook(event) {
   })
   const ingredientsList = currentUser.pantry.evaluateIngredients(matchedRecipe);
   if(ingredientsList.length === 0){
+    currentUser.pantry.removePantryIngredients(matchedRecipe);
     displayAddedRecipe();
   } else {
     updateIngredientsNeeded(ingredientsList, event);
