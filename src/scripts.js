@@ -185,8 +185,6 @@ function displayPantry(pantryItems) {
   })
 }
 
-      // <input class="ingredient-checkbox"type="checkbox">
-
 function displayHome() {
   let tagTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
   tagTitle.innerText = "Filter By Recipe Tags";
@@ -272,6 +270,7 @@ function handleModalDisplay(recipe, image, title, ingredients, tags, instruction
   displayModalTags(recipe, tags);
   displayModalInstructions(recipe, instructions);
   displayFavoriteButton(recipe);
+  showAlreadyAddedRecipe(recipe, event);
   modalRecipeView.setAttribute("id", recipe.id);
 }
 
@@ -312,6 +311,16 @@ function displayFavoriteButton(recipe) {
       favoriteButton.classList.add('favorite-button-clicked');
     }
   })
+}
+
+function showAlreadyAddedRecipe(recipe, event) {
+  currentUser.recipesToCook.forEach(recipeToCook => {
+    if (recipeToCook.id === recipe.id) {
+      let addButton = modalRecipeView.children[0].children[1].children[0];
+      addButton.disabled = true;
+      matchRecipeToCook(event);
+    }
+  });
 }
 
 function filterTags(event) {
