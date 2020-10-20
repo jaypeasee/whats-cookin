@@ -58,6 +58,14 @@ class User {
       this.recipesToCook.push(matchedRecipe);
     }
   }
+
+  searchQueue(nameFragment) {
+    const lowerCaseWord = nameFragment.toLowerCase();
+    const filteredFavorites = this.recipesToCook.filter(recipe => {
+      return recipe.name.includes(lowerCaseWord);
+    });
+    return filteredFavorites;
+  }
 }
 
 if (typeof module !== 'undefined') {
