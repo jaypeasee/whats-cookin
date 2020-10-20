@@ -150,11 +150,13 @@ function unhideHome() {
   let searchButton = searchBar.nextElementSibling
   searchButton.classList.remove('search-favorites');
   searchButton.classList.remove('search-recipes-to-cook');
+  nav.children[1].classList.remove('hidden')
 }
 
 function hideHome() {
   tagSection.classList.add('hidden');
   pageWrap.classList.add('hidden');
+  nav.children[1].classList.add('hidden');
 }
 
 function openPantry() {
@@ -445,7 +447,7 @@ function populateShoppingList(ingredient) {
     `<div class="ingredient-wrap">
       <div class="ingredient-label">
         <input class="ingredient-checkbox"type="checkbox">
-        <label>${ingredient.amount} ${ingredient.unit} of ${ingredient.name}</label>
+        <label>${ingredient.amountNeeded} ${ingredient.unit} of ${ingredient.name}</label>
       </div>
       <div class="ingredient-quantity">
         <h3>$${ingredient.cost}</h3>
