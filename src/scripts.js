@@ -150,6 +150,7 @@ function unhideHome() {
   searchBar.value = "";
   let searchButton = searchBar.nextElementSibling
   searchButton.classList.remove('search-favorites');
+  searchButton.classList.remove('search-recipes-to-cook');
 }
 
 function hideHome() {
