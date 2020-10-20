@@ -318,7 +318,7 @@ function displayFavoriteButton(recipe) {
 function showAlreadyAddedRecipe(recipe, event) {
   currentUser.recipesToCook.forEach(recipeToCook => {
     if (recipeToCook.id === recipe.id) {
-      matchRecipeToCook(event);
+      updateItemDetails(event, recipe);
     }
   });
 }
@@ -389,9 +389,12 @@ function matchRecipeToCook(event) {
   const matchedRecipe = currentUser.recipes.find((recipe) => {
     return recipe.id === parseInt(modalRecipeView.id);
   })
-  const ingredientsList = currentUser.pantry.evaluateIngredients(matchedRecipe);
+  updateItemDetails(event, matchedRecipe);
+}
+function updateItemDetails(event, recipe) {
+  const ingredientsList = currentUser.pantry.evaluateIngredients(recipe);
   if(ingredientsList.length === 0){
-    currentUser.pantry.removePantryIngredients(matchedRecipe);
+    currentUser.pantry.removePantryIngredients(recipe);
     displayAddedRecipe();
   } else {
     updateIngredientsNeeded(ingredientsList, event);
