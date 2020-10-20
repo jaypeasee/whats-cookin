@@ -17,8 +17,6 @@ describe('Pantry', () => {
 
   beforeEach(() => {
   recipe1 = {
-    //[{id:1, amountNeeded:0}, id:2, amountNeeded: 3, id: 3 amountNeeded: 10 ]
-    //[]
    "id": 1,
    "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
    "ingredients": [
@@ -180,6 +178,30 @@ describe('Pantry', () => {
           "amount": 3
         }]
 
+        // {
+        //   "name": "eggs",
+        //   "id": 1,
+        //   "quantity": {
+        //     "amount": 0.5,
+        //     "unit": "c"
+        //   }
+        // },
+        // {
+        //   "name": "bacon",
+        //   "id": 2,
+        //   "quantity": {
+        //     "amount": 6,
+        //     "unit": "tsp"
+        //   }
+        // },
+        // {
+        //   "name": "cheese",
+        //   "id": 3,
+        //   "quantity": {
+        //     "amount": 10,
+        //     "unit": "tsp"
+        //   }
+        // }
     pantry1 = new Pantry(contents1);
     pantry2 = new Pantry(contents2);
     pantry3 = new Pantry(contents3);
@@ -230,5 +252,11 @@ describe('Pantry', () => {
     expect(pantry1.consolidatePantry(user1.recipes)).to.deep.equal([{id: 1, name: "eggs", amount: 4, unit: "c"},
   {id: 2, name: "bacon", amount: 3, unit: "tsp"}, {id: 5, name: "bread", amount: 10, unit: "tsp"}, {id: 6, name: "chips", amount: 5, unit: "servings"}]);
 });
+
+  it('should remove ingredients from pantry when recipe is added to cook',() => {
+    pantry3.removePantryIngredients(recipe1);
+
+    expect(pantry3.pantry).to.deep.equal([{ingredient: 2, amount: 3}, {ingredient: 6, amount: 3}]);
+  });
 
 });

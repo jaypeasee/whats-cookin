@@ -40,7 +40,20 @@ class Pantry {
     return allPantryDetails
   }
 
+  removePantryIngredients(recipe) {
+    this.pantry.forEach((item, index) => {
+      recipe.ingredients.forEach((ingredient) => {
+        if (item.ingredient === ingredient.id) {
+          item.amount -= ingredient.quantity.amount
+        }
+      });
+    });
+    this.pantry = this.pantry.filter((item) => {
+      return item.amount > 0;
+    });
+  }
 }
+
 if (typeof module !== 'undefined') {
   module.exports = Pantry;
 }
