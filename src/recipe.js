@@ -9,10 +9,11 @@ class Recipe {
   }
 
   calculateCost() {
-    const totalCost = this.ingredients.reduce((sum, ingredient) => {
-      sum = Math.round(((sum + ingredient.estimatedCostInCents) / 100));
+    let totalCost = this.ingredients.reduce((sum, ingredient) => {
+      sum = ((sum + ingredient.estimatedCostInCents));
       return sum
     }, 0);
+    totalCost = Math.round(totalCost/100);
     return totalCost;
   }
 }

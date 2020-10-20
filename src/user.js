@@ -5,7 +5,6 @@ class User {
     this.pantry = pantry;
     this.recipes = recipes;
     this.favoriteRecipes = [];
-    this.shoppingList = [];
     this.recipesToCook = [];
   }
 
@@ -26,7 +25,7 @@ class User {
   searchFavorites(nameFragment) {
     const lowerCaseWord = nameFragment.toLowerCase();
     const filteredFavorites = this.favoriteRecipes.filter(recipe => {
-      return recipe.name.toLowerCase().includes(lowerCaseWord);
+      return recipe.name.includes(lowerCaseWord);
     });
     return filteredFavorites;
   }
