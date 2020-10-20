@@ -23,9 +23,9 @@ class User {
   }
 
   searchFavorites(nameFragment) {
-    // const lowerCaseWord = nameFragment.toLowerCase();
+    const lowerCaseWord = nameFragment.toLowerCase();
     const filteredFavorites = this.favoriteRecipes.filter(recipe => {
-      return recipe.name.includes(nameFragment.toLowerCase());
+      return recipe.name.toLowerCase().includes(lowerCaseWord);
     });
     return filteredFavorites;
   }
@@ -62,7 +62,7 @@ class User {
   searchQueue(nameFragment) {
     const lowerCaseWord = nameFragment.toLowerCase();
     const filteredQueue = this.recipesToCook.filter(recipe => {
-      return recipe.name.contains(lowerCaseWord);
+      return recipe.name.toLowerCase().includes(lowerCaseWord);
     });
     return filteredQueue;
   }

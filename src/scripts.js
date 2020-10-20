@@ -234,7 +234,6 @@ function showSearchedFavorites(event) {
 function showSearchedQueue(event) {
   const inputName = event.target.previousElementSibling
   const searchResults = currentUser.searchQueue(inputName.value);
-  console.log(searchResults);
   hideMainRecipes()
   getAvailableRecipes(searchResults);
   inputName.value = "";
