@@ -316,8 +316,6 @@ function displayFavoriteButton(recipe) {
 function showAlreadyAddedRecipe(recipe, event) {
   currentUser.recipesToCook.forEach(recipeToCook => {
     if (recipeToCook.id === recipe.id) {
-      let addButton = modalRecipeView.children[0].children[1].children[0];
-      addButton.disabled = true;
       matchRecipeToCook(event);
     }
   });
@@ -426,7 +424,8 @@ function updateIngredientsNeeded(ingredientsList, event) {
 }
 
 function DisplayIngredientsNeededBlock(ingredientsList, event) {
-  event.target.disabled = true;
+  let addButton = modalRecipeView.children[0].children[1].children[0];
+  addButton.disabled = true;
   let neededIngredientsBlock =
   `<div class="needed-ingredients">
     <h2>The following items have been added to your shopping list:</h2>
