@@ -45,8 +45,7 @@ function createRecipeCards(recipe, recipeCost) {
   let recipeTags = recipe.tags.join(', ');
   let recipeCardInfo = `<div class="recipe-card" id="${recipe.id}">
     <img class="recipe-card-image" src="${recipe.image}">
-    <h3 class="card-content card-title">${recipe.name}</h3>
-    <h4 class="recipe-cost">$${recipeCost}</h4>
+    <h3 class="card-content card-title">${recipe.name}: $${recipeCost}</h3>
     <div class="tag-buttons card-content">
       <p>${recipeTags}</p>
     </div>
@@ -175,15 +174,16 @@ function displayPantry(pantryItems) {
     const pantryItemBlock =
     `<div class="ingredient-wrap">
       <div class="ingredient-label">
-        <input class="ingredient-checkbox"type="checkbox">
-        <label>${item.name}</label>
+        <h4>${item.name}</h4>
       </div>
       <div class="ingredient-quantity">
-        <h3>${roundedAmount} ${item.unit}</h3>
+        <h4>${roundedAmount} ${item.unit}</h4>
       </div>`
     pantryView.children[0].insertAdjacentHTML('afterbegin', pantryItemBlock);
   })
 }
+
+      // <input class="ingredient-checkbox"type="checkbox">
 
 function displayHome() {
   let tagTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];

@@ -24,6 +24,7 @@ button:focus {
   justify-content: space-around;
   color: #FFFFFF;
   font-weight: 100;
+  margin-top: 2%;
 }
 
 .nav-buttons:hover {
@@ -49,6 +50,7 @@ button:focus {
   margin-right: 6.5%;
   display: flex;
   justify-content: flex-end;
+  margin: 2%;
 }
 
 .search-input {
@@ -176,6 +178,7 @@ button:focus {
   flex-wrap: wrap;
   padding-left: 5%;
   padding-right: 5%;
+  margin-bottom: 5%;
 }
 
 .tag-area {
@@ -219,6 +222,7 @@ button:focus {
 .tag-title {
   display: flex;
   justify-content: center;
+  margin-top: 2%;
 }
 
 .recipes-wrapper {
@@ -285,7 +289,10 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-style: solid;
+  background-color: #add8e6;
+  border-radius: 10px;
+  border: solid grey .5px;
+  box-shadow: 1px 1px grey;
 }
 
 .pantry-view, .shopping-list-view {
