@@ -135,6 +135,7 @@ function displayFavorites(recipe) {
   searchInput.placeholder = "Search Favorite By Name";
   searchButton.classList.add('search-favorites');
   tagSection.classList.add('hidden')
+  shoppingListView.classList.add('hidden');
   const sectionTitle = pageWrap.previousElementSibling.children[0];
   sectionTitle.innerText = "Your Favorites";
   getAvailableRecipes(currentUser.favoriteRecipes)
@@ -212,6 +213,7 @@ function displayRecipesToCook() {
   let searchInput = searchButton.previousElementSibling;
   searchInput.placeholder = "Search Recipes To Cook By Name";
   searchButton.classList.add('search-recipes-to-cook');
+  shoppingListView.classList.add('hidden');
   const sectionTitle = pageWrap.previousElementSibling.children[0];
   sectionTitle.innerText = "Your Recipes To Cook";
   getAvailableRecipes(currentUser.recipesToCook)
