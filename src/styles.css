@@ -99,9 +99,9 @@ button:focus {
   /* box-shadow: 1px 1px 20px 0px #000000; */
 }
 
-.recipe-card:hover {
+/* .recipe-card:hover {
   transform: scale(1.10);
-}
+} */
 
 .card-content {
   margin: 5%;
