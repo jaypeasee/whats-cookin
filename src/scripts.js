@@ -106,6 +106,8 @@ function changeRecipeView(event) {
     displayRecipesToCook();
   } else if (event.target.className.includes("search-favorites")) {
     showSearchedFavorites(event);
+  } else if (event.target.className.includes("search-recipes-to-cook")) {
+    showSearchedQueue(event);
   }
 }
 
@@ -204,7 +206,11 @@ function displayRecipesToCook() {
   unhideHome()
   let pageHeading = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
   pageHeading.innerText = "";
-  tagSection.classList.add('hidden')
+  tagSection.classList.add('hidden');
+  let searchButton = nav.children[1].children[1];
+  let searchInput = searchButton.previousElementSibling;
+  searchInput.placeholder = "Search Recipes To Cook By Name";
+  searchButton.classList.add('search-recipes-to-cook');
   const sectionTitle = pageWrap.previousElementSibling.children[0];
   sectionTitle.innerText = "Your Recipes To Cook";
   getAvailableRecipes(currentUser.recipesToCook)
@@ -220,6 +226,15 @@ function getAvailableRecipes(recipes) {
 function showSearchedFavorites(event) {
   const inputName = event.target.previousElementSibling
   const searchResults = currentUser.searchFavorites(inputName.value);
+  hideMainRecipes()
+  getAvailableRecipes(searchResults);
+  inputName.value = "";
+}
+
+function showSearchedQueue(event) {
+  const inputName = event.target.previousElementSibling
+  const searchResults = currentUser.searchQueue(inputName.value);
+  console.log(searchResults);
   hideMainRecipes()
   getAvailableRecipes(searchResults);
   inputName.value = "";
@@ -323,7 +338,7 @@ function handleModalClick(event) {
     removeFromFavorites(event, parseInt(modalRecipeView.id));
   } else if (event.target.className === 'add-recipe-to-cook'){
     addRecipeToCook(event, parseInt(modalRecipeView.id));
-  };
+  }
 }
 
 function clearModalView() {
