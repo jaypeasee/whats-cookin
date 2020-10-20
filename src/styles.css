@@ -187,13 +187,14 @@ button:focus {
 }
 
 .tag-button {
-  background: #e5383b;
+  background: #add8e6;
   border-radius: 5px;
-  color: #FFFFFF;
+  color: black;
   border-style: solid;
-  border-color: #e5383b;
+  border-color: #add8e6;
   margin: 1%;
   width: 8%;
+  border: none;
 }
 
 .tag-button:hover {
@@ -205,13 +206,10 @@ button:focus {
 .all-tag-button {
   margin: 1%;
   width: 8%;
-  background: #e5383b;
-  border-color: #e5383b;
-  background-color: none;
-  border-style: solid;
-  border-width: medium;
+  background-color: #add8e6;
   border-radius: 5px;
-  color: #FFFFFF;
+  color: black;
+  border: none;
 }
 
 .all-tag-button:hover {
@@ -285,7 +283,7 @@ body {
 }
 
 .ingredient-wrap {
-  margin: 1%;
+  margin: 2%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
