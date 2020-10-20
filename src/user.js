@@ -5,7 +5,6 @@ class User {
     this.pantry = pantry;
     this.recipes = recipes;
     this.favoriteRecipes = [];
-    this.shoppingList = [];
     this.recipesToCook = [];
   }
 
@@ -24,8 +23,9 @@ class User {
   }
 
   searchFavorites(nameFragment) {
+    const lowerCaseWord = nameFragment.toLowerCase();
     const filteredFavorites = this.favoriteRecipes.filter(recipe => {
-      return recipe.name.includes(nameFragment);
+      return recipe.name.toLowerCase().includes(lowerCaseWord);
     });
     return filteredFavorites;
   }
@@ -57,6 +57,14 @@ class User {
     if (!this.recipesToCook.includes(matchedRecipe)) {
       this.recipesToCook.push(matchedRecipe);
     }
+  }
+
+  searchQueue(nameFragment) {
+    const lowerCaseWord = nameFragment.toLowerCase();
+    const filteredQueue = this.recipesToCook.filter(recipe => {
+      return recipe.name.toLowerCase().includes(lowerCaseWord);
+    });
+    return filteredQueue;
   }
 }
 

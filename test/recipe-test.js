@@ -98,10 +98,10 @@ describe('Recipe', () =>{
   });
 
   it('should return the cost of ingredients', () => {
-    expect(recipe1.calculateCost()).to.equal(301);
+    expect(recipe1.calculateCost()).to.equal(3);
   });
 
   it('should be able to return a different cost', () => {
-    expect(recipe2.calculateCost()).to.equal(464);
+    expect(recipe2.calculateCost()).to.equal(5);
   });
 });

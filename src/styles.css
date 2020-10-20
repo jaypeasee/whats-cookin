@@ -24,6 +24,7 @@ button:focus {
   justify-content: space-around;
   color: #FFFFFF;
   font-weight: 100;
+  margin-top: 2%;
 }
 
 .nav-buttons:hover {
@@ -49,6 +50,7 @@ button:focus {
   margin-right: 6.5%;
   display: flex;
   justify-content: flex-end;
+  margin: 2%;
 }
 
 .search-input {
@@ -174,6 +176,9 @@ button:focus {
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-bottom: 5%;
 }
 
 .tag-area {
@@ -182,13 +187,14 @@ button:focus {
 }
 
 .tag-button {
-  background: #e5383b;
+  background: #add8e6;
   border-radius: 5px;
-  color: #FFFFFF;
+  color: black;
   border-style: solid;
-  border-color: #e5383b;
+  border-color: #add8e6;
   margin: 1%;
   width: 8%;
+  border: none;
 }
 
 .tag-button:hover {
@@ -200,13 +206,10 @@ button:focus {
 .all-tag-button {
   margin: 1%;
   width: 8%;
-  background: #e5383b;
-  border-color: #e5383b;
-  background-color: none;
-  border-style: solid;
-  border-width: medium;
+  background-color: #add8e6;
   border-radius: 5px;
-  color: #FFFFFF;
+  color: black;
+  border: none;
 }
 
 .all-tag-button:hover {
@@ -217,12 +220,13 @@ button:focus {
 .tag-title {
   display: flex;
   justify-content: center;
+  margin-top: 2%;
 }
 
 .recipes-wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
@@ -279,11 +283,14 @@ body {
 }
 
 .ingredient-wrap {
-  margin: 1%;
+  margin: 2%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-style: solid;
+  background-color: #add8e6;
+  border-radius: 10px;
+  border: solid grey .5px;
+  box-shadow: 1px 1px grey;
 }
 
 .pantry-view, .shopping-list-view {

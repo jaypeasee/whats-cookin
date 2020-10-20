@@ -32,19 +32,20 @@ function matchRecipeIngredients() {
 function loadNewExperience() {
   let recipeList = [];
   recipeData.forEach((recipe) => {
-    let newRecipe = new Recipe(recipe.id, recipe.image, recipe.ingredients, recipe.instructions, recipe.name, recipe.tags);
-    createRecipeCards(newRecipe);
+    const newRecipe = new Recipe(recipe.id, recipe.image, recipe.ingredients, recipe.instructions, recipe.name, recipe.tags);
+    const recipeCost = newRecipe.calculateCost();
+    createRecipeCards(newRecipe, recipeCost);
     recipeList.push(newRecipe);
     });
   randomizeUserData(recipeList);
   createUniqueTags(recipeList);
 }
 
-function createRecipeCards(recipe) {
+function createRecipeCards(recipe, recipeCost) {
   let recipeTags = recipe.tags.join(', ');
   let recipeCardInfo = `<div class="recipe-card" id="${recipe.id}">
     <img class="recipe-card-image" src="${recipe.image}">
-    <h3 class="card-content card-title">${recipe.name}</h3>
+    <h3 class="card-content card-title">${recipe.name}: $${recipeCost}</h3>
     <div class="tag-buttons card-content">
       <p>${recipeTags}</p>
     </div>
@@ -89,9 +90,9 @@ function displayTagButtons(uniqueTags) {
 
 function changeRecipeView(event) {
   if(event.target.className === 'search-button' && event.target.previousElementSibling.value) {
-    displaySearch(event.target.previousElementSibling.value);
+    displaySearch(event.target.previousElementSibling);
   } else if(event.target.className === 'clear-search-results') {
-    reloadAllRecipes();
+    reloadAllRecipes(event);
   } else if (event.target.className === "favorites-view") {
     displayFavorites(currentUser.favoriteRecipes);
   } else if (event.target.className === "pantry-button") {
@@ -99,14 +100,21 @@ function changeRecipeView(event) {
   } else if (event.target.className === "home-view") {
     displayHome();
   } else if (event.target.className === "view-shopping-list") {
-    displayShoppingList();
+    displayShoppingList(event);
+  } else if (event.target.className === "recipes-to-cook") {
+    displayRecipesToCook();
+  } else if (event.target.className.includes("search-favorites")) {
+    showSearchedFavorites(event);
+  } else if (event.target.className.includes("search-recipes-to-cook")) {
+    showSearchedQueue(event);
   }
 }
 
-function displaySearch(searchValue) {
-  const matchedRecipes = currentUser.searchByIngredient(searchValue.toLowerCase());
+function displaySearch(searchTerm) {
+  const matchedRecipes = currentUser.searchByIngredient(searchTerm.value.toLowerCase());
   hideMainRecipes();
   getAvailableRecipes(matchedRecipes);
+  searchTerm.value = "";
 }
 
 function reloadAllRecipes() {
@@ -120,6 +128,13 @@ function reloadAllRecipes() {
 function displayFavorites(recipe) {
   hideMainRecipes()
   unhideHome()
+  let pageHeading = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
+  pageHeading.innerText = "";
+  let searchButton = nav.children[1].children[1];
+  let searchInput = searchButton.previousElementSibling;
+  searchInput.placeholder = "Search Favorite By Name";
+  searchButton.classList.add('search-favorites');
+  tagSection.classList.add('hidden')
   const sectionTitle = pageWrap.previousElementSibling.children[0];
   sectionTitle.innerText = "Your Favorites";
   getAvailableRecipes(currentUser.favoriteRecipes)
@@ -129,11 +144,19 @@ function unhideHome() {
   pantryView.classList.add('hidden');
   tagSection.classList.remove('hidden');
   pageWrap.classList.remove('hidden');
+  let searchBar = nav.children[1].children[0];
+  searchBar.placeholder = "Search By An Ingredient";
+  searchBar.value = "";
+  let searchButton = searchBar.nextElementSibling
+  searchButton.classList.remove('search-favorites');
+  searchButton.classList.remove('search-recipes-to-cook');
+  nav.children[1].classList.remove('hidden')
 }
 
 function hideHome() {
   tagSection.classList.add('hidden');
   pageWrap.classList.add('hidden');
+  nav.children[1].classList.add('hidden');
 }
 
 function openPantry() {
@@ -153,15 +176,16 @@ function displayPantry(pantryItems) {
     const pantryItemBlock =
     `<div class="ingredient-wrap">
       <div class="ingredient-label">
-        <input class="ingredient-checkbox"type="checkbox">
-        <label>${item.name}</label>
+        <h4>${item.name}</h4>
       </div>
       <div class="ingredient-quantity">
-        <h3>${roundedAmount} ${item.unit}</h3>
+        <h4>${roundedAmount} ${item.unit}</h4>
       </div>`
     pantryView.children[0].insertAdjacentHTML('afterbegin', pantryItemBlock);
   })
 }
+
+      // <input class="ingredient-checkbox"type="checkbox">
 
 function displayHome() {
   let tagTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
@@ -180,10 +204,42 @@ function displayShoppingList() {
   sectionTitle.innerText = "Your Shopping List";
 }
 
+function displayRecipesToCook() {
+  hideMainRecipes()
+  unhideHome()
+  let pageHeading = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
+  pageHeading.innerText = "";
+  tagSection.classList.add('hidden');
+  let searchButton = nav.children[1].children[1];
+  let searchInput = searchButton.previousElementSibling;
+  searchInput.placeholder = "Search Recipes To Cook By Name";
+  searchButton.classList.add('search-recipes-to-cook');
+  const sectionTitle = pageWrap.previousElementSibling.children[0];
+  sectionTitle.innerText = "Your Recipes To Cook";
+  getAvailableRecipes(currentUser.recipesToCook)
+}
+
 function getAvailableRecipes(recipes) {
   recipes.forEach(recipe => {
-    createRecipeCards(recipe);
+    const recipeCost = recipe.calculateCost()
+    createRecipeCards(recipe, recipeCost);
   });
+}
+
+function showSearchedFavorites(event) {
+  const inputName = event.target.previousElementSibling
+  const searchResults = currentUser.searchFavorites(inputName.value);
+  hideMainRecipes()
+  getAvailableRecipes(searchResults);
+  inputName.value = "";
+}
+
+function showSearchedQueue(event) {
+  const inputName = event.target.previousElementSibling
+  const searchResults = currentUser.searchQueue(inputName.value);
+  hideMainRecipes()
+  getAvailableRecipes(searchResults);
+  inputName.value = "";
 }
 
 function handleRecipeClick(event) {
@@ -284,7 +340,7 @@ function handleModalClick(event) {
     removeFromFavorites(event, parseInt(modalRecipeView.id));
   } else if (event.target.className === 'add-recipe-to-cook'){
     addRecipeToCook(event, parseInt(modalRecipeView.id));
-  };
+  }
 }
 
 function clearModalView() {
@@ -391,7 +447,7 @@ function populateShoppingList(ingredient) {
     `<div class="ingredient-wrap">
       <div class="ingredient-label">
         <input class="ingredient-checkbox"type="checkbox">
-        <label>${ingredient.amount} ${ingredient.unit} of ${ingredient.name}</label>
+        <label>${ingredient.amountNeeded} ${ingredient.unit} of ${ingredient.name}</label>
       </div>
       <div class="ingredient-quantity">
         <h3>$${ingredient.cost}</h3>

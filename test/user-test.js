@@ -26,7 +26,7 @@ describe('User', () => {
 
     recipe1 = new Recipe(1, "Big image thing http", [ingredient1, ingredient2], [{ instruction: "boil em", number: 1 }, { instruction: "mash em", number: 2 }, { instruction: "stick em in a stew", number: 3 }], "pasta sauce", ["rabbit", "banana", "yup", "garlic"]);
 
-    recipe2 = new Recipe(2, "another image", [ingredient1, ingredient2], [{ instruction: "chop it up", number: 2 }, { instruction: "put some butter on it", number: 2 }], "Garlic bread", ["bread", "garlic", "italian"])
+    recipe2 = new Recipe(2, "another image", [ingredient1, ingredient2], [{ instruction: "chop it up", number: 2 }, { instruction: "put some butter on it", number: 2 }], "garlic bread", ["bread", "garlic", "italian"])
 
     recipe3 = new Recipe(3, "jpg", [ingredient2, ingredient1], [{ instruction: "boil water", number: 1 }, { instruction: "add salt", number: 2 }, { instruction: "soften noodles", number: 3 }], "pasta", ["pasta", "carbs", "italian"])
 
@@ -80,10 +80,6 @@ describe('User', () => {
     expect(user1.favoriteRecipes).to.deep.equal([]);
   });
 
-  it('should have an empty shopping list to start', () => {
-    expect(user1.shoppingList).to.deep.equal([]);
-  });
-
   it('should start with an empty list of recipes to cook', () => {
     expect(user1.recipesToCook).to.deep.equal([]);
   });
@@ -129,11 +125,21 @@ describe('User', () => {
     expect(user1.searchFavorites("past")).to.deep.equal([recipe1, recipe3]);
   });
 
+  it('favorites searches should not be case sensitive', () => {
+    user1.addFavorite(recipe1);
+
+    expect(user1.searchFavorites("pAsT")).to.deep.equal([recipe1]);
+  })
+
   it('should be able to search recipes by tag', () => {
+    user1.addFavorite(recipe1);
+
     expect(user1.filterByTag("Italian")).to.deep.equal([recipe2, recipe3, recipe4]);
   });
 
   it('search by tag should not be case sensitive', () => {
+    user1.addFavorite(recipe1);
+
     expect(user1.filterByTag("ITaLiAn")).to.deep.equal([recipe2, recipe3, recipe4]);
   });
 
@@ -145,12 +151,28 @@ describe('User', () => {
     user1.addToCook(recipe1.id);
     user1.addToCook(recipe2.id);
     user1.addToCook(recipe3.id);
+
     expect(user1.recipesToCook).to.deep.equal([recipe1, recipe2, recipe3]);
   })
 
   it('should not have duplicate recipes to cook in the cook list', () => {
     user1.addToCook(recipe1.id);
     user1.addToCook(recipe1.id);
+
     expect(user1.recipesToCook).to.deep.equal([recipe1])
+  });
+
+  it('should be able to search for recipes to cook by name', () => {
+    user1.addToCook(recipe1.id);
+    user1.addToCook(recipe2.id);
+    user1.addToCook(recipe3.id);
+
+    expect(user1.searchQueue("past")).to.deep.equal([recipe1, recipe3]);
+  });
+
+  it('queue searches should not be case sensitive', () => {
+    user1.addToCook(recipe1.id);
+
+    expect(user1.searchQueue("pAsT")).to.deep.equal([recipe1]);
   })
 });
