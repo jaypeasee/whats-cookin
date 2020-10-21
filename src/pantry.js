@@ -2,7 +2,8 @@ class Pantry {
   constructor(pantry) {
     this.pantry = pantry;
   }
-  evaluateIngredients(recipe) {
+
+  evaluateNeededIngredients(recipe) {
     const neededIngredients = recipe.ingredients.reduce((acc, ingredient) => {
       const matchedID = this.pantry.find(item =>{
         return item.ingredient === ingredient.id
@@ -19,7 +20,7 @@ class Pantry {
     return neededIngredients;
   }
 
-  consolidatePantry(allRecipes) {
+  addDetailsToItems(allRecipes) {
     const allPantryDetails = this.pantry.reduce((acc, item) => {
       const updatedIngredient = {};
       allRecipes.forEach(recipe => {
@@ -37,14 +38,14 @@ class Pantry {
       })
       return acc;
     }, []);
-    return allPantryDetails
+    return allPantryDetails;
   }
 
   removePantryIngredients(recipe) {
-    this.pantry.forEach((item, index) => {
+    this.pantry.forEach(item => {
       recipe.ingredients.forEach((ingredient) => {
         if (item.ingredient === ingredient.id) {
-          item.amount -= ingredient.quantity.amount
+          item.amount -= ingredient.quantity.amount;
         }
       });
     });

@@ -148,31 +148,31 @@ describe('User', () => {
   });
 
   it('should be able to add to their recipes to cook list', () => {
-    user1.addToCook(recipe1.id);
-    user1.addToCook(recipe2.id);
-    user1.addToCook(recipe3.id);
+    user1.addToCookQueue(recipe1.id);
+    user1.addToCookQueue(recipe2.id);
+    user1.addToCookQueue(recipe3.id);
 
     expect(user1.recipesToCook).to.deep.equal([recipe1, recipe2, recipe3]);
   })
 
   it('should not have duplicate recipes to cook in the cook list', () => {
-    user1.addToCook(recipe1.id);
-    user1.addToCook(recipe1.id);
+    user1.addToCookQueue(recipe1.id);
+    user1.addToCookQueue(recipe1.id);
 
     expect(user1.recipesToCook).to.deep.equal([recipe1])
   });
 
   it('should be able to search for recipes to cook by name', () => {
-    user1.addToCook(recipe1.id);
-    user1.addToCook(recipe2.id);
-    user1.addToCook(recipe3.id);
+    user1.addToCookQueue(recipe1.id);
+    user1.addToCookQueue(recipe2.id);
+    user1.addToCookQueue(recipe3.id);
 
-    expect(user1.searchQueue("past")).to.deep.equal([recipe1, recipe3]);
+    expect(user1.searchCookQueue("past")).to.deep.equal([recipe1, recipe3]);
   });
 
   it('queue searches should not be case sensitive', () => {
-    user1.addToCook(recipe1.id);
+    user1.addToCookQueue(recipe1.id);
 
-    expect(user1.searchQueue("pAsT")).to.deep.equal([recipe1]);
+    expect(user1.searchCookQueue("pAsT")).to.deep.equal([recipe1]);
   })
 });

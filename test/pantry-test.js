@@ -233,23 +233,23 @@ describe('Pantry', () => {
   });
 
   it('should be able to evaluate what ingredients are needed to cook a recipe', () => {
-    expect(pantry1.evaluateIngredients(recipe1)).to.deep.equal([{id:2, amountNeeded: 3}, {id: 3, amountNeeded: 10 }]);
+    expect(pantry1.evaluateNeededIngredients(recipe1)).to.deep.equal([{id:2, amountNeeded: 3}, {id: 3, amountNeeded: 10 }]);
   });
 
   it('should be able to evaluate ingredients for another recipe', () => {
-    expect(pantry1.evaluateIngredients(recipe2)).to.deep.equal([{id:3, amountNeeded: .5}, {id: 4, amountNeeded: 24 }]);
+    expect(pantry1.evaluateNeededIngredients(recipe2)).to.deep.equal([{id:3, amountNeeded: .5}, {id: 4, amountNeeded: 24 }]);
   });
 
   it('should be able to evaluate a different user pantry', () => {
-    expect(pantry2.evaluateIngredients(recipe2)).to.deep.equal([{id:3, amountNeeded: .5}, {id: 4, amountNeeded: 24 }])
+    expect(pantry2.evaluateNeededIngredients(recipe2)).to.deep.equal([{id:3, amountNeeded: .5}, {id: 4, amountNeeded: 24 }])
   });
 
   it('should return an empty array if there is enough ingredients', () => {
-    expect(pantry3.evaluateIngredients(recipe1)).to.deep.equal([]);
+    expect(pantry3.evaluateNeededIngredients(recipe1)).to.deep.equal([]);
   });
 
   it('should be able to return a more detailed list of each pantry item', () => {
-    expect(pantry1.consolidatePantry(user1.recipes)).to.deep.equal([{id: 1, name: "eggs", amount: 4, unit: "c"},
+    expect(pantry1.addDetailsToItems(user1.recipes)).to.deep.equal([{id: 1, name: "eggs", amount: 4, unit: "c"},
   {id: 2, name: "bacon", amount: 3, unit: "tsp"}, {id: 5, name: "bread", amount: 10, unit: "tsp"}, {id: 6, name: "chips", amount: 5, unit: "servings"}]);
 });
 

@@ -11,7 +11,7 @@ class Recipe {
   calculateCost() {
     let totalCost = this.ingredients.reduce((sum, ingredient) => {
       sum = ((sum + ingredient.estimatedCostInCents));
-      return sum
+      return sum;
     }, 0);
     totalCost = Math.round(totalCost/100);
     return totalCost;
