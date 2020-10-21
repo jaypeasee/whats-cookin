@@ -15,17 +15,17 @@ modalRecipeView.addEventListener('click', handleModalClick);
 
 function matchRecipeIngredients() {
   recipeData.forEach(recipe => {
-      recipe.ingredients.forEach(recipeIngredient => {
-        let matchedIngredient = ingredientsData.find(ingredientData => {
-          return ingredientData.id === recipeIngredient.id;
-        })
-        if (matchedIngredient) {
-          recipeIngredient.name = matchedIngredient.name;
-          recipeIngredient.estimatedCostInCents = matchedIngredient.
-          estimatedCostInCents;
-        }
-      });
+    recipe.ingredients.forEach(recipeIngredient => {
+      let matchedIngredient = ingredientsData.find(ingredientData => {
+        return ingredientData.id === recipeIngredient.id;
+      })
+      if (matchedIngredient) {
+        recipeIngredient.name = matchedIngredient.name;
+        recipeIngredient.estimatedCostInCents = matchedIngredient.
+        estimatedCostInCents;
+      }
     });
+  });
   loadNewExperience();
 }
 
@@ -36,7 +36,7 @@ function loadNewExperience() {
     const recipeCost = newRecipe.calculateCost();
     recipeList.push(newRecipe);
     createRecipeCards(newRecipe, recipeCost);
-    });
+  });
   randomizeUserData(recipeList);
   createUniqueTags(recipeList);
 }
@@ -73,9 +73,9 @@ function createUniqueTags(recipeList) {
   let uniqueTags = [];
   recipeList.forEach((recipe) => {
     recipe.tags.forEach((tag) => {
-      if(!uniqueTags.includes(tag)) {
+      if (!uniqueTags.includes(tag)) {
         uniqueTags.push(tag);
-      };
+      }
     })
   })
   displayTagButtons(uniqueTags);
@@ -197,6 +197,7 @@ function openPantry() {
 
 function showPantrySection() {
   hideHome();
+  shoppingListView.classList.add('hidden');
   pantryView.classList.remove('hidden');
   const removedHeading = pageWrap.previousElementSibling.children[0];
   const sectionTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
@@ -349,8 +350,7 @@ function displayFavoriteButton(recipe) {
   });
 }
 
-function showAlreadyAddedRecipe(recipe, event) {
-  let cardID = parseInt(event.target.closest('.recipe-card').id);
+function showAlreadyAddedRecipe(recipe) {
   currentUser.recipesToCook.forEach(item => {
     if (item === recipe) {
       displayAddedRecipe();
@@ -363,7 +363,7 @@ function showAlreadyAddedRecipe(recipe, event) {
 function filterTags(event) {
   if (event.target.className === 'all-tag-button') {
     reloadAllRecipes();
-  } else if(event.target.className === 'tag-button') {
+  } else if (event.target.className === 'tag-button') {
     displayFilteredTag(event);
   }
 }
@@ -384,12 +384,12 @@ function handleModalClick(event) {
     addToFavoritesList(event);
   } else if (event.target.className.includes('favorite-button-clicked')) {
     removeFromFavorites(event);
-  } else if (event.target.className === 'add-recipe-to-cook'){
+  } else if (event.target.className === 'add-recipe-to-cook') {
     matchRecipeToCook();
   }
 }
 
-function clearModalView(event) {
+function clearModalView() {
   const favoriteButton = modalRecipeView.children[0].children[0].children[2].children[1];
   const addRecipeButton = modalRecipeView.children[0].children[1].children[0];
   const neededIngredients = modalRecipeView.children[0].children[2];
@@ -448,7 +448,7 @@ function displayAddedRecipe() {
 }
 
 function updateIngredientsNeeded(ingredientsList) {
-  const detailsList = ingredientsList.map(item => {
+  ingredientsList.map(item => {
     return currentUser.recipes.forEach(recipe => {
       const matchedRecipe = recipe.ingredients.find(ingredient => {
         return ingredient.id === item.id;

@@ -32,9 +32,9 @@ class Pantry {
             updatedIngredient.unit = ingredient.quantity.unit;
           }
         })
-          if (!acc.includes(updatedIngredient)) {
-            acc.push(updatedIngredient);
-          }
+        if (!acc.includes(updatedIngredient)) {
+          acc.push(updatedIngredient);
+        }
       })
       return acc;
     }, []);
