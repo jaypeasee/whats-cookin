@@ -17,10 +17,10 @@ function matchRecipeIngredients() {
   recipeData.forEach(recipe => {
       recipe.ingredients.forEach(recipeIngredient => {
         let matchedIngredient = ingredientsData.find(ingredientData => {
-          return ingredientData.id === recipeIngredient.id
+          return ingredientData.id === recipeIngredient.id;
         })
         if (matchedIngredient) {
-          recipeIngredient.name = matchedIngredient.name
+          recipeIngredient.name = matchedIngredient.name;
           recipeIngredient.estimatedCostInCents = matchedIngredient.
           estimatedCostInCents;
         }
@@ -34,8 +34,8 @@ function loadNewExperience() {
   recipeData.forEach((recipe) => {
     const newRecipe = new Recipe(recipe.id, recipe.image, recipe.ingredients, recipe.instructions, recipe.name, recipe.tags);
     const recipeCost = newRecipe.calculateCost();
-    createRecipeCards(newRecipe, recipeCost);
     recipeList.push(newRecipe);
+    createRecipeCards(newRecipe, recipeCost);
     });
   randomizeUserData(recipeList);
   createUniqueTags(recipeList);
@@ -51,7 +51,7 @@ function createRecipeCards(recipe, recipeCost) {
     </div>
     <div class="recipe-ctas">
       <button class="card-content view-recipe-button">View Recipe</button>
-  </div>`
+  </div>`;
   pageWrap.insertAdjacentHTML('afterbegin', recipeCardInfo);
 }
 
@@ -83,20 +83,20 @@ function createUniqueTags(recipeList) {
 
 function displayTagButtons(uniqueTags) {
   uniqueTags.forEach((tag) => {
-    const tagButton = `<button class="tag-button">${tag}</button>`
+    const tagButton = `<button class="tag-button">${tag}</button>`;
     tagSection.insertAdjacentHTML('beforeend', tagButton);
   });
 }
 
 function changeRecipeView(event) {
-  if(event.target.className === 'search-button' && event.target.previousElementSibling.value) {
+  if (event.target.className === 'search-button' && event.target.previousElementSibling.value) {
     displaySearch(event.target.previousElementSibling);
-  } else if(event.target.className === 'clear-search-results') {
+  } else if (event.target.className === 'clear-search-results') {
     reloadAllRecipes(event);
   } else if (event.target.className === "favorites-view") {
     displayFavorites(currentUser.favoriteRecipes);
   } else if (event.target.className === "pantry-button") {
-    openPantry()
+    openPantry();
   } else if (event.target.className === "home-view") {
     displayHome();
   } else if (event.target.className === "view-shopping-list") {
@@ -117,28 +117,47 @@ function displaySearch(searchTerm) {
   searchTerm.value = "";
 }
 
+function hideMainRecipes() {
+  pageWrap.innerHTML = "";
+}
+
+function getAvailableRecipes(recipes) {
+  recipes.forEach(recipe => {
+    const recipeCost = recipe.calculateCost()
+    createRecipeCards(recipe, recipeCost);
+  });
+}
+
 function reloadAllRecipes() {
-  let recipeList = currentUser.recipes;
   hideMainRecipes();
   let sectionTitle = pageWrap.previousElementSibling.children[0];
+  let recipeList = currentUser.recipes;
   sectionTitle.innerText = "All Recipes";
   getAvailableRecipes(recipeList);
 }
 
 function displayFavorites(recipe) {
+  displayFavoritesSection();
+  displayFavoritesDetails();
+  getAvailableRecipes(currentUser.favoriteRecipes)
+}
+
+function displayFavoritesSection() {
   hideMainRecipes()
   unhideHome()
-  let pageHeading = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
-  pageHeading.innerText = "";
-  let searchButton = nav.children[1].children[1];
-  let searchInput = searchButton.previousElementSibling;
-  searchInput.placeholder = "Search Favorite By Name";
-  searchButton.classList.add('search-favorites');
   tagSection.classList.add('hidden')
   shoppingListView.classList.add('hidden');
+}
+
+function displayFavoritesDetails() {
+  let searchButton = nav.children[1].children[1];
+  searchButton.classList.add('search-favorites');
+  let searchInput = searchButton.previousElementSibling;
+  let pageHeading = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
   const sectionTitle = pageWrap.previousElementSibling.children[0];
+  searchInput.placeholder = "Search Favorite By Name";
+  pageHeading.innerText = "";
   sectionTitle.innerText = "Your Favorites";
-  getAvailableRecipes(currentUser.favoriteRecipes)
 }
 
 function unhideHome() {
@@ -217,13 +236,6 @@ function displayRecipesToCook() {
   const sectionTitle = pageWrap.previousElementSibling.children[0];
   sectionTitle.innerText = "Your Recipes To Cook";
   getAvailableRecipes(currentUser.recipesToCook)
-}
-
-function getAvailableRecipes(recipes) {
-  recipes.forEach(recipe => {
-    const recipeCost = recipe.calculateCost()
-    createRecipeCards(recipe, recipeCost);
-  });
 }
 
 function showSearchedFavorites(event) {
@@ -473,10 +485,6 @@ function populateShoppingList(ingredient) {
       </div>
     </div>`
     ingredientsBlock.insertAdjacentHTML('afterbegin', ingredientItem);
-}
-
-function hideMainRecipes() {
-  pageWrap.innerHTML = "";
 }
 
 function clearAllInputs() {
