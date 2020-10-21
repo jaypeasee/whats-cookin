@@ -1,5 +1,5 @@
 class Recipe {
-  constructor(id, image, ingredients, instructions, name, tags){
+  constructor(id, image, ingredients, instructions, name, tags) {
     this.id = id;
     this.image = image;
     this.ingredients = ingredients;
@@ -13,7 +13,7 @@ class Recipe {
       sum = ((sum + ingredient.estimatedCostInCents));
       return sum;
     }, 0);
-    totalCost = Math.round(totalCost/100);
+    totalCost = Math.round(totalCost / 100);
     return totalCost;
   }
 }

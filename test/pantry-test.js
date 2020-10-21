@@ -16,34 +16,34 @@ describe('Pantry', () => {
   let recipe3;
 
   beforeEach(() => {
-  recipe1 = {
-   "id": 1,
-   "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
-   "ingredients": [
-     {
-       "name": "eggs",
-       "id": 1,
-       "quantity": {
+    recipe1 = {
+     "id": 1,
+     "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
+     "ingredients": [
+       {
+         "name": "eggs",
+         "id": 1,
+         "quantity": {
          "amount": 0.5,
          "unit": "c"
        }
-     },
-     {
-       "name": "bacon",
-       "id": 2,
-       "quantity": {
-         "amount": 6,
-         "unit": "tsp"
-       }
-     },
-     {
-       "name": "cheese",
-       "id": 3,
-       "quantity": {
-         "amount": 10,
-         "unit": "tsp"
-       }
-     }
+      },
+      {
+        "name": "bacon",
+        "id": 2,
+        "quantity": {
+        "amount": 6,
+        "unit": "tsp"
+        }
+      },
+      {
+        "name": "cheese",
+        "id": 3,
+        "quantity": {
+        "amount": 10,
+        "unit": "tsp"
+        }
+      }
    ],
    "instructions": [
      {

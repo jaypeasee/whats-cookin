@@ -39,14 +39,14 @@ class User {
 
   searchByIngredient(ingredientName) {
     const matchedRecipes = this.recipes.reduce((collection, recipe) => {
-    const matchedIngredients = recipe.ingredients.find((ingredient) => {
-      return ingredient.name === ingredientName;
-    });
-    if (matchedIngredients) {
-      collection.push(recipe);
-    }
-    return collection;
-    },[]);
+      const matchedIngredients = recipe.ingredients.find((ingredient) => {
+        return ingredient.name === ingredientName;
+      });
+      if (matchedIngredients) {
+        collection.push(recipe);
+      }
+      return collection;
+    }, []);
     return matchedRecipes;
   }
 
