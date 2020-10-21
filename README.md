@@ -37,12 +37,12 @@ This project was assigned on October 9, 2020 and turned in on October 21, 2020. 
 ## Challenges
 
 1. Intentionally planning an overall specific strategy before actually jumping into writing code. This included writing tests and class implementations before working in the `DOM`.
-2. Working between multiple datasets where the only commonality to match them was an id. And then creating functions out of them that could easily be reused later in the project's progression.
-3. Avoiding using global variables by relying almost entirely on event delegation while still making the page dynamic and fully customizable.
+2. Working between multiple datasets where the only commonality to match them was an `id`. And then creating functions for them that could easily be reused later in the project's progression.
+3. Avoiding using global variables by relying almost entirely on `event delegation` while still making the page dynamic and customizable.
 
 ## Wins
 
-1. We built the minimum viable product where the user can view, add and search for all sorts of recipes without encountering any bugs.
+1. We built the minimum viable product (MVP) where the user can view, add and search for all sorts of recipes without encountering any bugs.
 2. The testing suite is specific with sad pathing outcomes and 53 total `it` blocks.
 3. The page is mostly responsive with a media query for mobile devices.
 
