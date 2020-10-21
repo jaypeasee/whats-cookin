@@ -316,9 +316,15 @@ function displayFavoriteButton(recipe) {
 }
 
 function showAlreadyAddedRecipe(recipe, event) {
-    if (currentUser.recipesToCook.includes(recipe)) {
+  let cardID = parseInt(event.target.closest('.recipe-card').id);
+  currentUser.recipesToCook.forEach((item) => {
+    if (item === recipe) {
       displayAddedRecipe();
-    }
+      let addButton = modalRecipeView.children[0].children[1].children[0];
+      addButton.disabled = true;
+  }
+  });
+
 }
 
 function filterTags(event) {
