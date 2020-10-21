@@ -190,7 +190,7 @@ function hideHome() {
 }
 
 function openPantry() {
-  const allPantryDetails = currentUser.pantry.consolidatePantry(currentUser.recipes);
+  const allPantryDetails = currentUser.pantry.addDetailsToItems(currentUser.recipes);
   displayPantry(allPantryDetails);
   showPantrySection();
 }
@@ -270,7 +270,7 @@ function showSearchedFavorites(event) {
 
 function showSearchedQueue(event) {
   const inputName = event.target.previousElementSibling;
-  const searchResults = currentUser.searchQueue(inputName.value);
+  const searchResults = currentUser.searchCookQueue(inputName.value);
   hideMainRecipes();
   getAvailableRecipes(searchResults);
   inputName.value = "";
@@ -425,11 +425,11 @@ function matchRecipeToCook() {
 }
 
 function updateItemDetails(recipe, cardID) {
-  const ingredientsList = currentUser.pantry.evaluateIngredients(recipe);
+  const ingredientsList = currentUser.pantry.evaluateNeededIngredients(recipe);
   const addButton = modalRecipeView.children[0].children[1].children[0];
   if (ingredientsList.length === 0) {
     currentUser.pantry.removePantryIngredients(recipe);
-    currentUser.addToCook(cardID);
+    currentUser.addToCookQueue(cardID);
     displayAddedRecipe();
   } else {
     updateIngredientsNeeded(ingredientsList);

@@ -14,9 +14,9 @@ class User {
     }
   }
 
-  removeFavorite(id) {
+  removeFavorite(recipeID) {
     this.favoriteRecipes.forEach((recipe, index) => {
-      if (id === recipe.id) {
+      if (recipeID === recipe.id) {
         this.favoriteRecipes.splice(index, 1);
       }
     });
@@ -38,28 +38,28 @@ class User {
   }
 
   searchByIngredient(ingredientName) {
-    const filteredRecipes = this.recipes.reduce((acc, recipe) => {
+    const matchedRecipes = this.recipes.reduce((collection, recipe) => {
     const matchedIngredients = recipe.ingredients.find((ingredient) => {
       return ingredient.name === ingredientName;
-    })
+    });
     if (matchedIngredients) {
-      acc.push(recipe);
+      collection.push(recipe);
     }
-    return acc;
+    return collection;
     },[]);
-    return filteredRecipes;
+    return matchedRecipes;
   }
 
-  addToCook(recipeID) {
+  addToCookQueue(recipeID) {
     const matchedRecipe = this.recipes.find(recipe => {
-      return recipe.id === recipeID
-    })
+      return recipe.id === recipeID;
+    });
     if (!this.recipesToCook.includes(matchedRecipe)) {
       this.recipesToCook.push(matchedRecipe);
     }
   }
 
-  searchQueue(nameFragment) {
+  searchCookQueue(nameFragment) {
     const lowerCaseWord = nameFragment.toLowerCase();
     const filteredQueue = this.recipesToCook.filter(recipe => {
       return recipe.name.toLowerCase().includes(lowerCaseWord);
