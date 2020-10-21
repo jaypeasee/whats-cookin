@@ -24,9 +24,9 @@ function matchRecipeIngredients() {
           recipeIngredient.estimatedCostInCents = matchedIngredient.
           estimatedCostInCents;
         }
-      })
-    })
-  loadNewExperience()
+      });
+    });
+  loadNewExperience();
 }
 
 function loadNewExperience() {
@@ -151,12 +151,12 @@ function displayFavoritesSection() {
 }
 
 function displayFavoritesDetails() {
-  const searchInput = searchButton.previousElementSibling;
   const searchButton = nav.children[1].children[1];
+  const searchInput = searchButton.previousElementSibling;
   const pageHeading = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
   const sectionTitle = pageWrap.previousElementSibling.children[0];
-  searchInput.placeholder = "Search Favorite By Name";
   searchButton.classList.add('search-favorites');
+  searchInput.placeholder = "Search Favorite By Name";
   pageHeading.innerText = "";
   sectionTitle.innerText = "Your Favorites";
 }
@@ -214,7 +214,7 @@ function displayPantry(pantryItems) {
       </div>
       <div class="ingredient-quantity">
         <h4>${roundedAmount} ${item.unit}</h4>
-      </div>`
+      </div>`;
     pantryView.children[0].insertAdjacentHTML('afterbegin', pantryItemBlock);
   });
 }
@@ -243,8 +243,8 @@ function displayRecipesToCook() {
 }
 
 function hideEverythingButQueue() {
-  hideMainRecipes()
-  showHome()
+  hideMainRecipes();
+  showHome();
   tagSection.classList.add('hidden');
   shoppingListView.classList.add('hidden');
 }
@@ -261,17 +261,17 @@ function displayQueueDetails() {
 }
 
 function showSearchedFavorites(event) {
-  const searchResults = currentUser.searchFavorites(inputName.value);
   const inputName = event.target.previousElementSibling
-  hideMainRecipes()
+  const searchResults = currentUser.searchFavorites(inputName.value);
+  hideMainRecipes();
   getAvailableRecipes(searchResults);
   inputName.value = "";
 }
 
 function showSearchedQueue(event) {
+  const inputName = event.target.previousElementSibling;
   const searchResults = currentUser.searchQueue(inputName.value);
-  const inputName = event.target.previousElementSibling
-  hideMainRecipes()
+  hideMainRecipes();
   getAvailableRecipes(searchResults);
   inputName.value = "";
 }
@@ -297,7 +297,7 @@ function findCardElements(recipe) {
   const ingredients = image.nextElementSibling.nextElementSibling.children[0].children[1];
   const tags = ingredients.nextElementSibling.children[1];
   const instructions = image.nextElementSibling.nextElementSibling.children[1].children[1];
-  handleModalDisplay(recipe, image, title, ingredients, tags, instructions)
+  handleModalDisplay(recipe, image, title, ingredients, tags, instructions);
 }
 
 function handleModalDisplay(recipe, image, title, ingredients, tags, instructions) {
@@ -371,7 +371,7 @@ function filterTags(event) {
 function displayFilteredTag(event) {
   hideMainRecipes();
   const filteredRecipes = currentUser.filterByTag(event.target.innerText);
-  getAvailableRecipes(filteredRecipes)
+  getAvailableRecipes(filteredRecipes);
   const title = event.target.innerText;
   let sectionTitle = pageWrap.previousElementSibling.children[0];
   sectionTitle.innerText = title;
@@ -402,7 +402,7 @@ function clearModalView(event) {
 }
 
 function addToFavoritesList(event) {
-  const cardID = parseInt(modalRecipeView.id)
+  const cardID = parseInt(modalRecipeView.id);
   event.target.classList.add('favorite-button-clicked');
   const matchedRecipe = currentUser.recipes.find((recipe) => {
     return recipe.id === cardID;
@@ -411,12 +411,12 @@ function addToFavoritesList(event) {
 }
 
 function removeFromFavorites(event) {
-  const cardID = parseInt(modalRecipeView.id)
+  const cardID = parseInt(modalRecipeView.id);
   event.target.classList.remove('favorite-button-clicked');
   currentUser.removeFavorite(cardID);
 }
 
-function matchRecipeToCook(cardID) {
+function matchRecipeToCook() {
   const cardID = parseInt(modalRecipeView.id);
   const matchedRecipe = currentUser.recipes.find((recipe) => {
     return recipe.id === parseInt(modalRecipeView.id);
@@ -471,7 +471,7 @@ function displayIngredientsNeededBlock(ingredientsList) {
     <h2>The following items have been added to your shopping list:</h2>
     <ul>
     </ul>
-  </div>`
+  </div>`;
   addRecipeButton.insertAdjacentHTML("afterend", neededIngredientsBlock);
   displayNeededIngredientItems(ingredientsList);
 }
@@ -482,7 +482,7 @@ function displayNeededIngredientItems(ingredientsList) {
     ingredient.cost = (ingredient.cost / 100).toFixed(2);
     ingredient.amountNeeded = Math.round(ingredient.amountNeeded * 100) / 100;
     const ingredientDetails =
-    `<li>${ingredient.amountNeeded} ${ingredient.unit} ${ingredient.name}: $${ingredient.cost}</li>`
+    `<li>${ingredient.amountNeeded} ${ingredient.unit} ${ingredient.name}: $${ingredient.cost}</li>`;
     listItems.insertAdjacentHTML('afterbegin', ingredientDetails);
     populateShoppingList(ingredient);
   })
