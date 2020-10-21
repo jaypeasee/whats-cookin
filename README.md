@@ -2,7 +2,7 @@
 
 ## Project Description
 
-This is a [recipe planning application](https://jaypeasee.github.io/whats-cookin/). In the project, we were provided 3 with separate data files of users, ingredients and recipes. With the data, we built an application (from scratch) for users to view, search, filter, "favorite", and add recipes to cook. We also provided a view of the ingredients that are currently in the user's pantry and a shopping list for when the user does not have enough ingredients after they select a recipe to cook. Finally, if the user did have enough ingredients for the recipe they select, those ingredients are then taken out of their pantry.
+This is a [recipe planning application](https://jaypeasee.github.io/whats-cookin/). In the project, we were provided 3 separate data files of users, ingredients and recipes. With the data, we built an application (from scratch) for users to view, search, filter, "favorite", and add recipes to cook. We also provided a view of the ingredients that are currently in the user's pantry and a shopping list for when the user does not have enough ingredients after they select a recipe to cook. Finally, if the user did have enough ingredients for the recipe they select, those ingredients are then taken out of their pantry.
 
 ## Learning Goals
 
