@@ -316,11 +316,9 @@ function displayFavoriteButton(recipe) {
 }
 
 function showAlreadyAddedRecipe(recipe, event) {
-  currentUser.recipesToCook.forEach(recipeToCook => {
-    if (recipeToCook.id === recipe.id) {
-      updateItemDetails(event, recipe);
+    if (currentUser.recipesToCook.includes(recipe)) {
+      displayAddedRecipe();
     }
-  });
 }
 
 function filterTags(event) {
@@ -381,24 +379,28 @@ function removeFromFavorites(event, cardID) {
 }
 
 function addRecipeToCook(event, cardID) {
-  matchRecipeToCook(event)
-  currentUser.addToCook(cardID)
+  matchRecipeToCook(event, cardID)
+  // currentUser.addToCook(cardID)
 }
 
-function matchRecipeToCook(event) {
+function matchRecipeToCook(event, cardID) {
   const matchedRecipe = currentUser.recipes.find((recipe) => {
     return recipe.id === parseInt(modalRecipeView.id);
   })
-  updateItemDetails(event, matchedRecipe);
+  updateItemDetails(event, matchedRecipe, cardID);
 }
-function updateItemDetails(event, recipe) {
+
+function updateItemDetails(event, recipe, cardID) {
   const ingredientsList = currentUser.pantry.evaluateIngredients(recipe);
   if(ingredientsList.length === 0){
     currentUser.pantry.removePantryIngredients(recipe);
     displayAddedRecipe();
+    currentUser.addToCook(cardID)
   } else {
     updateIngredientsNeeded(ingredientsList, event);
   }
+  let addButton = modalRecipeView.children[0].children[1].children[0];
+  addButton.disabled = true;
 }
 
 function displayAddedRecipe() {
@@ -425,12 +427,10 @@ function updateIngredientsNeeded(ingredientsList, event) {
     })
     return ingredientsList;
   })
-  DisplayIngredientsNeededBlock(ingredientsList, event);
+  displayIngredientsNeededBlock(ingredientsList, event);
 }
 
-function DisplayIngredientsNeededBlock(ingredientsList, event) {
-  let addButton = modalRecipeView.children[0].children[1].children[0];
-  addButton.disabled = true;
+function displayIngredientsNeededBlock(ingredientsList, event) {
   let neededIngredientsBlock =
   `<div class="needed-ingredients">
     <h2>The following items have been added to your shopping list:</h2>
