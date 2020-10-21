@@ -16,7 +16,7 @@ This is a [recipe planning application](https://jaypeasee.github.io/whats-cookin
 
 ## Functionality
 
-![View and interact with modal](https://media.giphy.com/media/RvGja3zWao9Xo7wAMI/giphy.gif )
+![View and interact with modal](https://media.giphy.com/media/RvGja3zWao9Xo7wAMI/giphy.gif)
 
 ![Show different views in application](https://media.giphy.com/media/ws8xrTaRdwEGxq5Ot0/giphy.gif)
 
