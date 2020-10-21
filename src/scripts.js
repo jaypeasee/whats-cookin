@@ -135,6 +135,7 @@ function displayFavorites(recipe) {
   searchInput.placeholder = "Search Favorite By Name";
   searchButton.classList.add('search-favorites');
   tagSection.classList.add('hidden')
+  shoppingListView.classList.add('hidden');
   const sectionTitle = pageWrap.previousElementSibling.children[0];
   sectionTitle.innerText = "Your Favorites";
   getAvailableRecipes(currentUser.favoriteRecipes)
@@ -185,8 +186,6 @@ function displayPantry(pantryItems) {
   })
 }
 
-      // <input class="ingredient-checkbox"type="checkbox">
-
 function displayHome() {
   let tagTitle = pageWrap.previousElementSibling.previousElementSibling.children[0].children[0];
   tagTitle.innerText = "Filter By Recipe Tags";
@@ -214,6 +213,7 @@ function displayRecipesToCook() {
   let searchInput = searchButton.previousElementSibling;
   searchInput.placeholder = "Search Recipes To Cook By Name";
   searchButton.classList.add('search-recipes-to-cook');
+  shoppingListView.classList.add('hidden');
   const sectionTitle = pageWrap.previousElementSibling.children[0];
   sectionTitle.innerText = "Your Recipes To Cook";
   getAvailableRecipes(currentUser.recipesToCook)
@@ -272,6 +272,7 @@ function handleModalDisplay(recipe, image, title, ingredients, tags, instruction
   displayModalTags(recipe, tags);
   displayModalInstructions(recipe, instructions);
   displayFavoriteButton(recipe);
+  showAlreadyAddedRecipe(recipe, event);
   modalRecipeView.setAttribute("id", recipe.id);
 }
 
@@ -312,6 +313,18 @@ function displayFavoriteButton(recipe) {
       favoriteButton.classList.add('favorite-button-clicked');
     }
   })
+}
+
+function showAlreadyAddedRecipe(recipe, event) {
+  let cardID = parseInt(event.target.closest('.recipe-card').id);
+  currentUser.recipesToCook.forEach((item) => {
+    if (item === recipe) {
+      displayAddedRecipe();
+      let addButton = modalRecipeView.children[0].children[1].children[0];
+      addButton.disabled = true;
+  }
+  });
+
 }
 
 function filterTags(event) {
@@ -372,31 +385,38 @@ function removeFromFavorites(event, cardID) {
 }
 
 function addRecipeToCook(event, cardID) {
-  matchRecipeToCook(event)
-  currentUser.addToCook(cardID)
+  matchRecipeToCook(event, cardID)
+  // currentUser.addToCook(cardID)
 }
 
-function matchRecipeToCook(event) {
+function matchRecipeToCook(event, cardID) {
   const matchedRecipe = currentUser.recipes.find((recipe) => {
     return recipe.id === parseInt(modalRecipeView.id);
   })
-  const ingredientsList = currentUser.pantry.evaluateIngredients(matchedRecipe);
-  if(ingredientsList === []){
+  updateItemDetails(event, matchedRecipe, cardID);
+}
+
+function updateItemDetails(event, recipe, cardID) {
+  const ingredientsList = currentUser.pantry.evaluateIngredients(recipe);
+  if(ingredientsList.length === 0){
+    currentUser.pantry.removePantryIngredients(recipe);
     displayAddedRecipe();
+    currentUser.addToCook(cardID)
   } else {
     updateIngredientsNeeded(ingredientsList, event);
   }
+  let addButton = modalRecipeView.children[0].children[1].children[0];
+  addButton.disabled = true;
 }
 
 function displayAddedRecipe() {
   const addRecipeButton = modalRecipeView.children[0].children[1];
   const addedRecipeBlock =
   `<div>
-    <h2>This recipe has  added to your cooking list!</h2>
+    <h2>This recipe has been added to your cooking list!</h2>
     <p>The ingredients needed have been taken out of your pantry</p>
   </div>`
   addRecipeButton.insertAdjacentHTML("afterend", addedRecipeBlock);
-  //need to manually test if this actually works
 }
 
 function updateIngredientsNeeded(ingredientsList, event) {
@@ -413,11 +433,10 @@ function updateIngredientsNeeded(ingredientsList, event) {
     })
     return ingredientsList;
   })
-  DisplayIngredientsNeededBlock(ingredientsList, event);
+  displayIngredientsNeededBlock(ingredientsList, event);
 }
 
-function DisplayIngredientsNeededBlock(ingredientsList, event) {
-  event.target.disabled = true;
+function displayIngredientsNeededBlock(ingredientsList, event) {
   let neededIngredientsBlock =
   `<div class="needed-ingredients">
     <h2>The following items have been added to your shopping list:</h2>
